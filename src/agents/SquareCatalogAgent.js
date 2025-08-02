@@ -115,16 +115,21 @@ export class SquareCatalogAgent {
       });
       
       // Upload the image using the correct Square SDK pattern
-      const { result } = await this.client.catalog.images.create({
-        idempotencyKey,
-        image: {
-          type: 'IMAGE',
-          imageData: {
-            name: imageName,
-            caption: caption || `Product image for ${imageName}`,
+      const response = await this.client.catalog.images.create({
+        request: {
+          idempotencyKey,
+          image: {
+            type: 'IMAGE',
+            imageData: {
+              name: imageName,
+              caption: caption || `Product image for ${imageName}`,
+            }
           }
-        }
-      }, imageBuffer);
+        },
+        imageFile: imageBuffer
+      });
+      
+      const result = response.result || response;
 
       this.observer.log('info', `Successfully uploaded image: ${imageName}`, { 
         imageId: result.image.id,
@@ -850,17 +855,20 @@ export class SquareCatalogAgent {
       let cursor = null;
       
       do {
-        const { result } = await this.catalogApi.search({
+        const response = await this.catalogApi.search({
           ...searchQuery,
           cursor,
           limit: Math.min(searchQuery.limit || 1000, 1000) // Respect API limits
         });
         
-        if (result.objects) {
+        // Handle both response.result and direct response patterns
+        const result = response.result || response;
+        
+        if (result && result.objects) {
           allResults.push(...result.objects);
         }
         
-        cursor = result.cursor;
+        cursor = result?.cursor;
       } while (cursor && allResults.length < (searchQuery.maxResults || 10000));
       
       return allResults;
