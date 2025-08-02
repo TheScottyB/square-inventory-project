@@ -85,17 +85,21 @@ export class SquareCatalogAgent {
   }
 
   /**
-   * Upload an image to Square Catalog
+   * Upload an image to Square Catalog using v43 SDK pattern
    * @param {Buffer} imageBuffer - Image file buffer
    * @param {string} imageName - Name for the image
    * @param {string} caption - Optional caption
+   * @param {string} objectId - Optional object ID to attach image to
+   * @param {boolean} isPrimary - Whether this should be the primary image
    * @returns {Promise<Object>} Uploaded image object
    */
-  async uploadImage(imageBuffer, imageName, caption = '') {
+  async uploadImage(imageBuffer, imageName, caption = '', objectId = null, isPrimary = false) {
     const traceId = this.observer.startTrace('uploadImage', {
       imageName,
       imageSize: imageBuffer ? imageBuffer.length : 0,
-      caption: caption ? caption.substring(0, 50) : null
+      caption: caption ? caption.substring(0, 50) : null,
+      objectId,
+      isPrimary
     });
     
     if (this.enableDryRun) {
@@ -110,33 +114,43 @@ export class SquareCatalogAgent {
       this.observer.addSpan(traceId, 'generate_idempotency_key', { key: idempotencyKey });
       
       this.observer.addSpan(traceId, 'api_call', { 
-        endpoint: 'catalog.images.create',
-        imageSize: imageBuffer.length 
+        endpoint: 'catalog.createCatalogImage',
+        imageSize: imageBuffer.length,
+        objectId,
+        isPrimary
       });
       
-      // Upload the image using the correct Square SDK pattern
-      const response = await this.client.catalog.images.create({
-        request: {
-          idempotencyKey,
-          image: {
-            type: 'IMAGE',
-            imageData: {
-              name: imageName,
-              caption: caption || `Product image for ${imageName}`,
-            }
+      // Determine file extension for content type
+      const contentType = this.getImageContentType(imageName);
+      
+      // Upload the image using the correct v43 SDK pattern
+      const requestParams = {
+        idempotencyKey,
+        image: {
+          imageData: {
+            name: imageName,
+            caption: caption || `Product image for ${imageName}`,
           }
         },
-        imageFile: imageBuffer
-      });
+        isPrimary
+      };
+      
+      // If objectId is provided, attach the image automatically
+      if (objectId) {
+        requestParams.objectId = objectId;
+      }
+      
+      const response = await this.catalogApi.createCatalogImage(requestParams, imageBuffer);
       
       const result = response.result || response;
 
       this.observer.log('info', `Successfully uploaded image: ${imageName}`, { 
         imageId: result.image.id,
-        imageName 
+        imageName,
+        attachedTo: objectId || 'none'
       });
       
-      this.observer.endTrace(traceId, { imageId: result.image.id, imageName });
+      this.observer.endTrace(traceId, { imageId: result.image.id, imageName, objectId });
       return result.image;
       
     } catch (error) {
