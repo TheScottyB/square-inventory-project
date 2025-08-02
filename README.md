@@ -5,9 +5,17 @@ This repository contains Square inventory management data and reports for tracki
 ## Directory Structure
 
 ```
-├── catalogs/           # Square catalog exports with timestamps
-├── error-reports/      # Error reports from inventory operations
-└── sneaker-catalogs/   # Specialized sneaker inventory catalogs
+├── catalogs/                # Square catalog exports with timestamps
+├── error-reports/           # Error reports from inventory operations
+├── sneaker-catalogs/        # Specialized sneaker inventory catalogs
+├── jewelry/                 # Jewelry product images (bracelets, amethyst, etc.)
+├── candles-holders/         # Candle and incense holder product images
+├── first-aid-kits/          # First aid kit and medical storage product images
+├── shoes-sneakers/          # Shoe and sneaker product images
+├── pet-products/            # Pet bowls and pet-related product images
+├── crystal-bowls/           # Crystal and singing bowl product images
+├── holographic-purses/      # Holographic purse and bag product images
+└── miscellaneous-products/  # Other uncategorized product images
 ```
 
 ## File Organization
@@ -26,6 +34,16 @@ This repository contains Square inventory management data and reports for tracki
 - Specialized catalogs focused on sneaker inventory
 - Contains cleaned and sorted sneaker variations
 - Final processed versions for specific inventory management
+
+### Product Images
+- **Jewelry**: Bracelets, amethyst crystals, and other jewelry items (8 files)
+- **Candles & Holders**: Abundance candles, incense burners, and candle holders (8 files)
+- **First Aid Kits**: Ambulance-style medical storage boxes and first aid kits (11 files)
+- **Shoes & Sneakers**: Footwear products including Sofroniev brand items (4 files)
+- **Pet Products**: Dog bowls, pet accessories, and crystal singing bowls (8 files)
+- **Crystal Bowls**: Singing bowls and crystal products (0 files currently)
+- **Holographic Purses**: Lumination holographic bags and purses (3 files)
+- **Miscellaneous**: Various other product images and data files (70 files)
 
 ## Usage
 

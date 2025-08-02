@@ -4,6 +4,13 @@
 *.xlsm
 *.xlsb
 
+# Image files (uncomment if you want to exclude images from git)
+# *.jpg
+# *.jpeg
+# *.png
+# *.gif
+# *.bmp
+
 # Temporary files
 ~$*
 *.tmp
