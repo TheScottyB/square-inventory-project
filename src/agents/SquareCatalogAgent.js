@@ -19,6 +19,7 @@ export class SquareCatalogAgent {
     });
 
     this.catalogApi = this.client.catalog;
+    this.imagesApi = this.client.catalog.images;
     this.locationsApi = this.client.locations;
     
     // Configuration
@@ -74,25 +75,28 @@ export class SquareCatalogAgent {
     }
 
     try {
-      const idempotencyKey = `img-${imageName}-${Date.now()}`;
+      const idempotencyKey = `img-${imageName.replace(/[^a-zA-Z0-9]/g, '-')}-${Date.now()}`;
       
-      const { result } = await this.catalogApi.createCatalogImage({
-        idempotencyKey,
+      // Upload the image using the createCatalogImage endpoint
+      const { result } = await this.imagesApi.create({
+        idempotency_key: idempotencyKey,
         image: {
           type: 'IMAGE',
           imageData: {
             name: imageName,
             caption: caption || `Product image for ${imageName}`,
           }
-        },
-        imageFile: imageBuffer
-      });
+        }
+      }, imageBuffer);
 
-      console.log(`🖼️ Successfully uploaded image: ${imageName} (ID: ${result.catalogObject.id})`);
-      return result.catalogObject;
+      console.log(`🖼️ Successfully uploaded image: ${imageName} (ID: ${result.image.id})`);
+      return result.image;
       
     } catch (error) {
       console.error(`❌ Failed to upload image ${imageName}:`, error.message);
+      if (error.result) {
+        console.error('Error details:', JSON.stringify(error.result, null, 2));
+      }
       throw error;
     }
   }
@@ -148,13 +152,15 @@ export class SquareCatalogAgent {
         catalogObject.itemData.imageIds = [imageId];
       }
 
-      const { result } = await this.catalogApi.upsertCatalogObject({
+      const { result } = await this.catalogApi.batchUpsert({
         idempotencyKey,
-        object: catalogObject
+        batches: [{
+          objects: [catalogObject]
+        }]
       });
 
-      console.log(`✅ Created catalog item: ${productData.productName} (ID: ${result.catalogObject.id})`);
-      return result.catalogObject;
+      console.log(`✅ Created catalog item: ${productData.productName} (ID: ${result.objects[0].id})`);
+      return result.objects[0];
       
     } catch (error) {
       console.error(`❌ Failed to create catalog item ${productData.productName}:`, error.message);
@@ -170,7 +176,7 @@ export class SquareCatalogAgent {
   async getOrCreateCategory(categoryName) {
     try {
       // Search for existing category
-      const { result } = await this.catalogApi.searchCatalogObjects({
+      const { result } = await this.catalogApi.search({
         objectTypes: ['CATEGORY'],
         query: {
           textQuery: {
@@ -190,19 +196,21 @@ export class SquareCatalogAgent {
 
       // Create new category
       const idempotencyKey = `cat-${categoryName.replace(/\s+/g, '-')}-${Date.now()}`;
-      const { result: createResult } = await this.catalogApi.upsertCatalogObject({
+      const { result: createResult } = await this.catalogApi.batchUpsert({
         idempotencyKey,
-        object: {
-          type: 'CATEGORY',
-          id: `#${categoryName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`,
-          categoryData: {
-            name: categoryName
-          }
-        }
+        batches: [{
+          objects: [{
+            type: 'CATEGORY',
+            id: `#${categoryName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`,
+            categoryData: {
+              name: categoryName
+            }
+          }]
+        }]
       });
 
-      console.log(`🏷️ Created new category: ${categoryName} (ID: ${createResult.catalogObject.id})`);
-      return createResult.catalogObject.id;
+      console.log(`🏷️ Created new category: ${categoryName} (ID: ${createResult.objects[0].id})`);
+      return createResult.objects[0].id;
       
     } catch (error) {
       console.warn(`⚠ Failed to get/create category ${categoryName}, using default:`, error.message);

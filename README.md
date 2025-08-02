@@ -1,6 +1,6 @@
 # Square Inventory Project
 
-AI-powered image processing workflow for Square inventory management using the OpenAI Agent SDK. This project analyzes product images and automatically generates detailed descriptions and groupings for inventory management.
+Square catalog management system with AI-powered product image processing using the OpenAI Agent SDK and Square API v43.0.1. This project provides comprehensive Square catalog integration for inventory management, including image uploads, catalog item creation, SKU generation, and batch processing capabilities.
 
 ## Directory Structure
 
@@ -57,7 +57,7 @@ This project tracks Square inventory data over time, allowing for:
 
 **Note**: Excel files (`.xlsx`) are excluded from Git tracking via `.gitignore` to prevent repository bloat. Consider using Git LFS for large binary files if needed, or maintain only documentation and scripts in version control.
 
-## AI-Powered Workflow
+## Square Catalog Integration
 
 ### Configuration
 
@@ -68,49 +68,87 @@ cp .env.example .env
 ```
 
 **Required Environment Variables:**
-- `OPENAI_API_KEY`: Your OpenAI API key
-- `IMAGE_SOURCE_DIR`: Directory containing product images (default: `./`)
-- `IMAGE_OUTPUT_DIR`: Output directory for results (default: `./output`)
-- `MAX_DESCRIPTION_LENGTH`: Maximum length for product descriptions (default: 500)
-- `GROUPING_SIMILARITY_THRESHOLD`: Similarity threshold for product grouping (default: 0.8)
+- `SQUARE_ACCESS_TOKEN`: Your Square access token (sandbox or production)
+- `SQUARE_APPLICATION_ID`: Your Square application ID
+- `SQUARE_ENVIRONMENT`: `sandbox` or `production`
+- `OPENAI_API_KEY`: Your OpenAI API key (for AI-powered features)
 - `ENABLE_DRY_RUN`: Set to `true` for testing without API calls (default: false)
 
-### Architecture
+### Core Components
 
+- **SquareCatalogAgent**: Main agent for Square API integration with catalog management, image uploads, and inventory operations
 - **ImageAnalysisAgent**: Analyzes individual product images using OpenAI's vision models
 - **GroupingAgent**: Clusters analyzed products based on similarity
+- **FileNamingAgent**: Handles automated file naming and organization
 - **Centralized Configuration**: Manages all settings through `src/config/index.js`
 
-### Running the Workflow
+### Available Scripts
 
 ```bash
 # Install dependencies
 pnpm install
 
-# Run the full workflow
-pnpm run manage-images
+# Square Catalog Management
+pnpm run square:test                    # Test Square API connection
+pnpm run square:upload-images           # Upload all product images
+pnpm run square:process-items           # Process all items (images + catalog)
+pnpm run square:process-directory ./jewelry "jewelry"  # Process specific directory
+pnpm run square:process-file ./jewelry/item.jpg "jewelry"  # Process single file
 
-# Run a dry-run (no API calls)
-pnpm run manage-images:dry-run
+# AI Image Analysis Workflow
+pnpm run manage-images                  # Run full AI analysis workflow
+pnpm run manage-images:dry-run          # Run a dry-run (no API calls)
 
-# Run tests
-pnpm test
+# File Management
+pnpm run generate-filenames             # Generate organized filenames
 
-# Lint code
-pnpm run lint
+# Testing & Quality
+pnpm test                               # Run tests
+pnpm run lint                           # Lint code
 ```
 
-### Output
+### Square Catalog Features
 
-The workflow generates a JSON file with:
-- Individual product analysis results
-- Product groupings based on similarity
-- Metadata including timestamps and confidence scores
+- **Image Upload**: Upload product images directly to Square catalog
+- **Catalog Item Creation**: Create items with variations, SKUs, and inventory tracking
+- **Category Management**: Automatic category creation and color coding
+- **SKU Generation**: Intelligent SKU generation based on category and product name
+- **Location Management**: Multi-location support with automatic location detection
+- **Batch Processing**: Process multiple products in a single operation
+- **Error Handling**: Comprehensive error handling with retry mechanisms
+- **Dry-Run Mode**: Test operations without making actual API calls
 
 ## Getting Started
 
 1. Clone this repository
-2. Copy `.env.example` to `.env` and configure your OpenAI API key
+2. Copy `.env.example` to `.env` and configure your Square and OpenAI credentials
 3. Install dependencies with `pnpm install`
-4. Run `pnpm run manage-images:dry-run` to test the configuration
-5. Run `pnpm run manage-images` to process your product images
+4. Test Square connection: `node scripts/test-square-catalog-agent.js`
+5. Run `pnpm run manage-images:dry-run` to test the AI workflow
+6. Use the SquareCatalogAgent to manage your Square inventory
+
+### Quick Start with Square Integration
+
+```javascript
+import { SquareCatalogAgent } from './src/agents/SquareCatalogAgent.js';
+
+const agent = new SquareCatalogAgent();
+
+// Test connection
+const isConnected = await agent.testConnection();
+
+// Get locations
+const locations = await agent.getLocations();
+
+// Upload an image
+const imageBuffer = await fs.readFile('product-image.jpg');
+const uploadedImage = await agent.uploadImage(imageBuffer, 'Product Name');
+
+// Create catalog item
+const productData = {
+  productName: 'My Product',
+  description: 'Product description',
+  category: 'jewelry'
+};
+const item = await agent.createCatalogItem(productData, uploadedImage.id);
+```

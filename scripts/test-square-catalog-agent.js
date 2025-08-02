@@ -86,6 +86,7 @@ tester.test('Agent initialization', async () => {
   // Only check API initialization if we have credentials
   if (process.env.SQUARE_ACCESS_TOKEN) {
     if (!agent.catalogApi) throw new Error('Catalog API not initialized');
+    if (!agent.imagesApi) throw new Error('Images API not initialized');
     if (!agent.locationsApi) throw new Error('Locations API not initialized');
     console.log('   ✓ APIs initialized');
   } else {
