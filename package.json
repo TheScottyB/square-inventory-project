@@ -1,0 +1,60 @@
+{
+  "name": "square-inventory-project",
+  "version": "1.0.0",
+  "description": "AI-powered image processing workflow for Square inventory management using OpenAI Agent SDK",
+  "main": "scripts/run-workflow.js",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/run-workflow.js",
+    "manage-images": "node scripts/run-workflow.js",
+    "manage-images:dry-run": "ENABLE_DRY_RUN=true node scripts/run-workflow.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:config": "jest src/config",
+    "lint": "eslint src/ scripts/",
+    "lint:fix": "eslint src/ scripts/ --fix",
+    "validate": "pnpm run lint && pnpm run test",
+    "audit": "pnpm audit",
+    "audit:fix": "pnpm audit --fix"
+  },
+  "keywords": [
+    "openai",
+    "ai",
+    "image-processing",
+    "inventory-management",
+    "square",
+    "agent-sdk"
+  ],
+  "author": "ScottyB",
+  "license": "ISC",
+  "packageManager": "pnpm@10.14.0",
+  "volta": {
+    "node": "22.18.0"
+  },
+  "dependencies": {
+    "@openai/agents": "^0.0.14",
+    "dotenv": "^17.2.1",
+    "fs-extra": "^11.3.0",
+    "openai": "^5.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "eslint": "^9.32.0",
+    "jest": "^30.0.5"
+  },
+  "jest": {
+    "preset": "@jest/preset-default",
+    "extensionsToTreatAsEsm": [".js"],
+    "globals": {
+      "__ESM": true
+    },
+    "transform": {},
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/__tests__/**"
+    ]
+  }
+}
