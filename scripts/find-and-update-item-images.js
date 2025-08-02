@@ -119,7 +119,7 @@ class SquareCatalogImageUpdater {
     return await this.observabilityAgent.traceSquareOperation(
       'catalog.findWithoutImages',
       async () => {
-        console.log(`🖼️ Searching for items without images...`);
+        console.log('🖼️ Searching for items without images...');
         
         const searchQuery = {
           objectTypes: ['ITEM'],
@@ -351,14 +351,14 @@ class SquareCatalogImageUpdater {
     const total = results.results.length + results.errors.length;
     const successRate = total > 0 ? (results.results.length / total * 100).toFixed(1) : 0;
     
-    console.log(`\n📊 Image Update Summary:`);
+    console.log('\n📊 Image Update Summary:');
     console.log(`   📦 Total Items: ${total}`);
     console.log(`   ✅ Successful: ${results.results.length}`);
     console.log(`   ❌ Failed: ${results.errors.length}`);
     console.log(`   📈 Success Rate: ${successRate}%`);
     
     if (results.errors.length > 0) {
-      console.log(`\n❌ Failed Items:`);
+      console.log('\n❌ Failed Items:');
       results.errors.forEach(error => {
         console.log(`   - ${error.itemName}: ${error.error}`);
       });

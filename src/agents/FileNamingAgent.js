@@ -264,7 +264,7 @@ const result = await this.openaiClient.chat.completions.create({
       }
     }
     
-    console.log(`\n📊 Renaming Summary:`);
+    console.log('\n📊 Renaming Summary:');
     console.log(`  ✓ Successfully renamed: ${renamed.length} files`);
     console.log(`  ❌ Errors: ${errors.length} files`);
     if (backupPath) {

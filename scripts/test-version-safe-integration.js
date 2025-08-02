@@ -238,7 +238,7 @@ class VersionSafeIntegrationTester {
       const duration = Date.now() - startTime;
 
       if (result && result.objects && result.objects.length > 0) {
-        console.log(`✅ Batch operation completed successfully`);
+        console.log('✅ Batch operation completed successfully');
         console.log(`   📊 Created ${result.objects.length} items`);
         console.log(`   ⏱️ Duration: ${duration}ms`);
         console.log(`   ⚡ Average per item: ${Math.round(duration / result.objects.length)}ms`);

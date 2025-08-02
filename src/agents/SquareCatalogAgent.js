@@ -405,7 +405,7 @@ export class SquareCatalogAgent {
       }
     }
     
-    console.log(`\n📊 Integration Summary:`);
+    console.log('\n📊 Integration Summary:');
     console.log(`  ✅ Successful: ${results.length}`);
     console.log(`  ❌ Errors: ${errors.length}`);
     
@@ -1270,7 +1270,7 @@ export class SquareCatalogAgent {
       // Update our version tracking
       this.lastKnownCatalogVersion = currentVersion;
       
-      console.log(`✅ Version-controlled sync completed successfully`);
+      console.log('✅ Version-controlled sync completed successfully');
       return result;
       
     } catch (error) {
@@ -1405,7 +1405,7 @@ export class SquareCatalogAgent {
       );
       
       if (recentRateLimits.length > 0) {
-        console.log(`🐌 Recent rate limiting detected, applying conservative settings`);
+        console.log('🐌 Recent rate limiting detected, applying conservative settings');
         config.batchSize = Math.max(config.batchSize * 0.5, 5);
         config.concurrency = 1;
         config.delayBetweenBatches = Math.max(config.delayBetweenBatches * 2, 1000);

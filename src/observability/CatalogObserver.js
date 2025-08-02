@@ -636,18 +636,18 @@ export class CatalogObserver {
     let output = '';
     
     // Total requests
-    output += `# HELP square_catalog_requests_total Total number of catalog requests\n`;
-    output += `# TYPE square_catalog_requests_total counter\n`;
+    output += '# HELP square_catalog_requests_total Total number of catalog requests\n';
+    output += '# TYPE square_catalog_requests_total counter\n';
     output += `square_catalog_requests_total ${metrics.totalRequests}\n\n`;
     
     // Total errors
-    output += `# HELP square_catalog_errors_total Total number of catalog errors\n`;
-    output += `# TYPE square_catalog_errors_total counter\n`;
+    output += '# HELP square_catalog_errors_total Total number of catalog errors\n';
+    output += '# TYPE square_catalog_errors_total counter\n';
     output += `square_catalog_errors_total ${metrics.totalErrors}\n\n`;
     
     // Response time by operation
-    output += `# HELP square_catalog_response_time_seconds Response time by operation\n`;
-    output += `# TYPE square_catalog_response_time_seconds histogram\n`;
+    output += '# HELP square_catalog_response_time_seconds Response time by operation\n';
+    output += '# TYPE square_catalog_response_time_seconds histogram\n';
     
     for (const [operation, opMetrics] of Object.entries(metrics.operations)) {
       if (opMetrics.percentiles) {

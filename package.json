@@ -19,6 +19,7 @@
     "square:test-version-safe": "node scripts/test-version-safe-upsert.js",
     "square:test-integration": "node scripts/test-version-safe-integration.js",
     "square:test-core-features": "node scripts/test-core-version-features.js",
+    "square:find-by-price-append-images": "node scripts/find-by-price-append-images.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:config": "jest src/config",

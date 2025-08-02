@@ -94,6 +94,7 @@ pnpm run square:upload-images           # Upload all product images
 pnpm run square:process-items           # Process all items (images + catalog)
 pnpm run square:process-directory ./jewelry "jewelry"  # Process specific directory
 pnpm run square:process-file ./jewelry/item.jpg "jewelry"  # Process single file
+pnpm run square:find-by-price-append-images --exact-price-append 4999 --image-dir ./new-images  # Find items by price and append images
 
 # AI Image Analysis Workflow
 pnpm run manage-images                  # Run full AI analysis workflow

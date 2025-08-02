@@ -204,14 +204,14 @@ class ItemProcessor {
     const total = this.processedItems.length + this.errors.length;
     const successRate = total > 0 ? (this.processedItems.length / total * 100).toFixed(1) : 0;
     
-    console.log(`\n📊 Processing Summary:`);
+    console.log('\n📊 Processing Summary:');
     console.log(`   📦 Total Items: ${total}`);
     console.log(`   ✅ Successful: ${this.processedItems.length}`);
     console.log(`   ❌ Failed: ${this.errors.length}`);
     console.log(`   📈 Success Rate: ${successRate}%`);
     
     if (this.errors.length > 0) {
-      console.log(`\n❌ Failed Items:`);
+      console.log('\n❌ Failed Items:');
       this.errors.forEach(error => {
         console.log(`   - ${error.itemName}: ${error.error}`);
       });

@@ -14,7 +14,7 @@ import { config } from '../src/config/index.js';
         const client = new SquareClient({
             environment: SquareEnvironment.Production,
             accessToken: process.env.SQUARE_ACCESS_TOKEN,
-            version: "2025-07-16",
+            version: '2025-07-16',
             timeout: 5000,
         });
 
