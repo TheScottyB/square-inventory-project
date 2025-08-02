@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { SquareCatalogAgent } from '../src/agents/SquareCatalogAgent.js';
-import { config } from '../src/config/index.js';
+import { SquareCatalogAgent } from '../../src/agents/SquareCatalogAgent.js';
+import { config } from '../../src/config/index.js';
 import dotenv from 'dotenv';
 
 // Load environment variables

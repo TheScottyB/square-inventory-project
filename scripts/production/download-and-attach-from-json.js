@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { SquareCatalogAgent } from '../src/agents/SquareCatalogAgent.js';
+import { SquareCatalogAgent } from '../../src/agents/SquareCatalogAgent.js';
 import fs from 'fs-extra';
 import path from 'path';
 import crypto from 'crypto';

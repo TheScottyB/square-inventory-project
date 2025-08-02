@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { SquareCatalogAgent } from '../src/agents/SquareCatalogAgent.js';
+import { SquareCatalogAgent } from '../../src/agents/SquareCatalogAgent.js';
 import fs from 'fs-extra';
 import path from 'path';
 import crypto from 'crypto';
@@ -12,7 +12,7 @@ import crypto from 'crypto';
 
 const agent = new SquareCatalogAgent();
 const TARGET_ITEM_ID = 'K7LO5CCCNKCWAB5VO426QZSQ'; // "The Original" Metal Electric Guitar
-const IMAGE_DIR = 'miscellaneous-products';
+const IMAGE_DIR = 'assets/images/miscellaneous-products';
 
 async function uploadAndAttachImages() {
   try {
