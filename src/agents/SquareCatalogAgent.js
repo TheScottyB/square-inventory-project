@@ -1,6 +1,7 @@
-import { SquareClient, SquareEnvironment } from 'square';
+import { SquareClient, SquareEnvironment, SquareError } from 'square';
 import fs from 'fs-extra';
 import path from 'path';
+import crypto from 'crypto';
 import { config } from '../config/index.js';
 
 /**
@@ -75,11 +76,11 @@ export class SquareCatalogAgent {
     }
 
     try {
-      const idempotencyKey = `img-${imageName.replace(/[^a-zA-Z0-9]/g, '-')}-${Date.now()}`;
+      const idempotencyKey = crypto.randomUUID();
       
-      // Upload the image using the createCatalogImage endpoint
-      const { result } = await this.imagesApi.create({
-        idempotency_key: idempotencyKey,
+      // Upload the image using the correct Square SDK pattern
+      const { result } = await this.client.catalog.images.create({
+        idempotencyKey,
         image: {
           type: 'IMAGE',
           imageData: {
@@ -93,10 +94,7 @@ export class SquareCatalogAgent {
       return result.image;
       
     } catch (error) {
-      console.error(`❌ Failed to upload image ${imageName}:`, error.message);
-      if (error.result) {
-        console.error('Error details:', JSON.stringify(error.result, null, 2));
-      }
+      this.handleSquareError(error, `Failed to upload image ${imageName}`);
       throw error;
     }
   }
@@ -108,62 +106,78 @@ export class SquareCatalogAgent {
    * @param {string} locationId - Location ID for the item
    * @returns {Promise<Object>} Created/updated catalog item
    */
-  async createCatalogItem(productData, imageId = null, locationId) {
+  async createCatalogItem(productData, imageId = null, locationId, price = 0) {
     if (this.enableDryRun) {
       console.log(`[DRY RUN] Would create catalog item: ${productData.productName}`);
       return { id: `mock-item-${Date.now()}`, itemData: { name: productData.productName } };
     }
 
     try {
-      const idempotencyKey = `item-${productData.productName.replace(/\s+/g, '-')}-${Date.now()}`;
+      const idempotencyKey = crypto.randomUUID();
+      const itemId = `#${productData.productName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
       
-      // Create basic item structure
+      // Create basic item structure with required price
       const catalogObject = {
         type: 'ITEM',
-        id: `#${productData.productName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`,
+        id: itemId,
+        presentAtAllLocations: true,
         itemData: {
           name: productData.productName,
           description: productData.description,
-          categoryId: await this.getOrCreateCategory(productData.category),
-          labelColor: this.getCategoryColor(productData.category),
-          availableOnline: true,
-          availableForPickup: true,
-          availableElectronically: false,
+          productType: 'REGULAR',
           variations: [
             {
               type: 'ITEM_VARIATION',
-              id: `#${productData.productName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}-regular`,
+              id: `${itemId}-regular`,
+              presentAtAllLocations: true,
               itemVariationData: {
-                itemId: `#${productData.productName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`,
+                itemId: itemId,
                 name: 'Regular',
                 sku: this.generateSku(productData),
                 trackInventory: true,
                 inventoryAlertType: 'LOW_QUANTITY',
-                inventoryAlertThreshold: BigInt(5), // Use BigInt for large numbers
-                pricingType: 'FIXED_PRICING'
+                inventoryAlertThreshold: BigInt(5),
+                pricingType: 'FIXED_PRICING',
+                priceMoney: {
+                  amount: BigInt(price || 0), // Default to $0.00 if no price provided
+                  currency: 'USD'
+                }
               }
             }
           ]
         }
       };
 
+      // Add category if available
+      const categoryId = await this.getOrCreateCategory(productData.category);
+      if (categoryId) {
+        catalogObject.itemData.categories = [{ id: categoryId }];
+      }
+
       // Add image if provided
       if (imageId) {
         catalogObject.itemData.imageIds = [imageId];
       }
 
-      const { result } = await this.catalogApi.batchUpsert({
+      const response = await this.catalogApi.batchUpsert({
         idempotencyKey,
         batches: [{
           objects: [catalogObject]
         }]
       });
 
-      console.log(`✅ Created catalog item: ${productData.productName} (ID: ${result.objects[0].id})`);
-      return result.objects[0];
+      const result = response.result || response;
+      const objects = result.objects || [];
+      
+      if (objects.length === 0) {
+        throw new Error('No objects returned from batch upsert');
+      }
+
+      console.log(`✅ Created catalog item: ${productData.productName} (ID: ${objects[0].id})`);
+      return objects[0];
       
     } catch (error) {
-      console.error(`❌ Failed to create catalog item ${productData.productName}:`, error.message);
+      this.handleSquareError(error, `Failed to create catalog item ${productData.productName}`);
       throw error;
     }
   }
@@ -176,7 +190,7 @@ export class SquareCatalogAgent {
   async getOrCreateCategory(categoryName) {
     try {
       // Search for existing category
-      const { result } = await this.catalogApi.search({
+      const response = await this.catalogApi.search({
         objectTypes: ['CATEGORY'],
         query: {
           textQuery: {
@@ -185,23 +199,28 @@ export class SquareCatalogAgent {
         }
       });
 
-      if (result.objects && result.objects.length > 0) {
-        const existingCategory = result.objects.find(obj => 
+      const result = response.result || response;
+      const objects = result.objects || [];
+
+      if (objects.length > 0) {
+        const existingCategory = objects.find(obj => 
           obj.categoryData?.name?.toLowerCase() === categoryName.toLowerCase()
         );
         if (existingCategory) {
+          console.log(`🏷️ Found existing category: ${categoryName} (ID: ${existingCategory.id})`);
           return existingCategory.id;
         }
       }
 
       // Create new category
-      const idempotencyKey = `cat-${categoryName.replace(/\s+/g, '-')}-${Date.now()}`;
-      const { result: createResult } = await this.catalogApi.batchUpsert({
+      const idempotencyKey = crypto.randomUUID();
+      const createResponse = await this.catalogApi.batchUpsert({
         idempotencyKey,
         batches: [{
           objects: [{
             type: 'CATEGORY',
             id: `#${categoryName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`,
+            presentAtAllLocations: true,
             categoryData: {
               name: categoryName
             }
@@ -209,11 +228,18 @@ export class SquareCatalogAgent {
         }]
       });
 
-      console.log(`🏷️ Created new category: ${categoryName} (ID: ${createResult.objects[0].id})`);
-      return createResult.objects[0].id;
+      const createResult = createResponse.result || createResponse;
+      const createdObjects = createResult.objects || [];
+      
+      if (createdObjects.length === 0) {
+        throw new Error('No category objects returned from batch upsert');
+      }
+
+      console.log(`🏷️ Created new category: ${categoryName} (ID: ${createdObjects[0].id})`);
+      return createdObjects[0].id;
       
     } catch (error) {
-      console.warn(`⚠ Failed to get/create category ${categoryName}, using default:`, error.message);
+      this.handleSquareError(error, `Failed to get/create category ${categoryName}`);
       return null;
     }
   }
@@ -319,6 +345,161 @@ export class SquareCatalogAgent {
   }
 
   /**
+   * Handle Square API errors with structured information
+   * @param {Error} error - The error object
+   * @param {string} context - Context description
+   */
+  handleSquareError(error, context) {
+    console.error(`❌ ${context}:`, error.message);
+    
+    if (error instanceof SquareError) {
+      console.error('Square Error Details:');
+      if (error.result) {
+        console.error('  Category:', error.result.errors?.[0]?.category);
+        console.error('  Code:', error.result.errors?.[0]?.code);
+        console.error('  Detail:', error.result.errors?.[0]?.detail);
+        console.error('  Field:', error.result.errors?.[0]?.field);
+      }
+    } else if (error.result) {
+      console.error('Error details:', JSON.stringify(error.result, null, 2));
+    }
+  }
+
+  /**
+   * Get catalog information including batch limits
+   * @returns {Promise<Object>} Catalog info with limits
+   */
+  async getCatalogInfo() {
+    try {
+      const response = await this.catalogApi.info();
+      const result = response.result || response;
+      
+      // Provide default limits if not available
+      const limits = result.limits || {
+        batchUpsertMaxObjectsPerBatch: 1000,
+        batchUpsertMaxTotalObjects: 10000,
+        batchRetrieveMaxObjectIds: 1000,
+        searchMaxPageLimit: 1000,
+        batchDeleteMaxObjectIds: 200
+      };
+      
+      console.log('📊 Catalog API Limits:');
+      console.log(`  Max objects per batch: ${limits.batchUpsertMaxObjectsPerBatch}`);
+      console.log(`  Max total objects: ${limits.batchUpsertMaxTotalObjects}`);
+      
+      return { ...result, limits };
+    } catch (error) {
+      console.warn('⚠️ Could not retrieve catalog info, using default limits');
+      // Return default limits if API call fails
+      return {
+        limits: {
+          batchUpsertMaxObjectsPerBatch: 1000,
+          batchUpsertMaxTotalObjects: 10000,
+          batchRetrieveMaxObjectIds: 1000,
+          searchMaxPageLimit: 1000,
+          batchDeleteMaxObjectIds: 200
+        }
+      };
+    }
+  }
+
+  /**
+   * List catalog objects with async iteration support
+   * @param {Object} options - List options
+   * @returns {AsyncIterable} Async iterable of catalog objects
+   */
+  async *listCatalogObjects(options = {}) {
+    try {
+      const response = await this.catalogApi.list({
+        types: options.types || 'ITEM,ITEM_VARIATION,CATEGORY',
+        catalogVersion: options.catalogVersion,
+        ...options
+      });
+      
+      // Use async iteration pattern as recommended
+      for await (const obj of response) {
+        yield obj;
+      }
+    } catch (error) {
+      this.handleSquareError(error, 'Failed to list catalog objects');
+      throw error;
+    }
+  }
+
+  /**
+   * Enhanced batch upsert with proper limits checking
+   * @param {Array} objects - Array of catalog objects
+   * @param {Object} options - Batch options
+   * @returns {Promise<Object>} Batch upsert results
+   */
+  async batchUpsertCatalogObjects(objects, options = {}) {
+    try {
+      // Get current limits
+      const catalogInfo = await this.getCatalogInfo();
+      const maxObjectsPerBatch = catalogInfo.limits?.batchUpsertMaxObjectsPerBatch || 1000;
+      const maxTotalObjects = catalogInfo.limits?.batchUpsertMaxTotalObjects || 10000;
+      
+      if (objects.length > maxTotalObjects) {
+        throw new Error(`Too many objects (${objects.length}). Maximum allowed is ${maxTotalObjects}`);
+      }
+      
+      // Split into batches if necessary
+      const batches = [];
+      for (let i = 0; i < objects.length; i += maxObjectsPerBatch) {
+        batches.push({
+          objects: objects.slice(i, i + maxObjectsPerBatch)
+        });
+      }
+      
+      const idempotencyKey = crypto.randomUUID();
+      
+      const { result } = await this.catalogApi.batchUpsert({
+        idempotencyKey,
+        batches,
+        ...options
+      });
+      
+      console.log(`✅ Batch upsert completed: ${result.objects?.length || 0} objects processed`);
+      return result;
+      
+    } catch (error) {
+      this.handleSquareError(error, 'Batch upsert failed');
+      throw error;
+    }
+  }
+
+  /**
+   * Enhanced search with proper pagination
+   * @param {Object} searchQuery - Search parameters
+   * @returns {Promise<Array>} Search results
+   */
+  async searchCatalogObjects(searchQuery) {
+    try {
+      const allResults = [];
+      let cursor = null;
+      
+      do {
+        const { result } = await this.catalogApi.search({
+          ...searchQuery,
+          cursor,
+          limit: Math.min(searchQuery.limit || 1000, 1000) // Respect API limits
+        });
+        
+        if (result.objects) {
+          allResults.push(...result.objects);
+        }
+        
+        cursor = result.cursor;
+      } while (cursor && allResults.length < (searchQuery.maxResults || 10000));
+      
+      return allResults;
+    } catch (error) {
+      this.handleSquareError(error, 'Search failed');
+      throw error;
+    }
+  }
+
+  /**
    * Test Square connection and permissions
    * @returns {Promise<boolean>} Connection status
    */
@@ -329,7 +510,10 @@ export class SquareCatalogAgent {
       const locations = await this.getLocations();
       console.log(`✅ Connection successful. Found ${locations.length} locations.`);
       
-      // Test catalog access
+      // Test catalog access and get limits
+      await this.getCatalogInfo();
+      
+      // Test basic catalog listing
       const { objects } = await this.catalogApi.list({
         types: 'ITEM',
         limit: 1
@@ -339,7 +523,7 @@ export class SquareCatalogAgent {
       return true;
       
     } catch (error) {
-      console.error('❌ Square API connection failed:', error.message);
+      this.handleSquareError(error, 'Square API connection failed');
       return false;
     }
   }
