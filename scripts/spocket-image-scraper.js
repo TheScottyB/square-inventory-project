@@ -392,8 +392,11 @@ window.SpocketScraper = (function() {
             // Output results
             console.log('✅ Scraping completed!', results);
 
-            if (config.downloadMode === 'json' || config.downloadMode === 'urls') {
+            // Always export JSON if there were errors (for server-side downloading)
+            if (config.downloadMode === 'json' || config.downloadMode === 'urls' || results.errors.length > 0) {
                 downloadJSON(results, 'spocket-scraped-images.json');
+                console.log('💡 Tip: Use the downloaded JSON with the server-side downloader:');
+                console.log('   node scripts/download-spocket-images.js --json spocket-scraped-images.json');
             }
 
             // Generate integration instructions
