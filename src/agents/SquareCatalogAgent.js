@@ -27,6 +27,10 @@ export class SquareCatalogAgent {
     this.enableDryRun = config.app.enableDryRun;
     this.maxRetries = 3;  
     this.retryDelayMs = 1000;
+    
+    // Version management for optimistic concurrency
+    this.lastKnownCatalogVersion = null;
+    this.versionCache = new Map(); // Cache object versions for conflict resolution
   }
 
   /**
@@ -500,6 +504,265 @@ export class SquareCatalogAgent {
   }
 
   /**
+   * Get current catalog version for optimistic concurrency
+   * @returns {Promise<number>} Current catalog version
+   */
+  async getCurrentCatalogVersion() {
+    try {
+      const response = await this.catalogApi.list({
+        types: 'ITEM',
+        limit: 1
+      });
+      
+      const result = response.result || response;
+      const catalogVersion = result.catalogVersion || 0;
+      
+      if (catalogVersion > 0) {
+        this.lastKnownCatalogVersion = catalogVersion;
+        console.log(`📊 Current catalog version: ${catalogVersion}`);
+      }
+      
+      return catalogVersion;
+    } catch (error) {
+      this.handleSquareError(error, 'Failed to get catalog version');
+      return 0;
+    }
+  }
+
+  /**
+   * Retrieve catalog objects with version tracking
+   * @param {Array} objectIds - Array of object IDs to retrieve
+   * @param {Object} options - Additional options
+   * @returns {Promise<Array>} Retrieved objects with versions cached
+   */
+  async retrieveCatalogObjectsWithVersions(objectIds, options = {}) {
+    try {
+      const { result } = await this.catalogApi.batchGet({
+        objectIds,
+        includeRelatedObjects: options.includeRelatedObjects || false,
+        includeCategoryPathToRoot: options.includeCategoryPathToRoot || false
+      });
+      
+      const objects = result.objects || [];
+      
+      // Cache versions for optimistic concurrency
+      objects.forEach(obj => {
+        if (obj.version) {
+          this.versionCache.set(obj.id, obj.version);
+        }
+      });
+      
+      console.log(`📋 Retrieved ${objects.length} objects with versions cached`);
+      return objects;
+      
+    } catch (error) {
+      this.handleSquareError(error, 'Failed to retrieve catalog objects');
+      throw error;
+    }
+  }
+
+  /**
+   * Enhanced batch upsert with version conflict handling
+   * @param {Array} objects - Array of catalog objects
+   * @param {Object} options - Batch options
+   * @returns {Promise<Object>} Batch upsert results with version updates
+   */
+  async batchUpsertWithVersions(objects, options = {}) {
+    try {
+      // Add versions to objects if available
+      const objectsWithVersions = objects.map(obj => {
+        const cachedVersion = this.versionCache.get(obj.id);
+        if (cachedVersion && !obj.version) {
+          return { ...obj, version: cachedVersion };
+        }
+        return obj;
+      });
+      
+      const result = await this.batchUpsertCatalogObjects(objectsWithVersions, options);
+      
+      // Update version cache with new versions
+      if (result.objects) {
+        result.objects.forEach(obj => {
+          if (obj.version) {
+            this.versionCache.set(obj.id, obj.version);
+          }
+        });
+      }
+      
+      // Update catalog version
+      if (result.catalogVersion) {
+        this.lastKnownCatalogVersion = result.catalogVersion;
+      }
+      
+      return result;
+      
+    } catch (error) {
+      // Handle version conflicts (409 errors)
+      if (error.result?.errors?.[0]?.code === 'CONFLICT') {
+        console.warn('⚠️ Version conflict detected. Refetching objects and retrying...');
+        
+        // Clear version cache for conflicted objects
+        const conflictedIds = objects.map(obj => obj.id).filter(id => id);
+        conflictedIds.forEach(id => this.versionCache.delete(id));
+        
+        // Refetch with latest versions (if this is not already a retry)
+        if (!options._isRetry) {
+          const freshObjects = await this.retrieveCatalogObjectsWithVersions(conflictedIds);
+          const updatedObjects = objects.map(obj => {
+            const freshObj = freshObjects.find(fresh => fresh.id === obj.id);
+            return freshObj ? { ...obj, version: freshObj.version } : obj;
+          });
+          
+          return await this.batchUpsertWithVersions(updatedObjects, { ...options, _isRetry: true });
+        }
+      }
+      
+      this.handleSquareError(error, 'Batch upsert with versions failed');
+      throw error;
+    }
+  }
+
+  /**
+   * List catalog objects for a specific version (historical snapshot)
+   * @param {number} catalogVersion - Specific catalog version to retrieve
+   * @param {Object} options - List options
+   * @returns {Promise<Array>} Objects from the specified version
+   */
+  async listCatalogObjectsAtVersion(catalogVersion, options = {}) {
+    try {
+      const allObjects = [];
+      let cursor = null;
+      
+      do {
+        const response = await this.catalogApi.list({
+          types: options.types || 'ITEM,ITEM_VARIATION,CATEGORY',
+          catalogVersion: catalogVersion,
+          cursor,
+          limit: options.limit || 1000
+        });
+        
+        const result = response.result || response;
+        
+        if (result.objects) {
+          allObjects.push(...result.objects);
+        }
+        
+        cursor = result.cursor;
+      } while (cursor && allObjects.length < (options.maxResults || 10000));
+      
+      console.log(`📜 Retrieved ${allObjects.length} objects from catalog version ${catalogVersion}`);
+      return allObjects;
+      
+    } catch (error) {
+      this.handleSquareError(error, `Failed to list catalog objects at version ${catalogVersion}`);
+      throw error;
+    }
+  }
+
+  /**
+   * Compare catalog versions and detect changes
+   * @param {number} fromVersion - Starting version
+   * @param {number} toVersion - Ending version (optional, defaults to current)
+   * @returns {Promise<Object>} Change summary
+   */
+  async compareCatalogVersions(fromVersion, toVersion = null) {
+    try {
+      if (!toVersion) {
+        toVersion = await this.getCurrentCatalogVersion();
+      }
+      
+      console.log(`🔍 Comparing catalog versions ${fromVersion} → ${toVersion}`);
+      
+      if (fromVersion === toVersion) {
+        return { hasChanges: false, fromVersion, toVersion, changes: [] };
+      }
+      
+      const oldObjects = await this.listCatalogObjectsAtVersion(fromVersion, { limit: 5000 });
+      const newObjects = await this.listCatalogObjectsAtVersion(toVersion, { limit: 5000 });
+      
+      const oldMap = new Map(oldObjects.map(obj => [obj.id, obj]));
+      const newMap = new Map(newObjects.map(obj => [obj.id, obj]));
+      
+      const changes = [];
+      
+      // Find added objects
+      for (const [id, obj] of newMap) {
+        if (!oldMap.has(id)) {
+          changes.push({ type: 'ADDED', id, object: obj });
+        }
+      }
+      
+      // Find removed objects
+      for (const [id, obj] of oldMap) {
+        if (!newMap.has(id)) {
+          changes.push({ type: 'REMOVED', id, object: obj });
+        }
+      }
+      
+      // Find modified objects
+      for (const [id, newObj] of newMap) {
+        const oldObj = oldMap.get(id);
+        if (oldObj && oldObj.version !== newObj.version) {
+          changes.push({ type: 'MODIFIED', id, oldObject: oldObj, newObject: newObj });
+        }
+      }
+      
+      console.log(`🔍 Found ${changes.length} changes between versions`);
+      return { hasChanges: changes.length > 0, fromVersion, toVersion, changes };
+      
+    } catch (error) {
+      this.handleSquareError(error, 'Failed to compare catalog versions');
+      throw error;
+    }
+  }
+
+  /**
+   * Sync local state with Square catalog using version management
+   * @param {Array} localObjects - Local objects to sync
+   * @param {Object} options - Sync options
+   * @returns {Promise<Object>} Sync results
+   */
+  async syncWithVersionControl(localObjects, options = {}) {
+    try {
+      console.log(`🔄 Starting version-controlled sync of ${localObjects.length} objects`);
+      
+      // Get current catalog version
+      const currentVersion = await this.getCurrentCatalogVersion();
+      
+      // If we have a last known version, check for conflicts
+      if (this.lastKnownCatalogVersion && this.lastKnownCatalogVersion < currentVersion) {
+        console.log(`⚠️ Catalog has changed (v${this.lastKnownCatalogVersion} → v${currentVersion}). Checking for conflicts...`);
+        
+        const versionDiff = await this.compareCatalogVersions(this.lastKnownCatalogVersion, currentVersion);
+        
+        if (versionDiff.hasChanges) {
+          console.log(`🔍 Found ${versionDiff.changes.length} changes in catalog since last sync`);
+          
+          if (options.onVersionConflict) {
+            const resolution = await options.onVersionConflict(versionDiff);
+            if (resolution === 'abort') {
+              throw new Error('Sync aborted due to version conflicts');
+            }
+          }
+        }
+      }
+      
+      // Perform sync with version control
+      const result = await this.batchUpsertWithVersions(localObjects, options);
+      
+      // Update our version tracking
+      this.lastKnownCatalogVersion = currentVersion;
+      
+      console.log(`✅ Version-controlled sync completed successfully`);
+      return result;
+      
+    } catch (error) {
+      this.handleSquareError(error, 'Version-controlled sync failed');
+      throw error;
+    }
+  }
+
+  /**
    * Test Square connection and permissions
    * @returns {Promise<boolean>} Connection status
    */
@@ -513,13 +776,10 @@ export class SquareCatalogAgent {
       // Test catalog access and get limits
       await this.getCatalogInfo();
       
-      // Test basic catalog listing
-      const { objects } = await this.catalogApi.list({
-        types: 'ITEM',
-        limit: 1
-      });
+      // Test basic catalog listing and get version
+      const catalogVersion = await this.getCurrentCatalogVersion();
       
-      console.log('✅ Catalog API access confirmed. Found:', objects?.length || 0);
+      console.log('✅ Catalog API access confirmed with version tracking enabled.');
       return true;
       
     } catch (error) {
