@@ -11,12 +11,29 @@ import GroupingAgent from '../src/agents/GroupingAgent.js';
 
     // Recursively find all image files in the source directory
     const sourceDir = config.filesystem.imageSourceDir;
-    const imageFiles = (await fs.readdir(sourceDir, { withFileTypes: true }))
-      .filter(dirent => dirent.isFile() && config.workflow.supportedImageExtensions.includes(path.extname(dirent.name).toLowerCase()))
-      .map(dirent => path.join(sourceDir, dirent.name));
-
-    // Map images to their directory-based category hints
+    const imageFiles = [];
     const categoryHints = {};
+    
+    async function findImagesRecursively(dir, categoryHint = null) {
+      const entries = await fs.readdir(dir, { withFileTypes: true });
+      
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        
+        if (entry.isDirectory()) {
+          // Use directory name as category hint
+          const dirCategoryHint = entry.name.replace(/[-_]/g, ' ');
+          await findImagesRecursively(fullPath, dirCategoryHint);
+        } else if (entry.isFile() && config.workflow.supportedImageExtensions.includes(path.extname(entry.name).toLowerCase())) {
+          imageFiles.push(fullPath);
+          if (categoryHint) {
+            categoryHints[fullPath] = categoryHint;
+          }
+        }
+      }
+    }
+    
+    await findImagesRecursively(sourceDir);
 
     // Analyze images
     const analysisResults = await imageAnalysisAgent.analyzeImages(imageFiles, categoryHints);
