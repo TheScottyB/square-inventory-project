@@ -562,7 +562,7 @@ export class SquareCatalogAgent {
   }
 
   /**
-   * Enhanced batch upsert with version conflict handling
+   * Enhanced batch upsert with intelligent version conflict handling
    * @param {Array} objects - Array of catalog objects
    * @param {Object} options - Batch options
    * @returns {Promise<Object>} Batch upsert results with version updates
@@ -597,29 +597,171 @@ export class SquareCatalogAgent {
       return result;
       
     } catch (error) {
-      // Handle version conflicts (409 errors)
-      if (error.result?.errors?.[0]?.code === 'CONFLICT') {
-        console.warn('⚠️ Version conflict detected. Refetching objects and retrying...');
+      return await this.handleVersionConflictWithRetry(error, objects, options);
+    }
+  }
+
+  /**
+   * Intelligent version conflict resolution with exponential backoff
+   * @param {Error} error - The error from batch upsert
+   * @param {Array} objects - Original objects being upserted
+   * @param {Object} options - Original options
+   * @returns {Promise<Object>} Retry result or throws error
+   */
+  async handleVersionConflictWithRetry(error, objects, options = {}) {
+    const maxRetries = options.maxRetries || 3;
+    const currentRetry = options._retryCount || 0;
+    
+    // Check if this is a version conflict error
+    const isVersionConflict = error.result?.errors?.some(err => 
+      err.code === 'CONFLICT' || err.code === 'VERSION_MISMATCH'
+    );
+    
+    if (isVersionConflict && currentRetry < maxRetries) {
+      console.warn(`⚠️ Version conflict detected (attempt ${currentRetry + 1}/${maxRetries}). Implementing intelligent resolution...`);
+      
+      // Exponential backoff with jitter
+      const baseDelay = Math.min(1000 * Math.pow(2, currentRetry), 8000); // Max 8s
+      const jitter = Math.random() * 1000; // Up to 1s jitter
+      const delay = baseDelay + jitter;
+      
+      console.log(`   ⏱️ Waiting ${Math.round(delay)}ms before retry...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      
+      try {
+        // Strategy 1: Fetch fresh versions for all objects
+        const objectIds = objects.map(obj => obj.id).filter(id => id && !id.startsWith('#'));
+        let freshObjects = [];
         
-        // Clear version cache for conflicted objects
-        const conflictedIds = objects.map(obj => obj.id).filter(id => id);
-        conflictedIds.forEach(id => this.versionCache.delete(id));
-        
-        // Refetch with latest versions (if this is not already a retry)
-        if (!options._isRetry) {
-          const freshObjects = await this.retrieveCatalogObjectsWithVersions(conflictedIds);
-          const updatedObjects = objects.map(obj => {
-            const freshObj = freshObjects.find(fresh => fresh.id === obj.id);
-            return freshObj ? { ...obj, version: freshObj.version } : obj;
-          });
-          
-          return await this.batchUpsertWithVersions(updatedObjects, { ...options, _isRetry: true });
+        if (objectIds.length > 0) {
+          console.log(`   🔄 Fetching fresh versions for ${objectIds.length} existing objects`);
+          freshObjects = await this.retrieveCatalogObjectsWithVersions(objectIds);
         }
+        
+        // Strategy 2: Merge changes intelligently
+        const reconciledObjects = await this.reconcileObjectVersions(objects, freshObjects);
+        
+        // Strategy 3: Retry with updated options
+        const retryOptions = {
+          ...options,
+          _retryCount: currentRetry + 1,
+          _isRetry: true
+        };
+        
+        console.log(`   ✨ Retrying with ${reconciledObjects.length} reconciled objects`);
+        return await this.batchUpsertWithVersions(reconciledObjects, retryOptions);
+        
+      } catch (retryError) {
+        // If retry also fails, check if we should try again
+        if (currentRetry < maxRetries - 1) {
+          return await this.handleVersionConflictWithRetry(retryError, objects, {
+            ...options,
+            _retryCount: currentRetry + 1
+          });
+        }
+        
+        console.error(`❌ Version conflict resolution failed after ${maxRetries} attempts`);
+        this.handleSquareError(retryError, 'Final retry attempt failed');
+        throw retryError;
+      }
+    }
+    
+    // Not a version conflict or exceeded retries
+    this.handleSquareError(error, 'Batch upsert with versions failed');
+    throw error;
+  }
+
+  /**
+   * Intelligent object version reconciliation
+   * @param {Array} localObjects - Objects we want to upsert
+   * @param {Array} remoteObjects - Fresh objects from Square
+   * @returns {Promise<Array>} Reconciled objects ready for upsert
+   */
+  async reconcileObjectVersions(localObjects, remoteObjects) {
+    const reconciledObjects = [];
+    const remoteMap = new Map(remoteObjects.map(obj => [obj.id, obj]));
+    
+    for (const localObj of localObjects) {
+      if (localObj.id && localObj.id.startsWith('#')) {
+        // New object with temp ID - no reconciliation needed
+        reconciledObjects.push(localObj);
+        continue;
       }
       
-      this.handleSquareError(error, 'Batch upsert with versions failed');
-      throw error;
+      const remoteObj = remoteMap.get(localObj.id);
+      if (!remoteObj) {
+        // Object doesn't exist remotely anymore - treat as new
+        console.warn(`   ⚠️ Object ${localObj.id} no longer exists remotely, treating as new`);
+        reconciledObjects.push({ ...localObj, id: `#${localObj.id}-recovered` });
+        continue;
+      }
+      
+      // Intelligent merge strategy
+      const reconciledObj = await this.mergeObjectChanges(localObj, remoteObj);
+      reconciledObjects.push(reconciledObj);
+      
+      console.log(`   🔄 Reconciled ${localObj.type} ${localObj.id} (v${remoteObj.version})`);
     }
+    
+    return reconciledObjects;
+  }
+
+  /**
+   * Smart merge strategy for catalog objects
+   * @param {Object} localObj - Local object with our changes
+   * @param {Object} remoteObj - Remote object with latest version
+   * @returns {Promise<Object>} Merged object
+   */
+  async mergeObjectChanges(localObj, remoteObj) {
+    const merged = { ...remoteObj }; // Start with remote as base
+    
+    // Strategy: Preserve local changes for specific fields
+    const preserveLocalFields = {
+      'ITEM': ['itemData.name', 'itemData.description', 'itemData.imageIds'],
+      'ITEM_VARIATION': ['itemVariationData.name', 'itemVariationData.priceMoney', 'itemVariationData.sku'],
+      'CATEGORY': ['categoryData.name'],
+      'IMAGE': ['imageData.name', 'imageData.caption']
+    };
+    
+    const fieldsToPreserve = preserveLocalFields[localObj.type] || [];
+    
+    for (const fieldPath of fieldsToPreserve) {
+      const localValue = this.getNestedValue(localObj, fieldPath);
+      if (localValue !== undefined) {
+        this.setNestedValue(merged, fieldPath, localValue);
+      }
+    }
+    
+    // Always use the remote version number
+    merged.version = remoteObj.version;
+    
+    return merged;
+  }
+
+  /**
+   * Get nested object value by path
+   * @param {Object} obj - Object to traverse
+   * @param {string} path - Dot-separated path
+   * @returns {*} Value at path or undefined
+   */
+  getNestedValue(obj, path) {
+    return path.split('.').reduce((current, key) => current?.[key], obj);
+  }
+
+  /**
+   * Set nested object value by path
+   * @param {Object} obj - Object to modify
+   * @param {string} path - Dot-separated path
+   * @param {*} value - Value to set
+   */
+  setNestedValue(obj, path, value) {
+    const keys = path.split('.');
+    const lastKey = keys.pop();
+    const target = keys.reduce((current, key) => {
+      if (!current[key]) current[key] = {};
+      return current[key];
+    }, obj);
+    target[lastKey] = value;
   }
 
   /**
@@ -763,6 +905,264 @@ export class SquareCatalogAgent {
   }
 
   /**
+   * Adaptive retry strategy with configurable backoff and jitter
+   * @param {Function} operation - Async operation to retry
+   * @param {Object} options - Retry configuration
+   * @returns {Promise<*>} Operation result
+   */
+  async withAdaptiveRetry(operation, options = {}) {
+    const {
+      maxRetries = 3,
+      baseDelayMs = 1000,
+      maxDelayMs = 30000,
+      backoffFactor = 2,
+      jitterFactor = 0.1,
+      retryableErrors = ['RATE_LIMITED', 'TEMPORARY_ERROR', 'NETWORK_ERROR', 'CONFLICT'],
+      onRetry = null
+    } = options;
+    
+    let lastError;
+    
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        return await operation();
+      } catch (error) {
+        lastError = error;
+        
+        // Check if error is retryable
+        const isRetryable = this.isRetryableError(error, retryableErrors);
+        const isLastAttempt = attempt === maxRetries;
+        
+        if (!isRetryable || isLastAttempt) {
+          throw error;
+        }
+        
+        // Calculate delay with exponential backoff and jitter
+        const exponentialDelay = Math.min(baseDelayMs * Math.pow(backoffFactor, attempt), maxDelayMs);
+        const jitter = exponentialDelay * jitterFactor * (Math.random() * 2 - 1); // ±jitterFactor
+        const delay = Math.max(exponentialDelay + jitter, 100); // Min 100ms
+        
+        console.warn(`⚠️ Attempt ${attempt + 1} failed, retrying in ${Math.round(delay)}ms... (${error.message})`);
+        
+        if (onRetry) {
+          await onRetry(error, attempt, delay);
+        }
+        
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+    }
+    
+    throw lastError;
+  }
+
+  /**
+   * Check if error is retryable based on configuration
+   * @param {Error} error - Error to check
+   * @param {Array} retryableErrors - List of retryable error codes
+   * @returns {boolean} Whether error is retryable
+   */
+  isRetryableError(error, retryableErrors) {
+    if (error instanceof SquareError) {
+      const errorCode = error.result?.errors?.[0]?.code;
+      if (errorCode && retryableErrors.includes(errorCode)) {
+        return true;
+      }
+      
+      // Check HTTP status codes
+      const status = error.statusCode;
+      if (status === 429 || status === 502 || status === 503 || status === 504) {
+        return true;
+      }
+    }
+    
+    // Network errors
+    if (error.code === 'ECONNRESET' || error.code === 'ETIMEDOUT' || error.code === 'ENOTFOUND') {
+      return true;
+    }
+    
+    return false;
+  }
+
+  /**
+   * Dynamic throughput optimization based on real-time API usage
+   * @param {string} merchantId - Merchant identifier for per-merchant tuning
+   * @returns {Promise<Object>} Optimized batch configuration
+   */
+  async getOptimizedBatchConfig(merchantId = 'default') {
+    try {
+      // Get current catalog info to understand API state
+      const catalogInfo = await this.getCatalogInfo();
+      const limits = catalogInfo.limits;
+      
+      // Base configuration
+      let config = {
+        batchSize: Math.floor(limits.batchUpsertMaxObjectsPerBatch * 0.8), // 80% of limit
+        concurrency: 2, // Conservative default
+        delayBetweenBatches: 100, // 100ms
+        adaptiveBackoff: true
+      };
+      
+      // Check if we have performance history for this merchant
+      const perfKey = `merchant_perf_${merchantId}`;
+      const perfHistory = this.performanceCache?.get(perfKey) || {
+        successRate: 1.0,
+        avgResponseTime: 1000,
+        recentErrors: [],
+        lastOptimization: Date.now()
+      };
+      
+      // Adjust based on recent performance
+      if (perfHistory.successRate > 0.95 && perfHistory.avgResponseTime < 2000) {
+        // High success rate and fast responses - increase throughput
+        config.batchSize = Math.min(config.batchSize * 1.2, limits.batchUpsertMaxObjectsPerBatch);
+        config.concurrency = Math.min(config.concurrency + 1, 5);
+        config.delayBetweenBatches = Math.max(config.delayBetweenBatches * 0.8, 50);
+      } else if (perfHistory.successRate < 0.8 || perfHistory.avgResponseTime > 5000) {
+        // Poor performance - be more conservative
+        config.batchSize = Math.max(config.batchSize * 0.6, 10);
+        config.concurrency = 1;
+        config.delayBetweenBatches = Math.min(config.delayBetweenBatches * 1.5, 2000);
+      }
+      
+      // Check for recent rate limiting
+      const recentRateLimits = perfHistory.recentErrors.filter(err => 
+        err.code === 'RATE_LIMITED' && (Date.now() - err.timestamp) < 300000 // Last 5 minutes
+      );
+      
+      if (recentRateLimits.length > 0) {
+        console.log(`🐌 Recent rate limiting detected, applying conservative settings`);
+        config.batchSize = Math.max(config.batchSize * 0.5, 5);
+        config.concurrency = 1;
+        config.delayBetweenBatches = Math.max(config.delayBetweenBatches * 2, 1000);
+      }
+      
+      console.log(`⚡ Optimized batch config for ${merchantId}:`, {
+        batchSize: Math.floor(config.batchSize),
+        concurrency: config.concurrency,
+        delayMs: config.delayBetweenBatches,
+        successRate: `${(perfHistory.successRate * 100).toFixed(1)}%`
+      });
+      
+      return config;
+      
+    } catch (error) {
+      console.warn('⚠️ Could not optimize batch config, using defaults');
+      return {
+        batchSize: 100,
+        concurrency: 1,
+        delayBetweenBatches: 500,
+        adaptiveBackoff: true
+      };
+    }
+  }
+
+  /**
+   * Initialize performance tracking cache
+   */
+  initializePerformanceTracking() {
+    if (!this.performanceCache) {
+      this.performanceCache = new Map();
+    }
+  }
+
+  /**
+   * Record performance metrics for adaptive optimization
+   * @param {string} merchantId - Merchant identifier
+   * @param {Object} metrics - Performance metrics
+   */
+  recordPerformanceMetrics(merchantId, metrics) {
+    this.initializePerformanceTracking();
+    
+    const perfKey = `merchant_perf_${merchantId}`;
+    const existing = this.performanceCache.get(perfKey) || {
+      successRate: 1.0,
+      avgResponseTime: 1000,
+      recentErrors: [],
+      totalRequests: 0,
+      successfulRequests: 0
+    };
+    
+    // Update metrics
+    existing.totalRequests += 1;
+    if (metrics.success) {
+      existing.successfulRequests += 1;
+    } else {
+      existing.recentErrors.push({
+        code: metrics.errorCode,
+        timestamp: Date.now()
+      });
+      
+      // Keep only recent errors (last hour)
+      existing.recentErrors = existing.recentErrors.filter(err => 
+        Date.now() - err.timestamp < 3600000
+      );
+    }
+    
+    // Calculate rolling success rate
+    existing.successRate = existing.successfulRequests / existing.totalRequests;
+    
+    // Update average response time (simple moving average)
+    if (metrics.responseTime) {
+      existing.avgResponseTime = (existing.avgResponseTime * 0.8) + (metrics.responseTime * 0.2);
+    }
+    
+    this.performanceCache.set(perfKey, existing);
+  }
+
+  /**
+   * Enhanced batch upsert with adaptive throughput optimization
+   * @param {Array} objects - Array of catalog objects
+   * @param {Object} options - Enhanced batch options
+   * @returns {Promise<Object>} Batch upsert results
+   */
+  async batchUpsertWithOptimization(objects, options = {}) {
+    const merchantId = options.merchantId || 'default';
+    const startTime = Date.now();
+    
+    try {
+      // Get optimized configuration
+      const config = await this.getOptimizedBatchConfig(merchantId);
+      
+      // Apply adaptive retry wrapper
+      const result = await this.withAdaptiveRetry(async () => {
+        return await this.batchUpsertWithVersions(objects, {
+          ...options,
+          batchSize: config.batchSize,
+          concurrency: config.concurrency
+        });
+      }, {
+        maxRetries: options.maxRetries || 3,
+        baseDelayMs: config.delayBetweenBatches,
+        onRetry: async (error, attempt, delay) => {
+          this.recordPerformanceMetrics(merchantId, {
+            success: false,
+            errorCode: error.result?.errors?.[0]?.code,
+            responseTime: Date.now() - startTime
+          });
+        }
+      });
+      
+      // Record success metrics
+      this.recordPerformanceMetrics(merchantId, {
+        success: true,
+        responseTime: Date.now() - startTime
+      });
+      
+      return result;
+      
+    } catch (error) {
+      // Record failure metrics
+      this.recordPerformanceMetrics(merchantId, {
+        success: false,
+        errorCode: error.result?.errors?.[0]?.code,
+        responseTime: Date.now() - startTime
+      });
+      
+      throw error;
+    }
+  }
+
+  /**
    * Test Square connection and permissions
    * @returns {Promise<boolean>} Connection status
    */
@@ -779,7 +1179,10 @@ export class SquareCatalogAgent {
       // Test basic catalog listing and get version
       const catalogVersion = await this.getCurrentCatalogVersion();
       
-      console.log('✅ Catalog API access confirmed with version tracking enabled.');
+      // Initialize performance tracking
+      this.initializePerformanceTracking();
+      
+      console.log('✅ Catalog API access confirmed with version tracking and performance optimization enabled.');
       return true;
       
     } catch (error) {
