@@ -38,26 +38,12 @@
     "@openai/agents": "^0.0.14",
     "dotenv": "^17.2.1",
     "fs-extra": "^11.3.0",
-    "openai": "^5.11.0"
+    "openai": "^5.11.0",
+    "square": "43.0.1"
   },
   "devDependencies": {
     "@types/node": "^24.1.0",
     "eslint": "^9.32.0",
     "jest": "^30.0.5"
-  },
-  "jest": {
-    "preset": "@jest/preset-default",
-    "extensionsToTreatAsEsm": [".js"],
-    "globals": {
-      "__ESM": true
-    },
-    "transform": {},
-    "testMatch": [
-      "**/__tests__/**/*.test.js"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.js",
-      "!src/**/__tests__/**"
-    ]
   }
 }
