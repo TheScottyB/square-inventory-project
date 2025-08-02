@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import crypto from 'crypto';
 import { config } from '../config/index.js';
+import { CatalogObserver } from '../observability/CatalogObserver.js';
 
 /**
  * SquareCatalogAgent - Manages Square Catalog items, images, and inventory
@@ -31,6 +32,15 @@ export class SquareCatalogAgent {
     // Version management for optimistic concurrency
     this.lastKnownCatalogVersion = null;
     this.versionCache = new Map(); // Cache object versions for conflict resolution
+    
+    // Initialize observability system
+    this.observer = new CatalogObserver({
+      enableFileLogging: !this.enableDryRun, // Disable file logging in dry run mode
+      enableMetrics: true,
+      enableTracing: true,
+      logLevel: process.env.LOG_LEVEL || 'info',
+      logsDirectory: './logs/square-catalog'
+    });
   }
 
   /**
@@ -38,12 +48,20 @@ export class SquareCatalogAgent {
    * @returns {Promise<Array>} Array of location objects
    */
   async getLocations() {
+    const traceId = this.observer.startTrace('getLocations');
+    
     try {
+      this.observer.addSpan(traceId, 'api_call', { endpoint: 'locations.list' });
       const { locations } = await this.locationsApi.list();
-      console.log(`📍 Found ${locations?.length || 0} Square locations`);
-      return locations || [];
+      
+      const result = locations || [];
+      this.observer.log('info', `Found ${result.length} Square locations`, { count: result.length });
+      this.observer.endTrace(traceId, { locationCount: result.length });
+      
+      return result;
     } catch (error) {
-      console.error('❌ Failed to retrieve locations:', error.message);
+      this.observer.endTrace(traceId, null, error);
+      this.handleSquareError(error, 'Failed to retrieve locations');
       throw error;
     }
   }
@@ -74,13 +92,27 @@ export class SquareCatalogAgent {
    * @returns {Promise<Object>} Uploaded image object
    */
   async uploadImage(imageBuffer, imageName, caption = '') {
+    const traceId = this.observer.startTrace('uploadImage', {
+      imageName,
+      imageSize: imageBuffer ? imageBuffer.length : 0,
+      caption: caption ? caption.substring(0, 50) : null
+    });
+    
     if (this.enableDryRun) {
-      console.log(`[DRY RUN] Would upload image: ${imageName}`);
-      return { id: `mock-image-${Date.now()}`, name: imageName };
+      this.observer.log('info', `[DRY RUN] Would upload image: ${imageName}`);
+      const mockResult = { id: `mock-image-${Date.now()}`, name: imageName };
+      this.observer.endTrace(traceId, mockResult);
+      return mockResult;
     }
 
     try {
       const idempotencyKey = crypto.randomUUID();
+      this.observer.addSpan(traceId, 'generate_idempotency_key', { key: idempotencyKey });
+      
+      this.observer.addSpan(traceId, 'api_call', { 
+        endpoint: 'catalog.images.create',
+        imageSize: imageBuffer.length 
+      });
       
       // Upload the image using the correct Square SDK pattern
       const { result } = await this.client.catalog.images.create({
@@ -94,10 +126,16 @@ export class SquareCatalogAgent {
         }
       }, imageBuffer);
 
-      console.log(`🖼️ Successfully uploaded image: ${imageName} (ID: ${result.image.id})`);
+      this.observer.log('info', `Successfully uploaded image: ${imageName}`, { 
+        imageId: result.image.id,
+        imageName 
+      });
+      
+      this.observer.endTrace(traceId, { imageId: result.image.id, imageName });
       return result.image;
       
     } catch (error) {
+      this.observer.endTrace(traceId, null, error);
       this.handleSquareError(error, `Failed to upload image ${imageName}`);
       throw error;
     }
@@ -111,14 +149,25 @@ export class SquareCatalogAgent {
    * @returns {Promise<Object>} Created/updated catalog item
    */
   async createCatalogItem(productData, imageId = null, locationId, price = 0) {
+    const traceId = this.observer.startTrace('createCatalogItem', {
+      productName: productData.productName,
+      category: productData.category,
+      hasImage: !!imageId,
+      price
+    });
+    
     if (this.enableDryRun) {
-      console.log(`[DRY RUN] Would create catalog item: ${productData.productName}`);
-      return { id: `mock-item-${Date.now()}`, itemData: { name: productData.productName } };
+      this.observer.log('info', `[DRY RUN] Would create catalog item: ${productData.productName}`);
+      const mockResult = { id: `mock-item-${Date.now()}`, itemData: { name: productData.productName } };
+      this.observer.endTrace(traceId, mockResult);
+      return mockResult;
     }
 
     try {
       const idempotencyKey = crypto.randomUUID();
       const itemId = `#${productData.productName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
+      
+      this.observer.addSpan(traceId, 'generate_item_structure', { itemId, idempotencyKey });
       
       // Create basic item structure with required price
       const catalogObject = {
@@ -153,16 +202,20 @@ export class SquareCatalogAgent {
       };
 
       // Add category if available
+      this.observer.addSpan(traceId, 'resolve_category', { category: productData.category });
       const categoryId = await this.getOrCreateCategory(productData.category);
       if (categoryId) {
         catalogObject.itemData.categories = [{ id: categoryId }];
+        this.observer.addSpan(traceId, 'category_resolved', { categoryId });
       }
 
       // Add image if provided
       if (imageId) {
         catalogObject.itemData.imageIds = [imageId];
+        this.observer.addSpan(traceId, 'image_attached', { imageId });
       }
 
+      this.observer.addSpan(traceId, 'api_call', { endpoint: 'catalog.batchUpsert' });
       const response = await this.catalogApi.batchUpsert({
         idempotencyKey,
         batches: [{
@@ -177,10 +230,16 @@ export class SquareCatalogAgent {
         throw new Error('No objects returned from batch upsert');
       }
 
-      console.log(`✅ Created catalog item: ${productData.productName} (ID: ${objects[0].id})`);
+      this.observer.log('info', `Created catalog item: ${productData.productName}`, { 
+        catalogId: objects[0].id,
+        productName: productData.productName
+      });
+      
+      this.observer.endTrace(traceId, { catalogId: objects[0].id, productName: productData.productName });
       return objects[0];
       
     } catch (error) {
+      this.observer.endTrace(traceId, null, error);
       this.handleSquareError(error, `Failed to create catalog item ${productData.productName}`);
       throw error;
     }
@@ -349,24 +408,308 @@ export class SquareCatalogAgent {
   }
 
   /**
-   * Handle Square API errors with structured information
+   * Enhanced Square API error handling with detailed classification
    * @param {Error} error - The error object
    * @param {string} context - Context description
+   * @param {Object} options - Additional error handling options
    */
-  handleSquareError(error, context) {
-    console.error(`❌ ${context}:`, error.message);
+  handleSquareError(error, context, options = {}) {
+    const errorInfo = this.classifySquareError(error);
     
-    if (error instanceof SquareError) {
-      console.error('Square Error Details:');
-      if (error.result) {
-        console.error('  Category:', error.result.errors?.[0]?.category);
-        console.error('  Code:', error.result.errors?.[0]?.code);
-        console.error('  Detail:', error.result.errors?.[0]?.detail);
-        console.error('  Field:', error.result.errors?.[0]?.field);
-      }
-    } else if (error.result) {
-      console.error('Error details:', JSON.stringify(error.result, null, 2));
+    // Log error through observability system
+    this.observer.log(errorInfo.severity, `Square API Error: ${context}`, {
+      errorType: errorInfo.type,
+      errorCategory: errorInfo.category,
+      isRetryable: errorInfo.isRetryable,
+      httpStatus: errorInfo.httpStatus,
+      errorMessage: error.message
+    }, {
+      operation: context,
+      errorCode: error instanceof SquareError ? error.result?.errors?.[0]?.code : error.code,
+      remediation: errorInfo.remediation
+    });
+    
+    // Enhanced error details for console (legacy support)
+    if (error instanceof SquareError && error.result?.errors) {
+      this.observer.log('debug', 'Square API Error Details', {
+        errors: error.result.errors.map((err, index) => ({
+          index: index + 1,
+          code: err.code,
+          category: err.category,
+          detail: err.detail,
+          field: err.field
+        }))
+      });
     }
+    
+    // Record error metrics for monitoring
+    if (options.trackMetrics !== false) {
+      this.recordErrorMetrics(errorInfo, context);
+    }
+    
+    return errorInfo;
+  }
+
+  /**
+   * Classify Square API errors with detailed categorization
+   * @param {Error} error - The error to classify
+   * @returns {Object} Error classification details
+   */
+  classifySquareError(error) {
+    const classification = {
+      type: 'unknown',
+      category: 'UNKNOWN_ERROR',
+      isRetryable: false,
+      severity: 'error',
+      httpStatus: null,
+      remediation: null
+    };
+    
+    // Handle Square SDK errors
+    if (error instanceof SquareError) {
+      classification.httpStatus = error.statusCode;
+      
+      // HTTP status code classification
+      if (error.statusCode) {
+        switch (Math.floor(error.statusCode / 100)) {
+          case 4: // 4xx Client Errors
+            classification.type = 'client_error';
+            classification.severity = error.statusCode === 401 ? 'critical' : 'error';
+            classification.isRetryable = [408, 409, 429].includes(error.statusCode);
+            break;
+          case 5: // 5xx Server Errors
+            classification.type = 'server_error';
+            classification.severity = 'critical';
+            classification.isRetryable = true;
+            break;
+          default:
+            classification.type = 'http_error';
+        }
+      }
+      
+      // Square-specific error codes
+      if (error.result?.errors?.[0]) {
+        const squareError = error.result.errors[0];
+        classification.category = squareError.category;
+        
+        const errorCode = squareError.code;
+        const errorMappings = this.getSquareErrorMappings();
+        
+        if (errorMappings[errorCode]) {
+          Object.assign(classification, errorMappings[errorCode]);
+        }
+      }
+    }
+    // Handle network and system errors
+    else if (error.code) {
+      const networkErrors = {
+        'ECONNRESET': { type: 'network', isRetryable: true, severity: 'warning', remediation: 'Check network connectivity and retry' },
+        'ETIMEDOUT': { type: 'network', isRetryable: true, severity: 'warning', remediation: 'Request timed out, consider increasing timeout or retry' },
+        'ENOTFOUND': { type: 'network', isRetryable: false, severity: 'error', remediation: 'DNS resolution failed, check hostname' },
+        'ECONNREFUSED': { type: 'network', isRetryable: false, severity: 'error', remediation: 'Connection refused, check service availability' }
+      };
+      
+      if (networkErrors[error.code]) {
+        Object.assign(classification, networkErrors[error.code]);
+      }
+    }
+    
+    return classification;
+  }
+
+  /**
+   * Get Square API error code mappings
+   * @returns {Object} Error code to classification mappings
+   */
+  getSquareErrorMappings() {
+    return {
+      // Authentication & Authorization
+      'UNAUTHORIZED': {
+        type: 'authentication',
+        isRetryable: false,
+        severity: 'critical',
+        remediation: 'Check access token validity and permissions'
+      },
+      'FORBIDDEN': {
+        type: 'authorization',
+        isRetryable: false,
+        severity: 'critical',
+        remediation: 'Insufficient permissions for this operation'
+      },
+      
+      // Rate Limiting
+      'RATE_LIMITED': {
+        type: 'rate_limit',
+        isRetryable: true,
+        severity: 'warning',
+        remediation: 'Reduce request frequency and implement backoff strategy'
+      },
+      
+      // Validation Errors
+      'BAD_REQUEST': {
+        type: 'validation',
+        isRetryable: false,
+        severity: 'error',
+        remediation: 'Check request format and required fields'
+      },
+      'INVALID_REQUEST_ERROR': {
+        type: 'validation',
+        isRetryable: false,
+        severity: 'error',
+        remediation: 'Validate request parameters and format'
+      },
+      
+      // Conflict & Version Errors
+      'CONFLICT': {
+        type: 'version_conflict',
+        isRetryable: true,
+        severity: 'warning',
+        remediation: 'Refresh object version and retry with latest data'
+      },
+      'VERSION_MISMATCH': {
+        type: 'version_conflict',
+        isRetryable: true,
+        severity: 'warning',
+        remediation: 'Object version is outdated, fetch latest version and retry'
+      },
+      
+      // Resource Errors
+      'NOT_FOUND': {
+        type: 'resource',
+        isRetryable: false,
+        severity: 'error',
+        remediation: 'Verify resource ID exists and is accessible'
+      },
+      'GONE': {
+        type: 'resource',
+        isRetryable: false,
+        severity: 'error',
+        remediation: 'Resource has been permanently deleted'
+      },
+      
+      // Service Errors
+      'INTERNAL_SERVER_ERROR': {
+        type: 'service',
+        isRetryable: true,
+        severity: 'critical',
+        remediation: 'Square service error, retry with exponential backoff'
+      },
+      'SERVICE_UNAVAILABLE': {
+        type: 'service',
+        isRetryable: true,
+        severity: 'critical',
+        remediation: 'Square service temporarily unavailable, retry later'
+      },
+      
+      // Request Limit Errors
+      'REQUEST_TIMEOUT': {
+        type: 'timeout',
+        isRetryable: true,
+        severity: 'warning',
+        remediation: 'Request took too long, consider reducing payload size'
+      },
+      'PAYLOAD_TOO_LARGE': {
+        type: 'validation',
+        isRetryable: false,
+        severity: 'error',
+        remediation: 'Reduce request payload size or split into smaller batches'
+      }
+    };
+  }
+
+  /**
+   * Record error metrics for monitoring and analysis
+   * @param {Object} errorInfo - Classified error information
+   * @param {string} context - Error context
+   */
+  recordErrorMetrics(errorInfo, context) {
+    if (!this.errorMetrics) {
+      this.errorMetrics = new Map();
+    }
+    
+    const timestamp = Date.now();
+    const hourKey = Math.floor(timestamp / (1000 * 60 * 60)); // Hour bucket
+    
+    if (!this.errorMetrics.has(hourKey)) {
+      this.errorMetrics.set(hourKey, {
+        total: 0,
+        byType: {},
+        byCategory: {},
+        bySeverity: {},
+        retryable: 0,
+        nonRetryable: 0
+      });
+    }
+    
+    const metrics = this.errorMetrics.get(hourKey);
+    metrics.total++;
+    metrics.byType[errorInfo.type] = (metrics.byType[errorInfo.type] || 0) + 1;
+    metrics.byCategory[errorInfo.category] = (metrics.byCategory[errorInfo.category] || 0) + 1;
+    metrics.bySeverity[errorInfo.severity] = (metrics.bySeverity[errorInfo.severity] || 0) + 1;
+    
+    if (errorInfo.isRetryable) {
+      metrics.retryable++;
+    } else {
+      metrics.nonRetryable++;
+    }
+    
+    // Clean up old metrics (keep last 24 hours)
+    const cutoffHour = hourKey - 24;
+    for (const [hour] of this.errorMetrics) {
+      if (hour < cutoffHour) {
+        this.errorMetrics.delete(hour);
+      }
+    }
+  }
+
+  /**
+   * Get error metrics summary
+   * @param {number} hours - Number of hours to look back (default: 1)
+   * @returns {Object} Error metrics summary
+   */
+  getErrorMetrics(hours = 1) {
+    if (!this.errorMetrics) {
+      return { total: 0, summary: 'No error metrics available' };
+    }
+    
+    const now = Math.floor(Date.now() / (1000 * 60 * 60));
+    const startHour = now - hours;
+    
+    const summary = {
+      total: 0,
+      byType: {},
+      byCategory: {},
+      bySeverity: {},
+      retryable: 0,
+      nonRetryable: 0,
+      period: `Last ${hours} hour(s)`
+    };
+    
+    for (let hour = startHour; hour <= now; hour++) {
+      const metrics = this.errorMetrics.get(hour);
+      if (metrics) {
+        summary.total += metrics.total;
+        summary.retryable += metrics.retryable;
+        summary.nonRetryable += metrics.nonRetryable;
+        
+        // Merge type counts
+        for (const [type, count] of Object.entries(metrics.byType)) {
+          summary.byType[type] = (summary.byType[type] || 0) + count;
+        }
+        
+        // Merge category counts
+        for (const [category, count] of Object.entries(metrics.byCategory)) {
+          summary.byCategory[category] = (summary.byCategory[category] || 0) + count;
+        }
+        
+        // Merge severity counts
+        for (const [severity, count] of Object.entries(metrics.bySeverity)) {
+          summary.bySeverity[severity] = (summary.bySeverity[severity] || 0) + count;
+        }
+      }
+    }
+    
+    return summary;
   }
 
   /**
@@ -437,8 +780,13 @@ export class SquareCatalogAgent {
    * @returns {Promise<Object>} Batch upsert results
    */
   async batchUpsertCatalogObjects(objects, options = {}) {
+    const traceId = this.observer.startTrace('batchUpsertCatalogObjects', {
+      objectCount: objects.length,
+      objectTypes: [...new Set(objects.map(obj => obj.type))]
+    });
+    
     try {
-      // Get current limits
+      this.observer.addSpan(traceId, 'get_catalog_limits');
       const catalogInfo = await this.getCatalogInfo();
       const maxObjectsPerBatch = catalogInfo.limits?.batchUpsertMaxObjectsPerBatch || 1000;
       const maxTotalObjects = catalogInfo.limits?.batchUpsertMaxTotalObjects || 10000;
@@ -446,6 +794,11 @@ export class SquareCatalogAgent {
       if (objects.length > maxTotalObjects) {
         throw new Error(`Too many objects (${objects.length}). Maximum allowed is ${maxTotalObjects}`);
       }
+      
+      this.observer.addSpan(traceId, 'prepare_batches', { 
+        maxObjectsPerBatch, 
+        totalObjects: objects.length 
+      });
       
       // Split into batches if necessary
       const batches = [];
@@ -457,16 +810,30 @@ export class SquareCatalogAgent {
       
       const idempotencyKey = crypto.randomUUID();
       
+      this.observer.addSpan(traceId, 'api_call', { 
+        endpoint: 'catalog.batchUpsert',
+        batchCount: batches.length,
+        idempotencyKey
+      });
+      
       const { result } = await this.catalogApi.batchUpsert({
         idempotencyKey,
         batches,
         ...options
       });
       
-      console.log(`✅ Batch upsert completed: ${result.objects?.length || 0} objects processed`);
+      const processedCount = result.objects?.length || 0;
+      this.observer.log('info', `Batch upsert completed: ${processedCount} objects processed`, {
+        processedCount,
+        batchCount: batches.length,
+        totalObjects: objects.length
+      });
+      
+      this.observer.endTrace(traceId, { processedCount, batchCount: batches.length });
       return result;
       
     } catch (error) {
+      this.observer.endTrace(traceId, null, error);
       this.handleSquareError(error, 'Batch upsert failed');
       throw error;
     }
@@ -956,28 +1323,28 @@ export class SquareCatalogAgent {
   }
 
   /**
-   * Check if error is retryable based on configuration
+   * Check if error is retryable based on enhanced error classification
    * @param {Error} error - Error to check
-   * @param {Array} retryableErrors - List of retryable error codes
+   * @param {Array} retryableErrors - List of retryable error codes (optional)
    * @returns {boolean} Whether error is retryable
    */
-  isRetryableError(error, retryableErrors) {
-    if (error instanceof SquareError) {
-      const errorCode = error.result?.errors?.[0]?.code;
-      if (errorCode && retryableErrors.includes(errorCode)) {
-        return true;
-      }
-      
-      // Check HTTP status codes
-      const status = error.statusCode;
-      if (status === 429 || status === 502 || status === 503 || status === 504) {
-        return true;
-      }
+  isRetryableError(error, retryableErrors = []) {
+    // Use enhanced error classification for more accurate determination
+    const errorInfo = this.classifySquareError(error);
+    
+    // Primary determination based on classification
+    if (errorInfo.isRetryable) {
+      return true;
     }
     
-    // Network errors
-    if (error.code === 'ECONNRESET' || error.code === 'ETIMEDOUT' || error.code === 'ENOTFOUND') {
-      return true;
+    // Fallback to legacy retryable error codes if provided
+    if (retryableErrors.length > 0) {
+      if (error instanceof SquareError) {
+        const errorCode = error.result?.errors?.[0]?.code;
+        if (errorCode && retryableErrors.includes(errorCode)) {
+          return true;
+        }
+      }
     }
     
     return false;
@@ -1167,28 +1534,74 @@ export class SquareCatalogAgent {
    * @returns {Promise<boolean>} Connection status
    */
   async testConnection() {
+    const traceId = this.observer.startTrace('testConnection');
+    
     try {
-      console.log('🔍 Testing Square API connection...');
+      this.observer.log('info', 'Testing Square API connection...');
       
+      this.observer.addSpan(traceId, 'test_locations');
       const locations = await this.getLocations();
-      console.log(`✅ Connection successful. Found ${locations.length} locations.`);
       
-      // Test catalog access and get limits
+      this.observer.addSpan(traceId, 'test_catalog_info');
       await this.getCatalogInfo();
       
-      // Test basic catalog listing and get version
+      this.observer.addSpan(traceId, 'test_catalog_version');
       const catalogVersion = await this.getCurrentCatalogVersion();
       
-      // Initialize performance tracking
+      this.observer.addSpan(traceId, 'initialize_performance_tracking');
       this.initializePerformanceTracking();
       
-      console.log('✅ Catalog API access confirmed with version tracking and performance optimization enabled.');
+      this.observer.log('info', 'Square API connection test successful', {
+        locationCount: locations.length,
+        catalogVersion,
+        features: ['version_tracking', 'performance_optimization', 'observability']
+      });
+      
+      this.observer.endTrace(traceId, { 
+        success: true, 
+        locationCount: locations.length, 
+        catalogVersion 
+      });
+      
       return true;
       
     } catch (error) {
+      this.observer.endTrace(traceId, null, error);
       this.handleSquareError(error, 'Square API connection failed');
       return false;
     }
+  }
+  
+  /**
+   * Get observability metrics and system health
+   * @returns {Object} Comprehensive system metrics
+   */
+  getObservabilityMetrics() {
+    return {
+      performance: this.observer.getPerformanceMetrics(24),
+      systemHealth: this.observer.getSystemHealth(),
+      alerts: this.observer.alerts.filter(alert => !alert.acknowledged),
+      traces: {
+        active: this.observer.currentOperations.size,
+        total: this.observer.traces.size
+      }
+    };
+  }
+  
+  /**
+   * Generate and return performance report
+   * @returns {Promise<Object>} Performance report
+   */
+  async generatePerformanceReport() {
+    return await this.observer.generatePerformanceReport();
+  }
+  
+  /**
+   * Graceful shutdown with observability cleanup
+   */
+  async shutdown() {
+    this.observer.log('info', 'Shutting down SquareCatalogAgent');
+    await this.observer.shutdown();
   }
 }
 
