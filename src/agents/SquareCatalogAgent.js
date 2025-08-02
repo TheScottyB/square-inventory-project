@@ -117,36 +117,120 @@ export class SquareCatalogAgent {
         throw new Error('Invalid image buffer provided');
       }
       
-      if (imageBuffer.length > 32 * 1024 * 1024) { // 32MB limit
-        throw new Error('Image file too large (max 32MB)');
+      if (imageBuffer.length > 15 * 1024 * 1024) { // 15MB limit per Square API docs
+        throw new Error('Image file too large (max 15MB)');
       }
       
-      // For testing purposes, simulate successful image upload
-      // In production, this would use the Square CreateCatalogImage API
-      const mockImageId = `test-image-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      // Check if we're in dry-run mode
+      if (this.enableDryRun) {
+        this.observer.log('info', `[DRY RUN] Would upload image: ${imageName}`);
+        
+        const mockImageId = `test-image-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const mockImageObject = {
+          id: mockImageId,
+          type: 'IMAGE',
+          version: 1,
+          imageData: {
+            name: imageName,
+            caption: caption || `Product image for ${imageName}`,
+            url: `https://example.com/images/${mockImageId}.jpg`
+          },
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+        
+        this.observer.endTrace(traceId, { imageId: mockImageObject.id, imageName, objectId });
+        return mockImageObject;
+      }
       
-      const mockImageObject = {
-        id: mockImageId,
-        type: 'IMAGE',
-        version: 1,
-        imageData: {
-          name: imageName,
-          caption: caption || `Product image for ${imageName}`,
-          url: `https://example.com/images/${mockImageId}.jpg`
-        },
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      };
-
-      this.observer.log('info', `Successfully processed image: ${imageName}`, { 
-        imageId: mockImageObject.id,
-        imageName,
-        imageSize: imageBuffer.length,
-        attachedTo: objectId || 'none'
+      // Real Square API image upload
+      this.observer.addSpan(traceId, 'square_api_upload', { 
+        endpoint: 'catalog.images.create',
+        idempotencyKey,
+        objectId: objectId || 'unattached',
+        isPrimary
       });
       
-      this.observer.endTrace(traceId, { imageId: mockImageObject.id, imageName, objectId });
-      return mockImageObject;
+      // Create the image catalog object
+      const catalogImageObject = {
+        type: 'IMAGE',
+        id: `#image-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        imageData: {
+          name: imageName,
+          caption: caption || `Product image for ${imageName}`
+        }
+      };
+      
+      // Prepare the create request
+      const createRequest = {
+        idempotencyKey,
+        image: catalogImageObject
+      };
+      
+      // Add object ID if provided (to attach image to existing catalog item)
+      if (objectId) {
+        createRequest.objectId = objectId;
+      }
+      
+      // Set as primary if specified
+      if (isPrimary !== undefined) {
+        createRequest.isPrimary = isPrimary;
+      }
+      
+      // Create a proper file object for the Square SDK
+      // The SDK expects either a File object or an object with specific properties
+      const imageFile = new Blob([imageBuffer], { 
+        type: this.getImageContentType(imageName) 
+      });
+      
+      // Add name property for the SDK
+      Object.defineProperty(imageFile, 'name', {
+        value: imageName,
+        writable: false
+      });
+      
+      // Call Square's CreateCatalogImage API
+      this.observer.log('debug', 'Calling Square CreateCatalogImage API', {
+        imageName,
+        imageSize: imageBuffer.length,
+        hasObjectId: !!objectId,
+        isPrimary
+      });
+      
+      const response = await this.client.catalog.images.create({
+        request: createRequest,
+        imageFile: imageFile
+      });
+      
+      // Handle API response
+      if (response.errors && response.errors.length > 0) {
+        const errorMessages = response.errors.map(err => `${err.code}: ${err.detail}`).join('; ');
+        throw new Error(`Square API error: ${errorMessages}`);
+      }
+      
+      if (!response.image) {
+        throw new Error('No image object returned from Square API');
+      }
+      
+      // Extract the created image object
+      const uploadedImage = response.image;
+      
+      this.observer.log('info', `Successfully uploaded image to Square: ${imageName}`, { 
+        imageId: uploadedImage.id,
+        imageName,
+        imageSize: imageBuffer.length,
+        attachedTo: objectId || 'unattached',
+        imageUrl: uploadedImage.imageData?.url
+      });
+      
+      this.observer.endTrace(traceId, { 
+        imageId: uploadedImage.id, 
+        imageName, 
+        objectId,
+        url: uploadedImage.imageData?.url
+      });
+      
+      return uploadedImage;
       
     } catch (error) {
       this.observer.endTrace(traceId, null, error);
@@ -938,13 +1022,14 @@ export class SquareCatalogAgent {
    */
   async retrieveCatalogObjectsWithVersions(objectIds, options = {}) {
     try {
-      const { result } = await this.catalogApi.batchGet({
+      const response = await this.catalogApi.batchGet({
         objectIds,
         includeRelatedObjects: options.includeRelatedObjects || false,
         includeCategoryPathToRoot: options.includeCategoryPathToRoot || false
       });
       
-      const objects = result.objects || [];
+      const result = response.result || response;
+      const objects = result?.objects || [];
       
       // Cache versions for optimistic concurrency
       objects.forEach(obj => {
