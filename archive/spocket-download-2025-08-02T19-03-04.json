@@ -1,0 +1,159 @@
+{
+  "successful": [
+    {
+      "index": 2,
+      "success": true,
+      "filename": "miscellaneous-products-product-description-1754159523164.jpg",
+      "filePath": "/Users/scottybe/Development/tools/Workspace/square-inventory-project/downloaded-images/miscellaneous-products/miscellaneous-products-product-description-1754159523164.jpg",
+      "fileSize": 134392,
+      "contentType": "image/jpeg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/f2c/812/cb-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-829605.jpg",
+      "metadata": {
+        "index": 2,
+        "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/f2c/812/cb-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-829605.jpg",
+        "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/f2c/812/cb-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-829605.jpg",
+        "filename": "miscellaneous-products-product-description-1754159523164.jpg",
+        "alt": "thumbnail image",
+        "dimensions": {
+          "width": 500,
+          "height": 628
+        },
+        "productName": "10 PCS Sleek Modern Pinky Flatware Set",
+        "description": "Premium stainless steel flatware set with modern design",
+        "price": "$49.99",
+        "category": "miscellaneous-products",
+        "supplier": ""
+      }
+    },
+    {
+      "index": 3,
+      "success": true,
+      "filename": "miscellaneous-products-product-description-1754159523167.jpg",
+      "filePath": "/Users/scottybe/Development/tools/Workspace/square-inventory-project/downloaded-images/miscellaneous-products/miscellaneous-products-product-description-1754159523167.jpg",
+      "fileSize": 166492,
+      "contentType": "image/jpeg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/13d/ce9/4a-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-238126.jpg",
+      "metadata": {
+        "index": 3,
+        "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/13d/ce9/4a-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-238126.jpg",
+        "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/13d/ce9/4a-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-238126.jpg",
+        "filename": "miscellaneous-products-product-description-1754159523167.jpg",
+        "alt": "thumbnail image",
+        "dimensions": {
+          "width": 500,
+          "height": 628
+        },
+        "productName": "10 PCS Sleek Modern Pinky Flatware Set",
+        "description": "Premium stainless steel flatware set with modern design",
+        "price": "$49.99",
+        "category": "miscellaneous-products",
+        "supplier": ""
+      }
+    },
+    {
+      "index": 1,
+      "success": true,
+      "filename": "miscellaneous-products-product-description-1754159523159.jpg",
+      "filePath": "/Users/scottybe/Development/tools/Workspace/square-inventory-project/downloaded-images/miscellaneous-products/miscellaneous-products-product-description-1754159523159.jpg",
+      "fileSize": 120069,
+      "contentType": "image/jpeg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/e89/9db/9a-/normal/10-pcs-sleek-modern-pinky-flatware-silverware-flatware-set-266324.jpg",
+      "metadata": {
+        "index": 1,
+        "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/e89/9db/9a-/normal/10-pcs-sleek-modern-pinky-flatware-silverware-flatware-set-266324.jpg",
+        "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/e89/9db/9a-/normal/10-pcs-sleek-modern-pinky-flatware-silverware-flatware-set-266324.jpg",
+        "filename": "miscellaneous-products-product-description-1754159523159.jpg",
+        "alt": "featured image",
+        "dimensions": {
+          "width": 500,
+          "height": 625
+        },
+        "productName": "10 PCS Sleek Modern Pinky Flatware Set",
+        "description": "Premium stainless steel flatware set with modern design",
+        "price": "$49.99",
+        "category": "miscellaneous-products",
+        "supplier": ""
+      }
+    },
+    {
+      "index": 4,
+      "success": true,
+      "filename": "miscellaneous-products-image-1754159523169.jpg",
+      "filePath": "/Users/scottybe/Development/tools/Workspace/square-inventory-project/downloaded-images/miscellaneous-products/miscellaneous-products-image-1754159523169.jpg",
+      "fileSize": 134392,
+      "contentType": "image/jpeg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/f2c/812/cb-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-829605.jpg",
+      "metadata": {
+        "index": 4,
+        "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/f2c/812/cb-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-829605.jpg",
+        "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/f2c/812/cb-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-829605.jpg",
+        "filename": "miscellaneous-products-image-1754159523169.jpg",
+        "alt": "Image",
+        "dimensions": {
+          "width": 500,
+          "height": 628
+        },
+        "productName": "10 PCS Sleek Modern Pinky Flatware Set",
+        "description": "Premium stainless steel flatware set with modern design",
+        "price": "$49.99",
+        "category": "miscellaneous-products",
+        "supplier": ""
+      }
+    },
+    {
+      "index": 5,
+      "success": true,
+      "filename": "miscellaneous-products-image-1754159523170.jpg",
+      "filePath": "/Users/scottybe/Development/tools/Workspace/square-inventory-project/downloaded-images/miscellaneous-products/miscellaneous-products-image-1754159523170.jpg",
+      "fileSize": 120069,
+      "contentType": "image/jpeg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/e89/9db/9a-/normal/10-pcs-sleek-modern-pinky-flatware-silverware-flatware-set-266324.jpg",
+      "metadata": {
+        "index": 5,
+        "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/e89/9db/9a-/normal/10-pcs-sleek-modern-pinky-flatware-silverware-flatware-set-266324.jpg",
+        "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/e89/9db/9a-/normal/10-pcs-sleek-modern-pinky-flatware-silverware-flatware-set-266324.jpg",
+        "filename": "miscellaneous-products-image-1754159523170.jpg",
+        "alt": "Image",
+        "dimensions": {
+          "width": 500,
+          "height": 625
+        },
+        "productName": "10 PCS Sleek Modern Pinky Flatware Set",
+        "description": "Premium stainless steel flatware set with modern design",
+        "price": "$49.99",
+        "category": "miscellaneous-products",
+        "supplier": ""
+      }
+    },
+    {
+      "index": 6,
+      "success": true,
+      "filename": "miscellaneous-products-image-1754159523172.jpg",
+      "filePath": "/Users/scottybe/Development/tools/Workspace/square-inventory-project/downloaded-images/miscellaneous-products/miscellaneous-products-image-1754159523172.jpg",
+      "fileSize": 226902,
+      "contentType": "image/jpeg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/dd0/ffa/9e-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-221549.jpg",
+      "metadata": {
+        "index": 6,
+        "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/dd0/ffa/9e-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-221549.jpg",
+        "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/dd0/ffa/9e-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-221549.jpg",
+        "filename": "miscellaneous-products-image-1754159523172.jpg",
+        "alt": "Image",
+        "dimensions": {
+          "width": 500,
+          "height": 628
+        },
+        "productName": "10 PCS Sleek Modern Pinky Flatware Set",
+        "description": "Premium stainless steel flatware set with modern design",
+        "price": "$49.99",
+        "category": "miscellaneous-products",
+        "supplier": ""
+      }
+    }
+  ],
+  "failed": [],
+  "totalImages": 6,
+  "startTime": "2025-08-02T19:03:03.374Z",
+  "endTime": "2025-08-02T19:03:04.960Z",
+  "duration": 1586
+}

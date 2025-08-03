@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2025-08-02T19:00:32.968Z",
+  "summary": {
+    "totalRequests": 3,
+    "totalErrors": 1,
+    "errorRate": 33.33333333333333,
+    "averageResponseTime": 983
+  },
+  "operations": {
+    "catalog.findVariationsByExactPrice": {
+      "requests": 1,
+      "errors": 0,
+      "totalDuration": 2695,
+      "minDuration": 2695,
+      "maxDuration": 2695,
+      "percentiles": {
+        "p50": 2695,
+        "p90": 2695,
+        "p95": 2695,
+        "p99": 2695
+      },
+      "avgDuration": 2695,
+      "errorRate": 0
+    },
+    "catalog.appendImageToItem": {
+      "requests": 1,
+      "errors": 0,
+      "totalDuration": 4,
+      "minDuration": 4,
+      "maxDuration": 4,
+      "percentiles": {
+        "p50": 4,
+        "p90": 4,
+        "p95": 4,
+        "p99": 4
+      },
+      "avgDuration": 4,
+      "errorRate": 0
+    },
+    "catalog.updateItemWithNewImage": {
+      "requests": 1,
+      "errors": 1,
+      "totalDuration": 249,
+      "minDuration": 249,
+      "maxDuration": 249,
+      "percentiles": {
+        "p50": 249,
+        "p90": 249,
+        "p95": 249,
+        "p99": 249
+      },
+      "avgDuration": 249,
+      "errorRate": 100
+    }
+  },
+  "alerts": [],
+  "systemHealth": {
+    "uptime": 4,
+    "memory": {
+      "used": 55,
+      "total": 94,
+      "external": 5
+    },
+    "activeOperations": 0,
+    "totalTraces": 0,
+    "pendingAlerts": 0
+  }
+}

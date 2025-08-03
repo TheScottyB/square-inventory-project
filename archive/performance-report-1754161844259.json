@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2025-08-02T19:10:44.259Z",
+  "summary": {
+    "totalRequests": 0,
+    "totalErrors": 0,
+    "errorRate": 0,
+    "averageResponseTime": 0
+  },
+  "operations": {},
+  "alerts": [],
+  "systemHealth": {
+    "uptime": 1,
+    "memory": {
+      "used": 55,
+      "total": 94,
+      "external": 6
+    },
+    "activeOperations": 0,
+    "totalTraces": 0,
+    "pendingAlerts": 0
+  }
+}

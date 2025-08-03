@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-08-02T19:26:27.763Z",
+  "summary": {
+    "totalProcessed": 1,
+    "successful": 0,
+    "failed": 1,
+    "successRate": 0
+  },
+  "results": [],
+  "errors": [
+    {
+      "itemId": "K7LO5CCCNKCWAB5VO426QZSQ",
+      "error": "Status code: 400\nBody: {\n  \"errors\": [\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"INVALID_VALUE\",\n      \"detail\": \"[merchant_token=7MM9AFJAD0XHW] Object `3UKBCKRVVANO3AWR5325CHZM` of type ITEM_VARIATION is enabled at unit `B87BAEZ0NWV34`, but the referenced object with token `K7LO5CCCNKCWAB5VO426QZSQ` of type ITEM is not.\",\n      \"field\": \"item_id\"\n    }\n  ]\n}",
+      "timestamp": "2025-08-02T19:26:27.762Z"
+    }
+  ]
+}

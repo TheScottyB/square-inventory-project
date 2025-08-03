@@ -1,0 +1,207 @@
+{
+  "productInfo": {
+    "name": "10 PCS Sleek Modern Pinky Flatware Set",
+    "category": "miscellaneous-products",
+    "slug": "10-pcs-sleek-modern-pinky-flatware-set",
+    "createdAt": "2025-08-02T23:32:08.657Z",
+    "source": "spocket-scraped-images.json"
+  },
+  "sourceData": {
+    "price": "$49.99",
+    "description": "Premium stainless steel flatware set with modern design",
+    "supplier": "",
+    "dimensions": {
+      "width": 500,
+      "height": 625
+    },
+    "pageType": "product-detail",
+    "totalVariations": 6
+  },
+  "aiAnalysis": {
+    "analyzedImages": 6,
+    "averageConfidence": 0.9500000000000001,
+    "aggregatedTags": [
+      "acrylic",
+      "cutlery",
+      "dining",
+      "dishwasher safe",
+      "fork",
+      "kitchenware",
+      "marble",
+      "pink",
+      "spoon",
+      "stainless steel",
+      "tableware",
+      "utensils"
+    ],
+    "primaryDescription": "10-piece cutlery set includes 2 knives, 2 dinner forks, 2 dinner spoons, 2 teaspoons, and 2 dessert forks. Made from stainless steel with pink acrylic handles. Dishwasher safe. Handle patterns may vary due to craftsmanship."
+  },
+  "images": [
+    {
+      "filename": "10-pcs-sleek-modern-pinky-flatware-set-main.jpg",
+      "originalFilename": "miscellaneous-products-product-description-1754159523159.jpg",
+      "currentFilename": "miscellaneous-products-image-1754159523169.jpg",
+      "alt": "featured image",
+      "isPrimary": true,
+      "sourceUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/e89/9db/9a-/normal/10-pcs-sleek-modern-pinky-flatware-silverware-flatware-set-266324.jpg",
+      "analysisId": "ada1d8ae-78ea-4799-9ee6-4e238e8b4202"
+    },
+    {
+      "filename": "10-pcs-sleek-modern-pinky-flatware-set-thumbnail-image.jpg",
+      "originalFilename": "miscellaneous-products-product-description-1754159523164.jpg",
+      "currentFilename": "miscellaneous-products-image-1754159523169.jpg",
+      "alt": "thumbnail image",
+      "isPrimary": false,
+      "sourceUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/f2c/812/cb-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-829605.jpg",
+      "analysisId": "ed97a95f-149b-4d69-bf4f-fd1de39b0d40"
+    },
+    {
+      "filename": "10-pcs-sleek-modern-pinky-flatware-set-thumbnail-image.jpg",
+      "originalFilename": "miscellaneous-products-product-description-1754159523167.jpg",
+      "currentFilename": "miscellaneous-products-image-1754159523169.jpg",
+      "alt": "thumbnail image",
+      "isPrimary": false,
+      "sourceUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/13d/ce9/4a-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-238126.jpg",
+      "analysisId": "267e92d8-d7dd-4e20-b448-51194ed70bfb"
+    },
+    {
+      "filename": "10-pcs-sleek-modern-pinky-flatware-set-4.jpg",
+      "originalFilename": "miscellaneous-products-image-1754159523169.jpg",
+      "currentFilename": "miscellaneous-products-image-1754159523169.jpg",
+      "alt": "Image",
+      "isPrimary": false,
+      "sourceUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/f2c/812/cb-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-829605.jpg",
+      "analysisId": "a2078a17-573e-41be-90a8-39aacc38b8c0"
+    },
+    {
+      "filename": "10-pcs-sleek-modern-pinky-flatware-set-5.jpg",
+      "originalFilename": "miscellaneous-products-image-1754159523170.jpg",
+      "currentFilename": "miscellaneous-products-image-1754159523169.jpg",
+      "alt": "Image",
+      "isPrimary": false,
+      "sourceUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/e89/9db/9a-/normal/10-pcs-sleek-modern-pinky-flatware-silverware-flatware-set-266324.jpg",
+      "analysisId": "2cb320a5-8bce-404e-934f-ce50cf7ca630"
+    },
+    {
+      "filename": "10-pcs-sleek-modern-pinky-flatware-set-6.jpg",
+      "originalFilename": "miscellaneous-products-image-1754159523172.jpg",
+      "currentFilename": "miscellaneous-products-image-1754159523172.jpg",
+      "alt": "Image",
+      "isPrimary": false,
+      "sourceUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/dd0/ffa/9e-/normal/10-pcs-sleek-modern-pinky-flatware-set-49-each-221549.jpg",
+      "analysisId": "579eec7a-6140-431b-b6da-c54a3c00f265"
+    }
+  ],
+  "analysisDetails": [
+    {
+      "id": "559c86b7-932e-4b95-8481-caa9040aa7cb",
+      "originalFilename": "miscellaneous-products-product-description-1754159523159.jpg",
+      "aiProductName": "Stainless Steel & Acrylic Cutlery Set",
+      "aiCategory": "Kitchenware",
+      "description": "10-piece cutlery set includes 2 knives, 2 dinner forks, 2 dinner spoons, 2 teaspoons, and 2 dessert forks. Made from stainless steel with pink acrylic handles. Dishwasher safe. Handle patterns may vary due to craftsmanship.",
+      "tags": [
+        "cutlery",
+        "stainless steel",
+        "acrylic",
+        "kitchenware",
+        "dishwasher safe"
+      ],
+      "confidence": 0.95,
+      "condition": "New",
+      "analyzedAt": "2025-08-02T23:23:26.530Z",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "id": "fcff4d10-aac6-48b6-ba17-92c9a02d9df9",
+      "originalFilename": "miscellaneous-products-product-description-1754159523164.jpg",
+      "aiProductName": "Pink Handle Cutlery Set",
+      "aiCategory": "Kitchenware",
+      "description": "Stylish cutlery set featuring pink handles with black dot accents. Includes a knife, fork, spoon, and dessert fork. Made of stainless steel with durable plastic handles. Perfect for adding a touch of elegance to everyday dining or special occasions.",
+      "tags": [
+        "cutlery",
+        "kitchenware",
+        "pink",
+        "stainless steel",
+        "dining"
+      ],
+      "confidence": 0.95,
+      "condition": "New",
+      "analyzedAt": "2025-08-02T23:23:25.974Z",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "id": "b8282751-a1e2-481d-a90f-5c5ab4e5ffc1",
+      "originalFilename": "miscellaneous-products-product-description-1754159523167.jpg",
+      "aiProductName": "Pink Marble Handle Cutlery Set",
+      "aiCategory": "Kitchenware",
+      "description": "Elegant cutlery set featuring a fork and spoon with pink marble-patterned handles. The handles are accented with metallic rivets, providing a stylish and modern look. Ideal for enhancing table settings with a touch of sophistication. Suitable for everyday use or special occasions.",
+      "tags": [
+        "cutlery",
+        "fork",
+        "spoon",
+        "pink",
+        "marble",
+        "kitchenware",
+        "tableware"
+      ],
+      "confidence": 0.95,
+      "condition": "New",
+      "analyzedAt": "2025-08-02T23:23:27.445Z",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "id": "0816c104-2150-4528-839a-62fb4507ffa8",
+      "originalFilename": "miscellaneous-products-image-1754159523169.jpg",
+      "aiProductName": "Pink Handle Cutlery Set",
+      "aiCategory": "Kitchenware",
+      "description": "Stylish cutlery set featuring pink handles with black dot accents. Includes a knife, fork, spoon, and dessert fork. Made of stainless steel with durable plastic handles. Perfect for adding a touch of elegance to dining settings.",
+      "tags": [
+        "cutlery",
+        "pink",
+        "kitchenware",
+        "utensils",
+        "dining"
+      ],
+      "confidence": 0.95,
+      "condition": "New",
+      "analyzedAt": "2025-08-02T23:23:25.405Z",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "id": "58fa7f4b-add0-4217-afd7-5f74dac1898f",
+      "originalFilename": "miscellaneous-products-image-1754159523170.jpg",
+      "aiProductName": "10-Piece Stainless Steel & Acrylic Cutlery Set",
+      "aiCategory": "Kitchenware",
+      "description": "This 10-piece cutlery set includes 2 knives, 2 dinner forks, 2 dinner spoons, 2 tea spoons, and 2 dessert forks. Made from stainless steel with pink acrylic handles, each piece is dishwasher safe. Handle patterns may vary due to craftsmanship.",
+      "tags": [
+        "cutlery",
+        "stainless steel",
+        "acrylic",
+        "kitchenware",
+        "dishwasher safe"
+      ],
+      "confidence": 0.95,
+      "condition": "New",
+      "analyzedAt": "2025-08-02T23:23:25.747Z",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "id": "41f4dfa5-8b7d-41ed-a719-88bee9c56da4",
+      "originalFilename": "miscellaneous-products-image-1754159523172.jpg",
+      "aiProductName": "Pink Handle Cutlery Set",
+      "aiCategory": "Kitchenware",
+      "description": "Stylish cutlery set featuring pink marbled handles with metal rivets. Includes a knife, fork, and spoon, perfect for adding a touch of elegance to dining. Made with stainless steel for durability and easy cleaning. Ideal for everyday use or special occasions.",
+      "tags": [
+        "cutlery",
+        "pink",
+        "kitchenware",
+        "dining",
+        "utensils"
+      ],
+      "confidence": 0.95,
+      "condition": "New",
+      "analyzedAt": "2025-08-02T23:23:32.852Z",
+      "model": "gpt-4o-mini"
+    }
+  ]
+}

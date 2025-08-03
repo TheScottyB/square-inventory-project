@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-08-02T19:02:09.550Z",
+  "summary": {
+    "totalProcessed": 1,
+    "successful": 0,
+    "failed": 1,
+    "successRate": 0
+  },
+  "results": [],
+  "errors": [
+    {
+      "itemId": "K7LO5CCCNKCWAB5VO426QZSQ",
+      "error": "Status code: 400\nBody: {\n  \"errors\": [\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"INVALID_VALUE\",\n      \"detail\": \"Object of type IMAGE does not exist: ID=\\\"test-image-1754161328843-vr23aqemg\\\"\"\n    }\n  ]\n}",
+      "timestamp": "2025-08-02T19:02:09.549Z"
+    }
+  ]
+}

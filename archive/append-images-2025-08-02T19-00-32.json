@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-08-02T19:00:32.964Z",
+  "summary": {
+    "totalProcessed": 1,
+    "successful": 0,
+    "failed": 1,
+    "successRate": 0
+  },
+  "results": [],
+  "errors": [
+    {
+      "itemId": "K7LO5CCCNKCWAB5VO426QZSQ",
+      "error": "Cannot read properties of undefined (reading 'objects')",
+      "timestamp": "2025-08-02T19:00:32.961Z"
+    }
+  ]
+}
