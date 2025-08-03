@@ -13,6 +13,7 @@ class PuppeteerSEOAgent {
   constructor(options = {}) {
     this.browser = null;
     this.page = null;
+    this.connectedToExisting = false; // Track if we connected to existing Chrome
     this.options = {
       headless: process.env.NODE_ENV === 'production',
       timeout: 30000,
@@ -96,6 +97,8 @@ class PuppeteerSEOAgent {
             defaultViewport: null // Don't override existing viewport
           });
           
+          this.connectedToExisting = true;
+          
           // Get existing pages
           const pages = await this.browser.pages();
           console.log(chalk.gray(`  Found ${pages.length} pages on port ${port}`));
@@ -160,11 +163,17 @@ class PuppeteerSEOAgent {
           // Clean up failed connection
           if (this.browser) {
             try {
-              await this.browser.close();
+              // Only disconnect, don't close if we connected to existing
+              if (this.connectedToExisting) {
+                await this.browser.disconnect();
+              } else {
+                await this.browser.close();
+              }
             } catch (closeError) {
-              // Ignore close errors
+              // Ignore close/disconnect errors
             }
             this.browser = null;
+            this.connectedToExisting = false;
           }
           continue;
         }
@@ -487,7 +496,7 @@ class PuppeteerSEOAgent {
       }
       
       // Wait for save confirmation
-      await this.page.waitForTimeout(2000);
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
       spinner.succeed('SEO fields updated successfully');
       return true;
@@ -521,7 +530,7 @@ class PuppeteerSEOAgent {
         }
         
         // Wait before retry
-        await this.page.waitForTimeout(2000);
+        await new Promise(resolve => setTimeout(resolve, 2000));
       }
     }
   }
@@ -549,7 +558,7 @@ class PuppeteerSEOAgent {
       
       // Add delay between items to avoid rate limiting
       if (i < items.length - 1) {
-        await this.page.waitForTimeout(1000);
+        await new Promise(resolve => setTimeout(resolve, 1000));
       }
     }
     
@@ -592,8 +601,15 @@ class PuppeteerSEOAgent {
 
   async cleanup() {
     if (this.browser) {
-      await this.browser.close();
-      console.log(chalk.green('✓ Browser closed'));
+      if (this.connectedToExisting) {
+        // Just disconnect from existing Chrome, don't close it
+        await this.browser.disconnect();
+        console.log(chalk.green('✓ Disconnected from existing Chrome (browser left open)'));
+      } else {
+        // Close browser we launched ourselves
+        await this.browser.close();
+        console.log(chalk.green('✓ Browser closed'));
+      }
     }
   }
 }
