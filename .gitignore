@@ -59,6 +59,17 @@ data/descriptions.json
 data/groupings.json
 data/renames.json
 
+# Catalog data (sensitive/large files)
+data/catalog-full.json
+data/catalog-analysis.json
+data/active-items.json
+data/archived-items.json
+data/items-needing-updates.json
+
+# Keep sample/template data files
+!data/*-sample.json
+!data/*-template.json
+
 # Test coverage
 coverage/
 *.lcov
