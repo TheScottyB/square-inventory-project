@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dawn Zurick Beilfuss — CET Resume</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <style>
+      :root {
+        --bg-1: #080b12;
+        --bg-2: #0c1220;
+        --bg-3: #0d1328;
+        --ink: #e8f0ff;
+        --muted: #a6b3cc;
+        --neon-a: #67d4ff;
+        --neon-b: #7cffc4;
+        --neon-c: #c59bff;
+        --surface: rgba(255, 255, 255, 0.06);
+        --glass: rgba(12, 18, 36, 0.65);
+        --ring: 0 0 0 2px rgba(103, 212, 255, 0.3),
+          0 0 40px rgba(103, 212, 255, 0.15);
+        --soft-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        --radius: 18px;
+        --max: 980px;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg-1: #f4f7ff;
+          --bg-2: #eef2ff;
+          --bg-3: #e8edff;
+          --ink: #0e1633;
+          --muted: #4f5b7a;
+          --surface: rgba(255, 255, 255, 0.7);
+          --glass: rgba(255, 255, 255, 0.66);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI,
+          Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji,
+          Segoe UI Symbol;
+        background: radial-gradient(
+            1000px 700px at 10% -10%,
+            var(--bg-3),
+            transparent 60%
+          ),
+          radial-gradient(900px 700px at 110% 10%, var(--bg-2), transparent 60%),
+          linear-gradient(180deg, var(--bg-1), #05070e 70%);
+        line-height: 1.6;
+        min-height: 100dvh;
+        overflow-x: hidden;
+      }
+
+      /* Impossible grid + parallax glow */
+      .grid {
+        position: fixed;
+        inset: -20vmax;
+        background: radial-gradient(
+              1px 1px at 12% 18%,
+              rgba(255, 255, 255, 0.3),
+              transparent
+            )
+            0 0/40px 40px,
+          radial-gradient(
+              1px 1px at 62% 70%,
+              rgba(255, 255, 255, 0.25),
+              transparent
+            )
+            0 0/48px 48px;
+        opacity: 0.08;
+        transform: perspective(1200px) rotateX(60deg) translateY(-30vmin);
+        filter: blur(0.4px);
+        pointer-events: none;
+        z-index: 0;
+        animation: drift 40s linear infinite;
+      }
+      @keyframes drift {
+        0% {
+          transform: perspective(1200px) rotateX(60deg) translateY(-30vmin)
+            translateX(0);
+        }
+        100% {
+          transform: perspective(1200px) rotateX(60deg) translateY(-30vmin)
+            translateX(-40px);
+        }
+      }
+
+      .aurora {
+        position: fixed;
+        inset: -30vmax;
+        background: conic-gradient(
+          from 120deg at 30% 40%,
+          rgba(103, 212, 255, 0.18),
+          rgba(197, 155, 255, 0.12),
+          rgba(124, 255, 196, 0.12),
+          rgba(103, 212, 255, 0.18)
+        );
+        filter: blur(60px) saturate(130%);
+        animation: floaty 24s ease-in-out infinite alternate;
+        pointer-events: none;
+        z-index: 0;
+      }
+      @keyframes floaty {
+        0% {
+          transform: translate3d(-3%, -2%, 0) rotate(-4deg) scale(1);
+        }
+        100% {
+          transform: translate3d(3%, 2%, 0) rotate(4deg) scale(1.05);
+        }
+      }
+
+      /* Wrap and card */
+      .wrap {
+        position: relative;
+        z-index: 2;
+        max-width: var(--max);
+        margin: min(8vh, 80px) auto;
+        padding: 24px;
+      }
+
+      .card {
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.06),
+            rgba(255, 255, 255, 0)
+          ),
+          var(--glass);
+        border: 1px solid rgba(103, 212, 255, 0.22);
+        border-radius: var(--radius);
+        padding: clamp(24px, 3vw, 40px);
+        box-shadow: var(--soft-shadow);
+        backdrop-filter: blur(14px) saturate(125%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Inner neon ring */
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: calc(var(--radius) + 2px);
+        background: conic-gradient(
+          from 0deg,
+          transparent 0 20%,
+          rgba(103, 212, 255, 0.35) 20% 35%,
+          transparent 35% 55%,
+          rgba(197, 155, 255, 0.35) 55% 70%,
+          transparent 70% 85%,
+          rgba(124, 255, 196, 0.35) 85% 100%
+        );
+        filter: blur(14px);
+        z-index: -1;
+      }
+
+      /* Header */
+      .header {
+        display: grid;
+        gap: 12px;
+        align-items: start;
+      }
+      .name {
+        margin: 0;
+        font-weight: 900;
+        letter-spacing: 0.2px;
+        font-size: clamp(28px, 4.2vw, 44px);
+        line-height: 1.1;
+        background: linear-gradient(
+          92deg,
+          var(--neon-a) 0%,
+          var(--neon-c) 45%,
+          var(--neon-b) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 12px 40px rgba(103, 212, 255, 0.18);
+      }
+      .title {
+        margin: 0;
+        color: var(--muted);
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        margin-top: 6px;
+        color: var(--ink);
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(103, 212, 255, 0.08);
+        border: 1px solid rgba(103, 212, 255, 0.22);
+        box-shadow: inset 0 0 22px rgba(103, 212, 255, 0.08);
+        font-weight: 600;
+      }
+      .chip svg {
+        width: 16px;
+        height: 16px;
+        color: var(--neon-a);
+      }
+
+      /* Sections */
+      .section {
+        margin-top: 26px;
+        padding: 16px;
+        border-radius: 14px;
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.05),
+            rgba(255, 255, 255, 0)
+          ),
+          var(--surface);
+        border: 1px solid rgba(103, 212, 255, 0.18);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      }
+
+      .section h2 {
+        margin: 0 0 12px 0;
+        font-size: clamp(18px, 2.4vw, 22px);
+        letter-spacing: 0.2px;
+      }
+
+      .kicker {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .muted {
+        color: var(--muted);
+      }
+
+      ul {
+        margin: 8px 0 0 18px;
+        padding: 0;
+      }
+      li {
+        margin: 6px 0;
+      }
+
+      .columns {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @media (min-width: 880px) {
+        .columns {
+          grid-template-columns: 1.1fr 0.9fr;
+        }
+      }
+
+      /* Experience cards */
+      .exp {
+        display: grid;
+        gap: 8px;
+        padding: 12px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(103, 212, 255, 0.12);
+      }
+      .exp h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+      .exp .meta {
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .exp ul {
+        margin-left: 18px;
+      }
+
+      /* Floating corner badge */
+      .badge {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(197, 155, 255, 0.12);
+        border: 1px solid rgba(197, 155, 255, 0.3);
+        color: #efeaff;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        box-shadow: inset 0 0 20px rgba(197, 155, 255, 0.12);
+        backdrop-filter: blur(8px);
+      }
+
+      /* Animated underline headers */
+      .underline {
+        position: relative;
+        display: inline-block;
+      }
+      .underline::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -4px;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--neon-a),
+          var(--neon-c),
+          var(--neon-b),
+          transparent
+        );
+        box-shadow: 0 0 16px rgba(103, 212, 255, 0.5);
+        transform-origin: left;
+        transform: scaleX(0);
+        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .section:hover .underline::after {
+        transform: scaleX(1);
+      }
+
+      /* CTA bar */
+      .cta {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .btn {
+        appearance: none;
+        border: 1px solid rgba(103, 212, 255, 0.3);
+        color: var(--ink);
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.06),
+            rgba(255, 255, 255, 0)
+          ),
+          rgba(12, 18, 36, 0.5);
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-weight: 800;
+        letter-spacing: 0.3px;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.2s ease,
+          border-color 0.2s ease;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        border-color: rgba(103, 212, 255, 0.6);
+        box-shadow: 0 12px 30px rgba(103, 212, 255, 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      }
+
+      /* Print styles (clean, readable) */
+      @media print {
+        body {
+          background: white !important;
+          color: #000 !important;
+        }
+        .grid,
+        .aurora,
+        .badge {
+          display: none !important;
+        }
+        .card,
+        .section,
+        .exp {
+          background: white !important;
+          border: 1px solid #bbb !important;
+          box-shadow: none !important;
+        }
+        .name {
+          color: #000 !important;
+          background: none !important;
+          -webkit-text-fill-color: #000 !important;
+          text-shadow: none !important;
+        }
+        .chip {
+          border-color: #999 !important;
+          background: none !important;
+        }
+        .btn {
+          display: none !important;
+        }
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .grid,
+        .aurora {
+          animation: none !important;
+        }
+        .underline::after {
+          transition: none !important;
+        }
+        .btn {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid"></div>
+    <div class="aurora"></div>
+
+    <div class="wrap">
+      <div class="card">
+        <div class="badge">CET — NHA</div>
+
+        <header class="header">
+          <h1 class="name">Dawn Zurick Beilfuss</h1>
+          <p class="title">
+            Certified EKG Technician (CET) | Healthcare Professional
+          </p>
+          <div class="contact">
+            <span class="chip" title="Email">
+              <!-- mail icon -->
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4 6h16v12H4V6Zm0 0l8 6 8-6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              DZ4100@gmail.com
+            </span>
+            <span class="chip" title="Phone">
+              <!-- phone icon -->
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4 5c4 8 8 12 16 16l2-4-5-3-3 2c-4-2-6-4-8-8l2-3L8 3 4 5Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              847.287.1148
+            </span>
+            <span class="chip" title="Location">
+              <!-- location icon -->
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle
+                  cx="12"
+                  cy="10"
+                  r="3"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+              Harvard, IL 60033
+            </span>
+          </div>
+        </header>
+
+        <div class="columns">
+          <main>
+            <section class="section">
+              <h2 class="underline">🫀 Cardiac Monitoring Expertise</h2>
+              <p class="kicker">
+                Newly Certified EKG Technician with 40+ years healthcare
+                administration experience and fresh cardiac monitoring
+                expertise. Earned National Healthcareer Association (NHA)
+                Certified EKG Technician (CET) credential (July 2025).
+              </p>
+
+              <p class="muted" style="margin-top: 10px; font-weight: 700">
+                Current Certifications
+              </p>
+              <ul>
+                <li>
+                  ✅ <strong>Certified EKG Technician (CET)</strong> — NHA, July
+                  2025
+                </li>
+                <li>
+                  ✅ <strong>Medical Terminology Certificate</strong> — McHenry
+                  Community College, Summer 2025
+                </li>
+                <li>
+                  📚 <strong>Basic Nursing Assistant Program</strong> — In
+                  Progress, Fall 2025
+                </li>
+              </ul>
+
+              <p class="muted" style="margin-top: 10px; font-weight: 700">
+                EKG Skills
+              </p>
+              <ul>
+                <li>EKG/ECG Testing and Monitoring</li>
+                <li>Cardiac Rhythm Analysis</li>
+                <li>12-Lead EKG Interpretation</li>
+                <li>Holter Monitor Setup and Analysis</li>
+                <li>Stress Test Monitoring</li>
+                <li>Patient Cardiac Assessment</li>
+              </ul>
+            </section>
+
+            <section class="section">
+              <h2 class="underline">🏥 Healthcare Experience</h2>
+
+              <div class="exp">
+                <h3>Fox Lake Animal Hospital | Veterinary Assistant</h3>
+                <div class="meta">Jan 2023 – Feb 2024</div>
+                <ul>
+                  <li>
+                    Managed 60–80 patients daily with triage and assessment
+                  </li>
+                  <li>Assisted in medical emergencies and patient care</li>
+                  <li>
+                    Medical charting, documentation, and payment processing
+                  </li>
+                </ul>
+              </div>
+
+              <div class="exp">
+                <h3>Midwest Sports Medicine | Supervisor</h3>
+                <div class="meta">1999 – 2002</div>
+                <ul>
+                  <li>
+                    Supervised medical office operations and call center teams
+                  </li>
+                  <li>
+                    MRI scheduling coordination and insurance verification
+                  </li>
+                </ul>
+              </div>
+
+              <div class="exp">
+                <h3>Family Medicine Practice | Medical Secretary</h3>
+                <div class="meta">1998 – 1999</div>
+                <ul>
+                  <li>
+                    Patient scheduling, insurance reconciliation, prescriptions
+                  </li>
+                  <li>Chart analysis and medical record management</li>
+                </ul>
+              </div>
+
+              <div class="exp">
+                <h3>Osco Pharmacy | Certified Pharmacy Technician</h3>
+                <div class="meta">1996</div>
+                <ul>
+                  <li>Licensed Illinois Pharmacy Technician</li>
+                  <li>
+                    Medication dispensing, patient counseling, insurance
+                    processing
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </main>
+
+          <aside>
+            <section class="section">
+              <h2 class="underline">💪 Core Competencies</h2>
+
+              <p class="muted" style="margin-top: 6px; font-weight: 700">
+                Patient Care Excellence
+              </p>
+              <ul>
+                <li>40+ years patient interaction experience</li>
+                <li>HIPAA compliance and patient confidentiality</li>
+                <li>Emergency response and medical assistance</li>
+                <li>Patient education and communication</li>
+              </ul>
+
+              <p class="muted" style="margin-top: 10px; font-weight: 700">
+                Medical Administration
+              </p>
+              <ul>
+                <li>Medical charting and record management</li>
+                <li>Insurance verification and reconciliation</li>
+                <li>Appointment scheduling and coordination</li>
+                <li>Electronic Health Records (EHR) systems</li>
+              </ul>
+
+              <p class="muted" style="margin-top: 10px; font-weight: 700">
+                Technical Proficiency
+              </p>
+              <ul>
+                <li>Healthcare scheduling software systems</li>
+                <li>Medical billing and practice management platforms</li>
+                <li>Microsoft Office Suite proficiency</li>
+                <li>Quick adaptation to new medical technologies</li>
+              </ul>
+
+              <p class="muted" style="margin-top: 10px; font-weight: 700">
+                Leadership Experience
+              </p>
+              <ul>
+                <li>Supervised medical office teams (up to 9 staff members)</li>
+                <li>Training and onboarding of healthcare personnel</li>
+                <li>Process improvement in medical settings</li>
+                <li>Quality assurance and compliance monitoring</li>
+              </ul>
+            </section>
+
+            <section class="section">
+              <h2 class="underline">🎯 Seeking EKG Opportunities</h2>
+              <p class="muted" style="margin-top: 6px; font-weight: 700">
+                Target Settings
+              </p>
+              <ul>
+                <li>Hospital Cardiac Units (Telemetry, ICU, Emergency)</li>
+                <li>
+                  Cardiology Practices (Stress testing, Holter monitoring)
+                </li>
+                <li>
+                  Outpatient Clinics (Pre-operative EKGs, routine screening)
+                </li>
+                <li>Urgent Care Centers (Cardiac assessment)</li>
+                <li>Primary Care Practices (Routine EKG services)</li>
+              </ul>
+
+              <p class="muted" style="margin-top: 10px; font-weight: 700">
+                Key Strengths
+              </p>
+              <ul>
+                <li>✅ Immediate availability for employment</li>
+                <li>✅ Fresh certification with current best practices</li>
+                <li>✅ Extensive patient care background</li>
+                <li>✅ Mature professional with strong work ethic</li>
+                <li>✅ Flexible scheduling for various shifts</li>
+              </ul>
+
+              <div class="cta">
+                <button class="btn" onclick="window.print()">🖨️ Print</button>
+                <button
+                  class="btn"
+                  onclick="location.href='mailto:DZ4100@gmail.com'"
+                >
+                  ✉️ Email Dawn
+                </button>
+                <button
+                  class="btn"
+                  onclick="window.scrollTo({top:0,behavior:'smooth'})"
+                >
+                  ⤴ Back to Top
+                </button>
+              </div>
+            </section>
+          </aside>
+        </div>
+
+        <section class="section" style="margin-top: 26px">
+          <p>
+            <em
+              >Available for immediate employment. References available upon
+              request.</em
+            >
+          </p>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
+```
