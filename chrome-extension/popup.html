@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 360px;
+      min-height: 400px;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      background: #f8f9fa;
+    }
+
+    .header {
+      background: #1976d2;
+      color: white;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .status {
+      padding: 12px 16px;
+      background: #e8f5e8;
+      border-left: 4px solid #4caf50;
+      margin: 0;
+    }
+
+    .status.error {
+      background: #ffeaea;
+      border-left-color: #f44336;
+    }
+
+    .status.warning {
+      background: #fff3e0;
+      border-left-color: #ff9800;
+    }
+
+    .section {
+      padding: 16px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    .section h3 {
+      margin: 0 0 12px 0;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .button {
+      background: #1976d2;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 100%;
+      margin-bottom: 8px;
+      transition: background 0.2s;
+    }
+
+    .button:hover {
+      background: #1565c0;
+    }
+
+    .button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .button.secondary {
+      background: #666;
+    }
+
+    .button.secondary:hover {
+      background: #555;
+    }
+
+    .button.success {
+      background: #4caf50;
+    }
+
+    .button.success:hover {
+      background: #45a049;
+    }
+
+    .button.danger {
+      background: #f44336;
+    }
+
+    .button.danger:hover {
+      background: #da190b;
+    }
+
+    .input-group {
+      margin-bottom: 12px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .input-group textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 12px;
+      background: white;
+      border-radius: 4px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1976d2;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .toggle input[type="checkbox"] {
+      transform: scale(1.2);
+    }
+
+    .progress {
+      background: #e0e0e0;
+      border-radius: 10px;
+      height: 8px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+
+    .progress-bar {
+      background: #4caf50;
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+
+    .log {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      max-height: 100px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #1976d2;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .tabs {
+      display: flex;
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .tab.active {
+      border-bottom-color: #1976d2;
+      color: #1976d2;
+      font-weight: 500;
+    }
+
+    .tab:hover {
+      background: #f5f5f5;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🤖 Square Automation</h1>
+  </div>
+
+  <div id="status" class="status">
+    <span id="status-text">Checking Square connection...</span>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="automation">Automation</div>
+    <div class="tab" data-tab="images">Images</div>
+    <div class="tab" data-tab="spocket">Spocket</div>
+    <div class="tab" data-tab="settings">Settings</div>
+  </div>
+
+  <!-- Automation Tab -->
+  <div id="automation-tab" class="tab-content active">
+    <div class="section">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value" id="items-count">-</div>
+          <div class="stat-label">Items</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="processed-count">-</div>
+          <div class="stat-label">Processed</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Quick Actions</h3>
+      <button id="sync-data" class="button">📊 Sync Catalog Data</button>
+      <button id="update-current-seo" class="button">✍️ Update Current Item SEO</button>
+      <button id="find-current-images" class="button">🖼️ Find Images for Current Item</button>
+      <button id="bulk-process" class="button secondary">⚡ Bulk Process Items</button>
+    </div>
+
+    <div class="section">
+      <h3>Current Operation</h3>
+      <div id="current-operation" class="hidden">
+        <div id="operation-status">Ready</div>
+        <div class="progress">
+          <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+        </div>
+        <div id="operation-log" class="log"></div>
+      </div>
+      <div id="no-operation">No operation in progress</div>
+    </div>
+  </div>
+
+  <!-- Images Tab -->
+  <div id="images-tab" class="tab-content">
+    <div class="section">
+      <h3>Image Management</h3>
+      <div class="input-group">
+        <label for="search-images">Search for images:</label>
+        <input type="text" id="search-images" placeholder="Enter item name or ID">
+      </div>
+      <button id="search-images-btn" class="button">🔍 Search Images</button>
+      <button id="auto-match-images" class="button success">🎯 Auto-Match All Images</button>
+    </div>
+
+    <div class="section">
+      <h3>Image Results</h3>
+      <div id="image-results">
+        <p>No image search performed yet</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Batch Operations</h3>
+      <button id="download-missing-images" class="button">⬬ Download Missing Images</button>
+      <button id="organize-images" class="button secondary">📁 Organize Image Files</button>
+    </div>
+  </div>
+
+  <!-- Spocket Tab -->
+  <div id="spocket-tab" class="tab-content">
+    <div class="section">
+      <h3>Spocket Product Capture</h3>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value" id="spocket-products-count">-</div>
+          <div class="stat-label">Products</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="spocket-images-count">-</div>
+          <div class="stat-label">Images</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Current Page Actions</h3>
+      <button id="capture-spocket-product" class="button">📦 Capture Product Data</button>
+      <button id="capture-spocket-images" class="button">📸 Capture All Images</button>
+      <button id="download-spocket-images" class="button success">💾 Download Images</button>
+      <button id="preview-spocket-images" class="button secondary">👁️ Preview Images</button>
+    </div>
+
+    <div class="section">
+      <h3>Batch Operations</h3>
+      <button id="sync-spocket-data" class="button">🔄 Sync All Spocket Data</button>
+      <button id="export-spocket-data" class="button secondary">📤 Export Spocket Products</button>
+      <button id="match-to-square" class="button success">🎯 Match to Square Items</button>
+    </div>
+
+    <div class="section">
+      <h3>Recent Spocket Products</h3>
+      <div id="spocket-products-list">
+        <p>No Spocket products captured yet</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Tab -->
+  <div id="settings-tab" class="tab-content">
+    <div class="section">
+      <h3>Automation Settings</h3>
+      <div class="toggle">
+        <label for="auto-mode">Auto-mode (process items automatically)</label>
+        <input type="checkbox" id="auto-mode">
+      </div>
+      <div class="toggle">
+        <label for="image-search-enabled">Enable image search</label>
+        <input type="checkbox" id="image-search-enabled" checked>
+      </div>
+      <div class="toggle">
+        <label for="seo-updates-enabled">Enable SEO updates</label>
+        <input type="checkbox" id="seo-updates-enabled" checked>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Data Management</h3>
+      <div class="input-group">
+        <label for="catalog-file">Upload catalog data (JSON):</label>
+        <input type="file" id="catalog-file" accept=".json">
+      </div>
+      <button id="export-data" class="button secondary">📤 Export Current Data</button>
+      <button id="clear-data" class="button danger">🗑️ Clear All Data</button>
+    </div>
+
+    <div class="section">
+      <h3>About</h3>
+      <p><strong>Version:</strong> 1.0.0</p>
+      <p><strong>Author:</strong> Square Inventory Automation</p>
+      <p><strong>Status:</strong> <span id="connection-status">Checking...</span></p>
+      <button id="test-connection" class="button secondary">🔗 Test Connection</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
