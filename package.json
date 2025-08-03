@@ -41,6 +41,10 @@
     "audit:fix": "pnpm audit --fix",
     "seo:enhance-data": "node scripts/enhance-seo-data.js",
     "seo:export-snapshot": "node scripts/export-seo-snapshot.js",
+    "seo:setup-chrome": "./setup-chrome-debugging.sh",
+    "seo:launch-chrome": "./launch-chrome-for-seo.sh",
+    "seo:launch-chrome-debug": "node scripts/launch-chrome-debug.js",
+    "seo:test": "node testSEOAgent.js",
     "seo:run-agent": "node runPuppeteerAgent.js",
     "seo:run-agent:headless": "HEADLESS=true node runPuppeteerAgent.js"
   },

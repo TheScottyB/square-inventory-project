@@ -28,30 +28,162 @@ class PuppeteerSEOAgent {
     const spinner = ora('Starting SEO Agent...').start();
     
     try {
+      // First try to connect to existing Chrome instance
+      spinner.text = 'Looking for existing Chrome browsers...';
+      if (await this.tryConnectToExistingChrome()) {
+        spinner.succeed('SEO Agent connected to existing Chrome');
+        
+        // Load existing session if available
+        await this.loadSession();
+        return;
+      }
+      
+      // If no existing Chrome found, launch new browser
+      spinner.text = 'No existing Chrome with debugging found, launching new browser...';
+      
       this.browser = await puppeteer.launch({
         headless: this.options.headless,
         defaultViewport: { width: 1280, height: 800 },
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: [
+          '--no-sandbox', 
+          '--disable-setuid-sandbox',
+          '--remote-debugging-port=9223', // Use different port to avoid conflicts
+          '--disable-web-security',
+          '--disable-features=VizDisplayCompositor'
+        ]
       });
       
       this.page = await this.browser.newPage();
       
       // Set user agent to avoid detection
-      await this.page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+      const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+      if (this.page && !this.page.isClosed()) {
+        await this.page.setUserAgent(userAgent);
+      }
       
-      spinner.succeed('SEO Agent initialized');
+      spinner.succeed('SEO Agent initialized with new browser');
       
       // Load existing session if available
       await this.loadSession();
       
     } catch (error) {
+      if (error.message.includes('Please setup Chrome')) {
+        throw error;
+      }
       spinner.fail('Failed to initialize SEO Agent');
       throw error;
     }
   }
 
+  async tryConnectToExistingChrome() {
+    try {
+      // Try common Chrome debugging ports
+      const ports = [9222, 9223, 9224, 9225, 9226];
+      
+      for (const port of ports) {
+        try {
+          console.log(chalk.gray(`  Trying port ${port}...`));
+          
+          // First check if port is accessible
+          const response = await fetch(`http://localhost:${port}/json/version`);
+          if (!response.ok) {
+            throw new Error('Port not accessible');
+          }
+          
+          this.browser = await puppeteer.connect({
+            browserURL: `http://localhost:${port}`,
+            defaultViewport: null // Don't override existing viewport
+          });
+          
+          // Get existing pages
+          const pages = await this.browser.pages();
+          console.log(chalk.gray(`  Found ${pages.length} pages on port ${port}`));
+          
+          // Look for a page that might be Square
+          let squarePage = null;
+          for (const page of pages) {
+            try {
+              const url = page.url();
+              if (url.includes('squareup.com') || url.includes('square.com')) {
+                // Test if page is still accessible
+                await page.evaluate(() => document.title);
+                squarePage = page;
+                break;
+              }
+            } catch (e) {
+              // Page might be detached, skip it
+              continue;
+            }
+          }
+          
+          if (squarePage) {
+            this.page = squarePage;
+            console.log(chalk.green(`✓ Connected to existing Square page: ${squarePage.url()}`));
+            return true;
+          }
+          
+          // Look for any non-blank page we can use
+          let usablePage = null;
+          for (const page of pages) {
+            try {
+              const url = page.url();
+              if (!url.startsWith('chrome://') && 
+                  !url.startsWith('chrome-extension://') && 
+                  url !== 'about:blank' &&
+                  !url.startsWith('devtools://')) {
+                // Test if page is still accessible
+                await page.evaluate(() => document.title);
+                usablePage = page;
+                break;
+              }
+            } catch (e) {
+              // Page might be detached, skip it
+              continue;
+            }
+          }
+          
+          if (usablePage) {
+            this.page = usablePage;
+            console.log(chalk.green(`✓ Connected to existing Chrome page: ${usablePage.url()}`));
+            return true;
+          }
+          
+          // Always create a fresh page to avoid detachment issues
+          this.page = await this.browser.newPage();
+          console.log(chalk.green(`✓ Connected to existing Chrome instance (port ${port}) - created new page`));
+          return true;
+          
+        } catch (e) {
+          console.log(chalk.gray(`  Port ${port} failed: ${e.message}`));
+          
+          // Clean up failed connection
+          if (this.browser) {
+            try {
+              await this.browser.close();
+            } catch (closeError) {
+              // Ignore close errors
+            }
+            this.browser = null;
+          }
+          continue;
+        }
+      }
+      
+      console.log(chalk.yellow('  No Chrome instances found with remote debugging enabled'));
+      return false;
+    } catch (error) {
+      console.log(chalk.yellow(`  Connection error: ${error.message}`));
+      return false;
+    }
+  }
+
   async loadSession() {
     try {
+      if (!this.page || this.page.isClosed()) {
+        console.log(chalk.yellow('⚠ Page not available for session loading'));
+        return false;
+      }
+      
       const sessionData = await fs.readFile(this.sessionFile, 'utf8');
       const cookies = JSON.parse(sessionData);
       
@@ -77,59 +209,139 @@ class PuppeteerSEOAgent {
   }
 
   async loginToSquare() {
-    const spinner = ora('Logging into Square Dashboard...').start();
+    const spinner = ora('Checking Square login status...').start();
     
     try {
-      await this.page.goto('https://squareup.com/login', { waitUntil: 'networkidle2' });
+      // Ensure page is still valid
+      if (!this.page || this.page.isClosed()) {
+        spinner.fail('Page was closed, reinitializing...');
+        throw new Error('Page session was closed');
+      }
       
-      // Check if already logged in
+      // First check if we're already on Square and logged in
+      let currentUrl;
       try {
-        await this.page.waitForSelector('[data-testid="dashboard"]', { timeout: 3000 });
-        spinner.succeed('Already logged in');
+        currentUrl = this.page.url();
+      } catch (e) {
+        spinner.fail('Could not get current URL, page may be closed');
+        throw new Error('Page session was closed during URL check');
+      }
+      
+      if (currentUrl.includes('squareup.com/dashboard') || currentUrl.includes('square.com/dashboard')) {
+        spinner.succeed('Already logged in to Square Dashboard');
+        return true;
+      }
+      
+      // Navigate to Square dashboard to check login status
+      spinner.text = 'Navigating to Square Dashboard...';
+      try {
+        await this.page.goto('https://squareup.com/dashboard', { 
+          waitUntil: 'networkidle2',
+          timeout: 30000
+        });
+      } catch (e) {
+        spinner.warn('Navigation to dashboard failed, trying login page directly');
+        await this.page.goto('https://squareup.com/login', { 
+          waitUntil: 'networkidle2',
+          timeout: 30000
+        });
+      }
+      
+      // Check if already logged in (redirected to dashboard)
+      try {
+        await this.page.waitForSelector('[data-testid="dashboard"], .dashboard, #dashboard', { timeout: 5000 });
+        spinner.succeed('Already logged in to Square');
         return true;
       } catch (e) {
-        // Not logged in, proceed with login
+        // Not logged in, continue to login process
       }
-
+      
+      // Check if we need to navigate to login page
+      const finalUrl = this.page.url();
+      if (!finalUrl.includes('login')) {
+        spinner.text = 'Navigating to login page...';
+        await this.page.goto('https://squareup.com/login', { 
+          waitUntil: 'networkidle2',
+          timeout: 30000
+        });
+      }
+      
       // Check for credentials
       if (!process.env.SQUARE_EMAIL || !process.env.SQUARE_PASSWORD) {
-        spinner.fail('Square credentials not found in environment variables');
-        console.log(chalk.yellow('Please set SQUARE_EMAIL and SQUARE_PASSWORD in your .env file'));
+        spinner.warn('Square credentials not found in environment variables');
+        console.log(chalk.yellow('\nPlease login manually in the browser window that opened...'));
+        console.log(chalk.blue('The browser should be visible - please navigate to Square and login'));
+        console.log(chalk.gray('Waiting for login to complete (2 minutes timeout)...'));
         
-        // Fallback: manual login
-        console.log(chalk.blue('Please login manually in the browser window...'));
-        await this.page.waitForSelector('[data-testid="dashboard"]', { timeout: 120000 });
-        await this.saveSession();
-        spinner.succeed('Manual login completed');
-        return true;
+        try {
+          // Wait for dashboard to appear or URL to change to dashboard
+          await Promise.race([
+            this.page.waitForSelector('[data-testid="dashboard"], .dashboard, #dashboard', { timeout: 120000 }),
+            this.page.waitForFunction(() => window.location.href.includes('dashboard'), { timeout: 120000 })
+          ]);
+          
+          await this.saveSession();
+          spinner.succeed('Manual login completed');
+          return true;
+        } catch (e) {
+          spinner.fail('Manual login timeout - please try again');
+          throw new Error('Manual login was not completed within 2 minutes');
+        }
       }
 
-      // Automated login
-      await this.page.waitForSelector('input[name="email"], input[type="email"]');
-      await this.page.type('input[name="email"], input[type="email"]', process.env.SQUARE_EMAIL);
-      
-      await this.page.waitForSelector('input[name="password"], input[type="password"]');
-      await this.page.type('input[name="password"], input[type="password"]', process.env.SQUARE_PASSWORD);
-      
-      await this.page.click('button[type="submit"], input[type="submit"]');
-      
-      // Handle potential 2FA
+      // Automated login (if credentials are available)
+      spinner.text = 'Attempting automated login...';
       try {
-        await this.page.waitForSelector('[data-testid="dashboard"]', { timeout: 10000 });
-        spinner.succeed('Login successful');
+        await this.page.waitForSelector('input[name="email"], input[type="email"]', { timeout: 10000 });
+        await this.page.type('input[name="email"], input[type="email"]', process.env.SQUARE_EMAIL);
+        
+        await this.page.waitForSelector('input[name="password"], input[type="password"]', { timeout: 5000 });
+        await this.page.type('input[name="password"], input[type="password"]', process.env.SQUARE_PASSWORD);
+        
+        await this.page.click('button[type="submit"], input[type="submit"]');
+        
+        // Handle potential 2FA or success
+        try {
+          await this.page.waitForSelector('[data-testid="dashboard"], .dashboard, #dashboard', { timeout: 10000 });
+          spinner.succeed('Login successful');
+        } catch (e) {
+          // Might be 2FA
+          spinner.warn('2FA required - please complete in browser');
+          await this.page.waitForSelector('[data-testid="dashboard"], .dashboard, #dashboard', { timeout: 120000 });
+          spinner.succeed('2FA completed');
+        }
+        
+        await this.saveSession();
+        return true;
+        
       } catch (e) {
-        // Might be 2FA
-        spinner.warn('2FA required - please complete in browser');
-        await this.page.waitForSelector('[data-testid="dashboard"]', { timeout: 120000 });
-        spinner.succeed('2FA completed');
+        spinner.warn('Automated login failed, falling back to manual login');
+        console.log(chalk.blue('Please complete login manually in the browser window...'));
+        
+        try {
+          await this.page.waitForSelector('[data-testid="dashboard"], .dashboard, #dashboard', { timeout: 120000 });
+          await this.saveSession();
+          spinner.succeed('Manual login completed');
+          return true;
+        } catch (e) {
+          spinner.fail('Login failed');
+          throw new Error('Could not complete login process');
+        }
       }
-      
-      await this.saveSession();
-      return true;
       
     } catch (error) {
       spinner.fail('Login failed');
-      await this.takeScreenshot('login-error');
+      console.error(chalk.red('Login error details:'), error.message);
+      
+      // Try to take screenshot if page is still available
+      try {
+        if (this.page && !this.page.isClosed()) {
+          await this.takeScreenshot('login-error');
+        }
+      } catch (screenshotError) {
+        console.log(chalk.gray('Could not take error screenshot'));
+      }
+      
       throw error;
     }
   }
