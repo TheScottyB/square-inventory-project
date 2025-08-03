@@ -14,9 +14,14 @@ sleep 2
 # Launch Chrome with remote debugging enabled
 echo "🌐 Starting Chrome with remote debugging on port 9222..."
 
-# Launch Chrome with your default profile and remote debugging
+# Create user data directory for debugging
+USER_DATA_DIR="$HOME/.chrome-debugging"
+mkdir -p "$USER_DATA_DIR"
+
+# Launch Chrome with custom data directory and remote debugging
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
   --remote-debugging-port=9222 \
+  --user-data-dir="$USER_DATA_DIR" \
   --no-first-run \
   --no-default-browser-check \
   --disable-background-timer-throttling \

@@ -20,6 +20,7 @@ killChrome.on('close', (code) => {
     
     const chromeArgs = [
       '--remote-debugging-port=9222',
+      '--user-data-dir=' + process.env.HOME + '/.chrome-debugging',
       '--disable-features=VizDisplayCompositor',
       '--disable-extensions',
       '--no-first-run',
@@ -53,6 +54,7 @@ killChrome.on('error', (error) => {
     
     const chromeArgs = [
       '--remote-debugging-port=9222',
+      '--user-data-dir=' + process.env.HOME + '/.chrome-debugging',
       '--disable-features=VizDisplayCompositor',
       '--disable-extensions',
       '--no-first-run',

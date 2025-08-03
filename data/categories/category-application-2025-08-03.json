@@ -1,0 +1,1928 @@
+{
+  "timestamp": "2025-08-03T05:05:30.917Z",
+  "summary": {
+    "totalItems": 355,
+    "categorized": 128,
+    "uncategorized": 227,
+    "highConfidence": 0,
+    "lowConfidence": 227
+  },
+  "categoryBreakdown": {
+    "Services": {
+      "count": 9,
+      "avgConfidence": 0.7,
+      "items": [
+        {
+          "id": "CWJOSY7V3QMW3B2KPMAU4BA6",
+          "name": "AI Chatbot Brainstorming",
+          "confidence": 0.7
+        },
+        {
+          "id": "3PZCHLQAVN7YCDOAGU47XPSV",
+          "name": "1hr Tour",
+          "confidence": 0.7
+        },
+        {
+          "id": "PIVBNX6IK6374PY3K4NEXQCD",
+          "name": "Home Improvement Services",
+          "confidence": 0.7
+        },
+        {
+          "id": "NAY5FZTOFOINR5KCPIWB5S74",
+          "name": "Preservation Service",
+          "confidence": 0.7
+        },
+        {
+          "id": "S5IFRSSD24MW43ILAXSZPCLS",
+          "name": "Black Tourmaline Quartz Stretch Bracelet! Natural Crystals & Handmade!",
+          "confidence": 0.7
+        },
+        {
+          "id": "3NAAOJOQ5IJLJCYO5VK7HWXN",
+          "name": "High Vibe Home Kit with Selenite, Palo Santo, Copal, Black Tourmaline,",
+          "confidence": 0.7
+        },
+        {
+          "id": "KZGLHZQSKWLG25P56RNNDSAZ",
+          "name": "Site Visit - Sat Service Call",
+          "confidence": 0.7
+        },
+        {
+          "id": "SZSQFTIA4DMHC2EYPIUJHK2V",
+          "name": "Field Service Work - Weekend",
+          "confidence": 0.7
+        },
+        {
+          "id": "H4TDVZDWH6F4SBK6VQHTYFJK",
+          "name": "Service Charge - Sunday",
+          "confidence": 0.7
+        }
+      ]
+    },
+    "Entertainment": {
+      "count": 6,
+      "avgConfidence": 0.7,
+      "items": [
+        {
+          "id": "YT4HUDRFFWJBPN22GHH4A6AY",
+          "name": "1hr Pinball Box",
+          "confidence": 0.7
+        },
+        {
+          "id": "LZYF2ZSEH2WNCCTTZ6A37KS3",
+          "name": "4hr Pinball Box Bar",
+          "confidence": 0.7
+        },
+        {
+          "id": "X3AB7CMOE5VIUKZUWEFYMJTR",
+          "name": "R36S Retro Handheld Video Game Console with Linux System and 3.5 Inch IPS Display",
+          "confidence": 0.7
+        },
+        {
+          "id": "3VSXXLRMZVY24CL6BFC3LLOU",
+          "name": "R36S Retro Handheld Video Game Console Linux System 3.5-inch IPS",
+          "confidence": 0.7
+        },
+        {
+          "id": "MMGCNW4QNBKAZ34FR4DPAAGV",
+          "name": "Pyramid Sheesham Wood Incense Cone Box with Fretwork",
+          "confidence": 0.7
+        },
+        {
+          "id": "5HDPBPYOUPELUA2MLZDEGCF6",
+          "name": "Ambulance Family First Aid Kit - Cute Medicine Lock Storage Box",
+          "confidence": 0.7
+        }
+      ]
+    },
+    "Apparel & Accessories": {
+      "count": 6,
+      "avgConfidence": 0.7,
+      "items": [
+        {
+          "id": "IC4OIS5YZVSM2I4LIJWXKPII",
+          "name": "TVM Tote Bag",
+          "confidence": 0.7
+        },
+        {
+          "id": "4WRYUDSESC2PVOWZ4OZYY47J",
+          "name": "Zoey in the Laundry Beanies",
+          "confidence": 0.7
+        },
+        {
+          "id": "VXJ2QU4FVZHSWMAKQP24TACH",
+          "name": "Tote bag",
+          "confidence": 0.7
+        },
+        {
+          "id": "TXZ63WVRJNIA5LGTAGENE7CF",
+          "name": "Set Pink Tarot Bag & Tarot Cloth for Tarot Cards",
+          "confidence": 0.7
+        },
+        {
+          "id": "PA6W33T6IYNKPSJ4YABVL7AN",
+          "name": "Evil eye bag, jute bag, evil eye clutch bag,",
+          "confidence": 0.7
+        },
+        {
+          "id": "3JSANUXOFSCEIBGQYDJZ5JIX",
+          "name": "Symbols of PARIS Everyday Tote Bag Medium",
+          "confidence": 0.7
+        }
+      ]
+    },
+    "Art & Decor": {
+      "count": 40,
+      "avgConfidence": 0.7,
+      "items": [
+        {
+          "id": "DOBJNEA7GSEOOELRM7V3HS2Z",
+          "name": "Murano Hand Blown Glass Giraffe",
+          "confidence": 0.7
+        },
+        {
+          "id": "GNJF2XCAHBVSHPTTVIALNSIN",
+          "name": "TVM Framed Custom TMV Digital Art (24″×36″)",
+          "confidence": 0.7
+        },
+        {
+          "id": "FUOK6ENYPAFER65XWW2ULC66",
+          "name": "TVM Print 18x18",
+          "confidence": 0.7
+        },
+        {
+          "id": "PBWA6TRQKEYUDDAV7WSX2TFP",
+          "name": "Arteza Metallic Markers",
+          "confidence": 0.7
+        },
+        {
+          "id": "7SIA5RIXDGCTYIXHXBZTPWJG",
+          "name": "Rocked Up Mini Crystal Quartz Necklace - Gold",
+          "confidence": 0.7
+        },
+        {
+          "id": "AE4LZG4E4QSC4PG5FDEQWLQZ",
+          "name": "Rocked Up Mini Crystal Quartz Necklace - Green",
+          "confidence": 0.7
+        },
+        {
+          "id": "43E65ZP3X4UK4NAPEYNK7VAG",
+          "name": "Pink Micro Hearts Over Vintage Floral - Premium Protective Decal",
+          "confidence": 0.7
+        },
+        {
+          "id": "GFUKYNAHYO5KKC4IYLUHMXT3",
+          "name": "Set of 2 |Crystal Wine Glasses with Gold Plated Purple Amethyst",
+          "confidence": 0.7
+        },
+        {
+          "id": "ERH3PYUZPUIFLZLYF73OSJST",
+          "name": "Glass jar soy wax candle",
+          "confidence": 0.7
+        },
+        {
+          "id": "CUAA54TST6VNHDL7PTNIF5KJ",
+          "name": "Labz' Mayan Slots Soy Candle – Glass Jar Edition",
+          "confidence": 0.7
+        },
+        {
+          "id": "LC5DHOLDRU52IH3QF26SQ633",
+          "name": "Labz' Easter Celebration Print – 24″×36″ Matte Poster",
+          "confidence": 0.7
+        },
+        {
+          "id": "6SN4NXV3FCYYU5EZXW2AMNVK",
+          "name": "Labz' Framed (3 types) Easter Picnic Print 8x10",
+          "confidence": 0.7
+        },
+        {
+          "id": "XTUBMCZTYNVT7345T4X55U5J",
+          "name": "Selenite Heart",
+          "confidence": 0.7
+        },
+        {
+          "id": "XUWOIEIFJFEIKHXGLBJPI4B6",
+          "name": "Tungsten Frame Gaming Glasses – Gold by Ninja Dragons",
+          "confidence": 0.7
+        },
+        {
+          "id": "KR5D5TOZVH32UIAOAMMADTI3",
+          "name": "Tungsten Frame Gaming Glasses – Gold by Ninja Dragons",
+          "confidence": 0.7
+        },
+        {
+          "id": "NLZLQKGW5YH7JS3YM7P3WDPF",
+          "name": "🔴 10\" Quartz Crystal Singing Bowl – Root Chakra (OM Engraving) Root Chakra",
+          "confidence": 0.7
+        },
+        {
+          "id": "MZDDON4TRJUWETJYYO34L2ZC",
+          "name": "Crystal Singing Bowl (Heart Chakra)",
+          "confidence": 0.7
+        },
+        {
+          "id": "QL5RXVRAXEHUGID7JSOS7TIT",
+          "name": "Crystal Quartz Points",
+          "confidence": 0.7
+        },
+        {
+          "id": "BR423UY6RKYSVQ6G3RXYEP5A",
+          "name": "Tarot Tablecloth Board Game Decorative Cloth Have Your Power Mandala",
+          "confidence": 0.7
+        },
+        {
+          "id": "NYHFFJWNL6SBLCEL4ATXWWTH",
+          "name": "Heart Chakra Incense Sticks",
+          "confidence": 0.7
+        },
+        {
+          "id": "WK3AMAFDM32N2E74RXBGUDQI",
+          "name": "Rainbow Moonstone & Crystal Quartz Stretch Bracelet! Genuine Crystals!",
+          "confidence": 0.7
+        },
+        {
+          "id": "SCU2XUSRBZ6QWAZYRJS3I3HR",
+          "name": "Rose Quartz & Amethyst Stretch Bracelet! Genuine Crystals!",
+          "confidence": 0.7
+        },
+        {
+          "id": "WYLEEVRSN47SUY4W6B22MQLS",
+          "name": "Heart Box With Crystals In Lid",
+          "confidence": 0.7
+        },
+        {
+          "id": "FAIAJBWM3HBDGVQ6HZUYKUYG",
+          "name": "Alchemical Visions tarot (dk & bk)  by Arthur Taussig",
+          "confidence": 0.7
+        },
+        {
+          "id": "6ONXFL7NUNT43C7EHLPP4SFJ",
+          "name": "Orange Selenite Raw Lamp by CuartoAstral Prime",
+          "confidence": 0.7
+        },
+        {
+          "id": "Y7TJVNEUP7ZSD3A75JDV5OKH",
+          "name": "Imperial Jasper Purple Heart Bracelet",
+          "confidence": 0.7
+        },
+        {
+          "id": "IDJWFHTPVNLAKXNCLHIDQXW6",
+          "name": "Wire Wrapped Faceted Pink Glass Crystal Pendant, Woven Frame",
+          "confidence": 0.7
+        },
+        {
+          "id": "ESYRABJ6NL3TBDM3LJU3P3JP",
+          "name": "PawPrint EMF Protection Charm for Dogs with Shungite and Crystals",
+          "confidence": 0.7
+        },
+        {
+          "id": "RGS7622ME5AGQS7EAQR7LWIK",
+          "name": "Rose Quartz Tumbled Genuine Polished Gemstone - 1\" per piece",
+          "confidence": 0.7
+        },
+        {
+          "id": "AINIKVMPIEZZIOVFOHCI2IOG",
+          "name": "Tresor Vintage Market Framed Poster with Custom TMV Digital Art",
+          "confidence": 0.7
+        },
+        {
+          "id": "4E4QWRTP6I36OQPWHCIRM2IS",
+          "name": "TVM 5x7 Heart Poster",
+          "confidence": 0.7
+        },
+        {
+          "id": "T6CZYYX3DQIOV5WU2XIBOS54",
+          "name": "Vintage Paris Flower Market Screen Print Art With Hollow Iron Frame",
+          "confidence": 0.7
+        },
+        {
+          "id": "HHGGDB6VMZ7OJFQ3PUSA5EYK",
+          "name": "10\" Quartz Crystal Singing Bowl, Solar Plexus Chakra (Regulate your",
+          "confidence": 0.7
+        },
+        {
+          "id": "6ONHT3QNEUOKBOOAKT3KMS2F",
+          "name": "Quartz Crystal Singing Bowl 10\" inch With Etched Chakra Symbol: Third",
+          "confidence": 0.7
+        },
+        {
+          "id": "W5GX2EC6GJ5IFT5NM2HYXUCY",
+          "name": "Heart chakra Crystal Singing Bowl",
+          "confidence": 0.7
+        },
+        {
+          "id": "IDXAXUSP7GJ6IUCYNOIDFI6H",
+          "name": "Amethyst Stone Home Decoration",
+          "confidence": 0.7
+        },
+        {
+          "id": "QE4F6YWOQB6WGOERPK54VZB7",
+          "name": "Tangerine Quartz Points",
+          "confidence": 0.7
+        },
+        {
+          "id": "JJ5KPHO3NY33BPS4KAE6E527",
+          "name": "Labz’ Digital Art Framed (+3 color choices) 8″×10″ Poster on Japense Paper+",
+          "confidence": 0.7
+        },
+        {
+          "id": "K7LO5CCCNKCWAB5VO426QZSQ",
+          "name": "\"The Original\" Metal Electric Guitar Sculpture Heavy Metal Wall Art",
+          "confidence": 0.7
+        },
+        {
+          "id": "TVL34MFHD3Q6FGHK2DYAQQYX",
+          "name": "Foosball Soccer Table 4FT Tables Football Game Home Party Gift",
+          "confidence": 0.7
+        }
+      ]
+    },
+    "Beauty & Cosmetics": {
+      "count": 45,
+      "avgConfidence": 0.7,
+      "items": [
+        {
+          "id": "OBQ7TRRYKG27PN3JVE2LNI2Z",
+          "name": "Liquid Shimmer - Champagne",
+          "confidence": 0.7
+        },
+        {
+          "id": "3TRVTZFNJXYGN7ZJ5RL3IJLT",
+          "name": "Coconut Oil Face & Body Moisturizer 4oz",
+          "confidence": 0.7
+        },
+        {
+          "id": "6P6CNDQU4ZBKD3KXZRV2LL2O",
+          "name": "Liquid Shimmer - Silver",
+          "confidence": 0.7
+        },
+        {
+          "id": "2N2U73MRAUWPCYVD3KACFNXG",
+          "name": "Argan Oil Face & Body Moisturizer 4oz",
+          "confidence": 0.7
+        },
+        {
+          "id": "G76UQPSP5PWYTOLGRL6IRYON",
+          "name": "Lip Gloss -  Nude",
+          "confidence": 0.7
+        },
+        {
+          "id": "ELEDDLANVY2ELETWPWLJQ7TO",
+          "name": "Lip Gloss - Rose Gold",
+          "confidence": 0.7
+        },
+        {
+          "id": "HFZSWADELZQ6SEPMA362FX6R",
+          "name": "Lip Gloss - Red",
+          "confidence": 0.7
+        },
+        {
+          "id": "OWDFACBM27HHFRQQZU6H2T5V",
+          "name": "Liquid Shimmer - Rose Gold",
+          "confidence": 0.7
+        },
+        {
+          "id": "NFBEVG6ZVLIZIHBRC6LWVXLP",
+          "name": "Dip Eye Liner - Black",
+          "confidence": 0.7
+        },
+        {
+          "id": "DLZ6XNGB6T7DOTMWIBBVEGK2",
+          "name": "Matte Liquid Lip Stick - Muted Red",
+          "confidence": 0.7
+        },
+        {
+          "id": "MKUMCIDTV77BZ472UKL54PKG",
+          "name": "Lip Gloss - Champagne",
+          "confidence": 0.7
+        },
+        {
+          "id": "LQTZQRHBVSYTZQ7VGCGKFRTC",
+          "name": "Lip Gloss - Light Pink",
+          "confidence": 0.7
+        },
+        {
+          "id": "6SOJMGJWDK4CZUMNU6PLT5EG",
+          "name": "Lip Gloss - Red",
+          "confidence": 0.7
+        },
+        {
+          "id": "X6FATZERQNB6AWFJR64EK6L3",
+          "name": "Lip Gloss - Raspberry Rose",
+          "confidence": 0.7
+        },
+        {
+          "id": "WQKRND6WUDK3JOH2NRD3TPB5",
+          "name": "Lip Gloss - Old Rose",
+          "confidence": 0.7
+        },
+        {
+          "id": "YM4VEQNOR7QB7SSFKXUPDZSY",
+          "name": "Vitamin E Oil Face & Body Moisturizer 4oz",
+          "confidence": 0.7
+        },
+        {
+          "id": "3YW4UQBNTFKN5TMEOHVI2XIP",
+          "name": "Honeysuckle Face & Body Oil 4oz",
+          "confidence": 0.7
+        },
+        {
+          "id": "UJE55LTIZGJDHCJ4KS6PABH7",
+          "name": "Natural Super Hydration Face Moisturizer 1.7oz",
+          "confidence": 0.7
+        },
+        {
+          "id": "5UWPTAQCIKTDM2HDTBQPFE6Y",
+          "name": "Natural Daily Moisturizer 1.7oz",
+          "confidence": 0.7
+        },
+        {
+          "id": "YXGDSDD4HVR5NJQVQ5CY5YAW",
+          "name": "Lip Plumping Oil",
+          "confidence": 0.7
+        },
+        {
+          "id": "Y7QDWK4WTBFWAR6PISXXDAPK",
+          "name": "Liquid Shimmer - Pink",
+          "confidence": 0.7
+        },
+        {
+          "id": "4LNU3UKADVOVNQYEJYHTTM54",
+          "name": "Treatments - TC02 - Body oil - Ceylon - 150 ml",
+          "confidence": 0.7
+        },
+        {
+          "id": "2BJBJVLDGZ25SFCOY4KBASLA",
+          "name": "The Rider Waite Purple Neon Foil Tarot Deck",
+          "confidence": 0.7
+        },
+        {
+          "id": "XFKLHBFGG43ZW2NRTDISR6FD",
+          "name": "Portable Ultrasonic Humidifier USB Aroma Essential Oil Diffuser LED",
+          "confidence": 0.7
+        },
+        {
+          "id": "U2MPZFYRTDUZPCX2IV5V5VXA",
+          "name": "Essential Oil Blend with Crystals Frankincense",
+          "confidence": 0.7
+        },
+        {
+          "id": "BSMDYD5KN2DFYHA4QOZ5MUFX",
+          "name": "Calm - Just Chill - Wood Roll-On Pure Essential Oils",
+          "confidence": 0.7
+        },
+        {
+          "id": "RLDPJM7DABDTM6JWJO6YLMGG",
+          "name": "LagunaMoon Aroma Diffuser with Essential Oils Gift 10 Set Kit",
+          "confidence": 0.7
+        },
+        {
+          "id": "EBDH6VV5AXSRXXYRVXCRREMJ",
+          "name": "No. 7 Repel Essential Oil",
+          "confidence": 0.7
+        },
+        {
+          "id": "A5XJCQTYEGCH2CGT3MBK2NTV",
+          "name": "No. 5 Protect Essential Oil",
+          "confidence": 0.7
+        },
+        {
+          "id": "V3W45LFF3ECYSVGCC6J5BEAN",
+          "name": "Milano Ultrasonic Usb Diffuser With 10 Aroma Oils 130Ml",
+          "confidence": 0.7
+        },
+        {
+          "id": "LSNBF7K3VBUHSIZEDMVERDQX",
+          "name": "Lime Pure Essential Oil Bottle - 15ml",
+          "confidence": 0.7
+        },
+        {
+          "id": "3F7FXEX3MTPMB4PXD5AMS3PC",
+          "name": "The Rider Waite Gold Sun Rainbow Foil Tarot Deck",
+          "confidence": 0.7
+        },
+        {
+          "id": "D5PL65GLR4CTGTQ2U4VNRGMB",
+          "name": "Fields of Provence Organic Essential Oil Disinfectant Spray",
+          "confidence": 0.7
+        },
+        {
+          "id": "5MDE3ZMA3JIW6U3BGZTO5Y3D",
+          "name": "No. 8 Breathe Essential Oil",
+          "confidence": 0.7
+        },
+        {
+          "id": "LR25GUIGHH2GCZ6APQX6XG6K",
+          "name": "Jasmine Essential Body + Massage Oil",
+          "confidence": 0.7
+        },
+        {
+          "id": "6IIHX3I6WQ7RNSB6DFIIRP7P",
+          "name": "the Rider Waite Holographic Crystal Foil Tarot Deck",
+          "confidence": 0.7
+        },
+        {
+          "id": "UZTVJUSLAV6GLRJFPFDTV6KO",
+          "name": "Charlie Buddy   H–µmp Oil for Dogs Cats   Hi—Ä and J–æint Supp–ært and",
+          "confidence": 0.7
+        },
+        {
+          "id": "FQ2X5H7MMZOKIAUYHL4GM5BC",
+          "name": "The Rider Waite Purple Neon Foil Tarot Deck: Premium & Complete Sets",
+          "confidence": 0.7
+        },
+        {
+          "id": "5J33H25LUHXP6ONIRUSZDQDD",
+          "name": "Best Beard On The Block Organic Beard Oil",
+          "confidence": 0.7
+        },
+        {
+          "id": "ZNOFR2FE3MRLDPYDXXMQA5O7",
+          "name": "Detox bath epsom salt clay essential oil soak",
+          "confidence": 0.7
+        },
+        {
+          "id": "NNLJHCHBE57CPYOBF37PRT7C",
+          "name": "Organic Gentle Baby Oil",
+          "confidence": 0.7
+        },
+        {
+          "id": "35JOKTVRC2QUWA4UINWB27PI",
+          "name": "Pink Tree Of Life Lava Stone Essential Oil Bracelet",
+          "confidence": 0.7
+        },
+        {
+          "id": "KXSELZCER3T3WNRHVIA747AQ",
+          "name": "Tea Tree Essential Oil",
+          "confidence": 0.7
+        },
+        {
+          "id": "QZC5OFJ3PJFE3PK5IIQRWL6W",
+          "name": "Sage Clary Essential Oil",
+          "confidence": 0.7
+        },
+        {
+          "id": "GWNB7OCDOVBOOIJJB45CMLBX",
+          "name": "🐶 Famous First Edition Farmhouse Wood Dog Bowl – BPA-Free, Non-Slip & Stylish Pet Dish",
+          "confidence": 0.7
+        }
+      ]
+    },
+    "Drinkware": {
+      "count": 14,
+      "avgConfidence": 0.7,
+      "items": [
+        {
+          "id": "4LVVDL5H762MPTVGBNRP27LK",
+          "name": "TMV Muted Parisian Pink Coffee Mug",
+          "confidence": 0.7
+        },
+        {
+          "id": "ISTP2VSYMJSGDIKP5W7MVYYD",
+          "name": "TVM Ceramic Mug (3 Sizes)",
+          "confidence": 0.7
+        },
+        {
+          "id": "JXWTI2F5QNR6ID66VYBAYVOM",
+          "name": "TVM Travel mug with a handle",
+          "confidence": 0.7
+        },
+        {
+          "id": "VGARBVCUYHJMKNAN7JRWJIJF",
+          "name": "Enamel Mug",
+          "confidence": 0.7
+        },
+        {
+          "id": "7FH3RO24VC4ZM7VYAZC6HP6T",
+          "name": "Travel mug with a handle",
+          "confidence": 0.7
+        },
+        {
+          "id": "HZGHFIWUWQSMLKVCSRPPLAOM",
+          "name": "The Grouse Plate – Ceramic Tableware",
+          "confidence": 0.7
+        },
+        {
+          "id": "WWDA2ADMS6FUJMZMLXG6A46M",
+          "name": "TMV Muted Parisian Pink Coffee Mug",
+          "confidence": 0.7
+        },
+        {
+          "id": "ZSV4UXCGXDIYYJTIYWTKE6ZO",
+          "name": "TMV's Latte Mug",
+          "confidence": 0.7
+        },
+        {
+          "id": "LUSCNPOZ3ZNGW4SJAF4NTWHZ",
+          "name": "TMV's Fav Latte Mug",
+          "confidence": 0.7
+        },
+        {
+          "id": "ZWXXJZQPW4ULWY3O2RYYEUAC",
+          "name": "Lotus Incense Burner – Black Ceramic Ash Catcher for Sticks",
+          "confidence": 0.7
+        },
+        {
+          "id": "J7D4DXAWZ5BMV6BRK2NQAX5B",
+          "name": "Original TVM Travel Mug",
+          "confidence": 0.7
+        },
+        {
+          "id": "R2AI3WLYE4MUZJV42AFCAFDE",
+          "name": "TVM's Fav Travel Mug with a Handle",
+          "confidence": 0.7
+        },
+        {
+          "id": "WQJMMTQHF7M3MGCJY4QLGX3N",
+          "name": "🔮 TVM’s Premium Enamel Camp Mug",
+          "confidence": 0.7
+        },
+        {
+          "id": "QVSDNO3IFZJNLR2JLHAM4U4H",
+          "name": "TMV Muted Parisian Pink Coffee Mug",
+          "confidence": 0.7
+        }
+      ]
+    },
+    "Tech Accessories": {
+      "count": 5,
+      "avgConfidence": 0.7,
+      "items": [
+        {
+          "id": "WRI6YC4W3UJHBJXFM4DYTSRO",
+          "name": "Zoey in the Laundry Clear Case for iPhone®",
+          "confidence": 0.7
+        },
+        {
+          "id": "PODVNCXV74BZCJDS2XWTJNKA",
+          "name": "Retro Charm Meets Modern Sound: Bluetooth Speaker & Phone Holder",
+          "confidence": 0.7
+        },
+        {
+          "id": "434AG2WCF5NPIBKRTWWTVQGO",
+          "name": "2021 New Wireless Headset HIFI Stereo Bluetooth Headphones",
+          "confidence": 0.7
+        },
+        {
+          "id": "PCWBNPMDP54YD6JCDZGZYM47",
+          "name": "Ninja Dragon Z10 Color Changing Bluetooth Headphones",
+          "confidence": 0.7
+        },
+        {
+          "id": "SMWFW4KINYK274DJILWTIZDZ",
+          "name": "Charles-Hubert- Paris Brass Mechanical Hunter Case Pocket Watch #3804",
+          "confidence": 0.7
+        }
+      ]
+    },
+    "Stationery": {
+      "count": 3,
+      "avgConfidence": 0.7,
+      "items": [
+        {
+          "id": "L6CLCKIW7S4BGFVID22EOYK6",
+          "name": "TVM Hardcover Bound Notebook",
+          "confidence": 0.7
+        },
+        {
+          "id": "QGFNR4SKET7AFREUNIARHRA5",
+          "name": "TVM's First Hardcover Bound JournalBook®",
+          "confidence": 0.7
+        },
+        {
+          "id": "KX336CU2T7RVNPJIZUKGBQOE",
+          "name": "📓 The White Quill – Hardcover JournalBook®",
+          "confidence": 0.7
+        }
+      ]
+    },
+    "Uncategorized": {
+      "count": 227,
+      "avgConfidence": 0.5,
+      "items": [
+        {
+          "id": "XXR3U246RB7FUVQC34JOJY7D",
+          "name": "Hyaluronic Acid Serum 1oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "WO6LDQUFJ5KXBNYZC55372KN",
+          "name": "Natural Gentle Milk Cleanser 5oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "IG2ARJ73QLFQACO7HQ74QP2W",
+          "name": "Natural Under-Eye Gel Cream Treatment 0.5oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "PNUPVZIGVTWHOXMNRSF44O7H",
+          "name": "Natural Anti-Aging Serum 1oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "NF7BTIT7Y2MOXOG6NIKQUUJG",
+          "name": "Resurfacing Detox Serum  1oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "JVXZYECXKAV4CWDHUZFOJ7EO",
+          "name": "Naturally Foaming Facial Cleanser 5oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "3KQAW7M5EG6N3UST2SW4OOFR",
+          "name": "Natural Vitamin Boost Serum 1oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "AGKUYE4VCSJYW4GC2IOIP534",
+          "name": "Collagen Serum 1oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "BZ6Z45BLU6PRPIYTKQ2CA7ZA",
+          "name": "Natural Hydro Burst Serum 1oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "2MEUETSO2GAPXMPFUGTV4D4M",
+          "name": "Naturally Exfoliating Toner 8oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "ZAQ3U42DL4EWSWYE45POTM6C",
+          "name": "Anti-Aging Cream 1.7oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "UW7LXVNCP5FVD2RZENJM4SHY",
+          "name": "Liquid Highlighter - Gold",
+          "confidence": 0.5
+        },
+        {
+          "id": "QH54UTQO2PGH22YEEJ6IWYQX",
+          "name": "Glycolic Acid Anti-Aging + Exfoliator Serum 1oz",
+          "confidence": 0.5
+        },
+        {
+          "id": "EXMNYMACPKJ6YAIYN3J52KF5",
+          "name": "Sort and store removed flooring planks into basement",
+          "confidence": 0.5
+        },
+        {
+          "id": "KF5DRGGA7F762EG4D5ZI5DMY",
+          "name": "Trucker Cap",
+          "confidence": 0.5
+        },
+        {
+          "id": "4UN6DMKR2STCDSRJWYPUPNSX",
+          "name": "TBDLabz Meshback Trucker Cap – Snapback Fit",
+          "confidence": 0.5
+        },
+        {
+          "id": "5M3Y2LOXQWBS7NVYZDQFXG7B",
+          "name": "DrDzb's Laptop Sleeve",
+          "confidence": 0.5
+        },
+        {
+          "id": "HVT3VVYY6JOWLFHCGU7JSGYT",
+          "name": "Treatments - TC11 - Fragrance sticks - Ceylon - 150 ml",
+          "confidence": 0.5
+        },
+        {
+          "id": "QO26QD7KVDBY66CDF3EVZOZ6",
+          "name": "HAWSER 10 MM Rope Chain | 970861",
+          "confidence": 0.5
+        },
+        {
+          "id": "TKMMHO63M4RPVAMEJEZGWDZS",
+          "name": "Turmeric Sage Facial Toner",
+          "confidence": 0.5
+        },
+        {
+          "id": "B2MDHCDADSE56ICM4JEKGHZM",
+          "name": "Necklace - Antique Series: Eiffel Tower Necklace Paris France Locket",
+          "confidence": 0.5
+        },
+        {
+          "id": "VHCBUCSAE6NMWAELGP6T7C7A",
+          "name": "Dolce Vita: Pomme d´amour",
+          "confidence": 0.5
+        },
+        {
+          "id": "OXD4B6V4J3CVIHQY6DQR3RQL",
+          "name": "L'ORACLE BY SISTERS ASTRO",
+          "confidence": 0.5
+        },
+        {
+          "id": "VAM6AAU62AYZRDLPROL52NZH",
+          "name": "Starlight Frequencies Oracle Deck",
+          "confidence": 0.5
+        },
+        {
+          "id": "GQCMNDE22KPQ4TX2CQADPG32",
+          "name": "Handmade Olive Wood Bottle Holder | Available in Two Designs",
+          "confidence": 0.5
+        },
+        {
+          "id": "3WVEMRASMN7MTNKMI6HXTT4U",
+          "name": "Abundance Candle / Ritual Candle / Intention Candle / Hand Poured",
+          "confidence": 0.5
+        },
+        {
+          "id": "5ENO2MDLW2ATSC6ILG7N2P7E",
+          "name": "Treatments - TC05 - Ultra rich sheabutter - Ceylon - 300 gram",
+          "confidence": 0.5
+        },
+        {
+          "id": "FR5MLBIWHCAIL2TFGOE56T33",
+          "name": "Organic Magnesium Lotion / Magnesium / Magnesium Cream / Magnesium",
+          "confidence": 0.5
+        },
+        {
+          "id": "LWISUQZWJK4HRH46U24HILF2",
+          "name": "The Tarot Essentials Kit",
+          "confidence": 0.5
+        },
+        {
+          "id": "6XCQROTQMNJYWI7WJZSSJJ5Q",
+          "name": "Unlocked - Large Key Necklace",
+          "confidence": 0.5
+        },
+        {
+          "id": "6YWUQRT7ADLCA45JIZ6JTWRI",
+          "name": "Charles-Hubert- Paris  Dual Time Mechanical Pocket Watch",
+          "confidence": 0.5
+        },
+        {
+          "id": "26P2AYCRZ4GO5FIKNMZJVHJN",
+          "name": "Skeleton Key Earrings # 1132",
+          "confidence": 0.5
+        },
+        {
+          "id": "PDJFDZXHYW6KTS4KMNWIEQ7V",
+          "name": "Tarot of Dreams by Ciro Marchetti",
+          "confidence": 0.5
+        },
+        {
+          "id": "IDFYM23PMIIG4TSXQUWV3EAH",
+          "name": "2-Pack Rose Candles – Scented Mini Votives",
+          "confidence": 0.5
+        },
+        {
+          "id": "MLF3GVKN3VAMHNOU4U2OJDAJ",
+          "name": "Turquoise Teardrop Bead Boho Silver Anklet",
+          "confidence": 0.5
+        },
+        {
+          "id": "7FQIQEZFZSAM4XXCXSNB5UJB",
+          "name": "Adjustable Anxiety Diffusing Lava Stone Bracelet w/Turquoise Stones",
+          "confidence": 0.5
+        },
+        {
+          "id": "TJ46OE4IY5GLLHFIZGJ52XTH",
+          "name": "RGBW Modern Curve Floor Lamp | New Version",
+          "confidence": 0.5
+        },
+        {
+          "id": "LP5AVFRVGNYTI5OMGE2MCMO7",
+          "name": "DRINCO® 22oz Stainless Steel Sport Water Bottle - Teal",
+          "confidence": 0.5
+        },
+        {
+          "id": "5WELVRDX2XAYW5UPIDXZM3C7",
+          "name": "TVM's Summer Shoes",
+          "confidence": 0.5
+        },
+        {
+          "id": "57ZIHQWD3UPIQ77KZMCUNY7C",
+          "name": "🐾 Zoey in the Laundry – High Top Canvas Shoes",
+          "confidence": 0.5
+        },
+        {
+          "id": "ZC7XAULAWXHEK372TAL75OA6",
+          "name": "TBDStud.io Work Shirt",
+          "confidence": 0.5
+        },
+        {
+          "id": "DEYA3FW6FC7X6ODK4Z5TWXTB",
+          "name": "TMV's Women’s high top canvas shoes",
+          "confidence": 0.5
+        },
+        {
+          "id": "2SDMFBOL3XKGGTSPNWYW77GA",
+          "name": "TVM’s The Only Hoodie Needed",
+          "confidence": 0.5
+        },
+        {
+          "id": "VUXA2GCLSZ7WYLR5OKKBICKP",
+          "name": "Stainless steel water bottle",
+          "confidence": 0.5
+        },
+        {
+          "id": "LOTK33JIIVZG2BVLK6RSM4VV",
+          "name": "Insight + Energy Crystal Set",
+          "confidence": 0.5
+        },
+        {
+          "id": "LOU23WD2TIXWCQQHOYX67MEN",
+          "name": "Rhodonite Crystal Teardrop Wire Wrapped Pendant Handmade",
+          "confidence": 0.5
+        },
+        {
+          "id": "HVFS2NEYAJ56TKGOMZCD246E",
+          "name": "Dali Rainbow Jasper Points",
+          "confidence": 0.5
+        },
+        {
+          "id": "KEPTSGP3T4OGR4LCL2F5NIF3",
+          "name": "Fluorite Crystal Gemstone Point",
+          "confidence": 0.5
+        },
+        {
+          "id": "7AC7CO66KZNNXYIJBAZG253Z",
+          "name": "Mookite Stone Bracelets Metaphysical Reiki Boho",
+          "confidence": 0.5
+        },
+        {
+          "id": "TTGF2XB5WGKJBT46OTWC2E57",
+          "name": "Small Polished Brass Singing Bowl",
+          "confidence": 0.5
+        },
+        {
+          "id": "GWEO7FKGI2Q5NVFTESEJXUVF",
+          "name": "15cm Brass Singing Bowl – Handcrafted",
+          "confidence": 0.5
+        },
+        {
+          "id": "FXLSXSWBHVXW6QU74AE3B33C",
+          "name": "Crystal Singing Bowl (Sacral Chakra)",
+          "confidence": 0.5
+        },
+        {
+          "id": "PJCBY7AJWRHEZNBWGQYDJQD2",
+          "name": "Handmade Nepal Tibetan Buddhist Brass Singing Bowl",
+          "confidence": 0.5
+        },
+        {
+          "id": "S4XUVKVUP6EQTW4XLYMSZ3DC",
+          "name": "Selenite Crystal Skyscraper Lamp Prime",
+          "confidence": 0.5
+        },
+        {
+          "id": "BDLVTK5IMBKQ3KPERTMHBEQG",
+          "name": "USB Port Hub 7 Ports USB Hub for PC, USB Splitter Extender with",
+          "confidence": 0.5
+        },
+        {
+          "id": "I3A2DWYZMGPD25N6APSGZ3U4",
+          "name": "Brass Singing Bowl – Meditation & Sound Healing Tool",
+          "confidence": 0.5
+        },
+        {
+          "id": "P3ZSEOU5X4EG4UU6CFCIRZFO",
+          "name": "Chakra Singing Bowl (Crown)",
+          "confidence": 0.5
+        },
+        {
+          "id": "LVAA3BQ47EP2XMJNPQK6KZMC",
+          "name": "Selenite Sticks 4\"",
+          "confidence": 0.5
+        },
+        {
+          "id": "47VWRC6QA5AGWW3USSQKQKAC",
+          "name": "Selenite Lamp",
+          "confidence": 0.5
+        },
+        {
+          "id": "ECWJ2DKIOSIJ7QF2O3SN3X5Q",
+          "name": "2–3\" Orange Selenite Sphere – Gazing & Energy Work",
+          "confidence": 0.5
+        },
+        {
+          "id": "A5MT2UIG6657DHNXKMIQO6PC",
+          "name": "Selenite Knife",
+          "confidence": 0.5
+        },
+        {
+          "id": "GPZMOEW3RLSH5N2TW5CRCEUP",
+          "name": "Selenite  Crystal Charging Plates",
+          "confidence": 0.5
+        },
+        {
+          "id": "EPV5L3DCZDDYUAJYROGIQ427",
+          "name": "Selenite from Morocco + Lava Bracelet 8 mm Beads.",
+          "confidence": 0.5
+        },
+        {
+          "id": "PUO7KOUJUUKFRAN43JCVOJWT",
+          "name": "Selenite Charging Table - Hexagon",
+          "confidence": 0.5
+        },
+        {
+          "id": "EYHHU6C6YIAUXZWK6UGZ5RTL",
+          "name": "Selenite from Morocco + wood Bracelet 8 mm Beads.",
+          "confidence": 0.5
+        },
+        {
+          "id": "34MB4OI7TPSRQ6ZMV6SFBDRW",
+          "name": "Selenite Bubble Lamp",
+          "confidence": 0.5
+        },
+        {
+          "id": "6T4RTW6I7IYDY2GOCAU4KZ3A",
+          "name": "Dragon W9 Wireless Charging Pad – 30W Fast Dock",
+          "confidence": 0.5
+        },
+        {
+          "id": "ODPHA3WLTUMBSAYY45VZLN5H",
+          "name": "Tibetan Singing Bowl 4\"Diameter",
+          "confidence": 0.5
+        },
+        {
+          "id": "ZMXWX2J74XWYR7C74XHJBDKO",
+          "name": "Crystal Singing Bowl (Throat Chakra)",
+          "confidence": 0.5
+        },
+        {
+          "id": "35DMFJTX7R6RGYCJINRYSPRA",
+          "name": "Crystal Singing Bowl Flower of Life (Symbol of Harmony)",
+          "confidence": 0.5
+        },
+        {
+          "id": "X5MGRZ7IXMEOA2RZGBVBPW6C",
+          "name": "Crystal Singing Bowl (Third Eye)",
+          "confidence": 0.5
+        },
+        {
+          "id": "BENBK6JZ2XP25O7U6WUXP4DT",
+          "name": "Natural Colorful Black Opal Bracelet Female Crystals",
+          "confidence": 0.5
+        },
+        {
+          "id": "5TJ7JPX3Y2QH2NJ547AKKAQB",
+          "name": "Flower of Life Laser Engraved Selenite Plates",
+          "confidence": 0.5
+        },
+        {
+          "id": "72DRBWRSYUSUBMVNB4PQDSZ7",
+          "name": "I am loved - Eternal Love Crystal Infused Reed Diffuser - Rose Scented",
+          "confidence": 0.5
+        },
+        {
+          "id": "HHPVQJW24S3RWZXS3D5V2OKY",
+          "name": "Lotus Flower Incense Holder",
+          "confidence": 0.5
+        },
+        {
+          "id": "5I64ODAQBHFJQ2PM7WUUL357",
+          "name": "Balance Your Energy - Seven Chakra Crystal Infused Candle",
+          "confidence": 0.5
+        },
+        {
+          "id": "DRAXSR7RUJDQ3VEROZFYWGAX",
+          "name": "Rectangular Selenite Crystal Lamp Prime",
+          "confidence": 0.5
+        },
+        {
+          "id": "VCTCLBRNM55DCCRRDWYBZVYB",
+          "name": "Citrine Tumble Stones-Natural Crystals-High Quality Crystals",
+          "confidence": 0.5
+        },
+        {
+          "id": "FZSYH6NYMYVAZ7KULUUVC6DE",
+          "name": "925 Sterling Silver Heavy Plated Tennis Bracelet Featuring 50 Crystals",
+          "confidence": 0.5
+        },
+        {
+          "id": "OFFFP52IVJLUVOMBRRZZI2OH",
+          "name": "Tarot Made Easy (deck and book) by Barbara Moore",
+          "confidence": 0.5
+        },
+        {
+          "id": "5KIPY65P7JYOW75LS6LRERRU",
+          "name": "Throat Chakra Incense Sticks",
+          "confidence": 0.5
+        },
+        {
+          "id": "Q7JSAUN2GKFV7QM6W5DJK3S4",
+          "name": "Chakra Incense Balancing Kit",
+          "confidence": 0.5
+        },
+        {
+          "id": "BLMUXO2ZAMCZIPLQAWNWEGSX",
+          "name": "Bluetooth Speaker Star Light Projector Starry LED Galaxy Lamp",
+          "confidence": 0.5
+        },
+        {
+          "id": "45VYNIR7WQJCC55DDEEY46Z3",
+          "name": "Wisdom Within Deck",
+          "confidence": 0.5
+        },
+        {
+          "id": "X7SDEYBWSPGTUW2IAO55FZY4",
+          "name": "Seven Chakra Soapstone Incense Burner",
+          "confidence": 0.5
+        },
+        {
+          "id": "SBSTQCRZH2WTOBVXQ6LRMVMS",
+          "name": "Aura's Incense Holder & Candle Pillar Holder",
+          "confidence": 0.5
+        },
+        {
+          "id": "WKB7UXTMSSL3OI6IYORZ7KYV",
+          "name": "Stamford Black Incense Cones - Pixies Dance",
+          "confidence": 0.5
+        },
+        {
+          "id": "6W2VKFXLUN3EKLLT3DLFRRGN",
+          "name": "Root Chakra Incense Sticks",
+          "confidence": 0.5
+        },
+        {
+          "id": "X2YPDOWG2AUHXIBRXWMV3H5D",
+          "name": "Harmony Meditation Fountain With Led Light",
+          "confidence": 0.5
+        },
+        {
+          "id": "ICQYC3OCECJIZXJD6A7C5LSV",
+          "name": "3 Pcs California White Sage + Lavender Bundle Smudge 4\"",
+          "confidence": 0.5
+        },
+        {
+          "id": "3VEAY7PPLFBBZZ6JEQWUKAHL",
+          "name": "Stainless Steel Agarbatti Stand - Incense Stick Holder | Oothupathi",
+          "confidence": 0.5
+        },
+        {
+          "id": "U47K5L2HIFQO4QWEOO3SRF3U",
+          "name": "Raw Amethyst Stone Bracelet",
+          "confidence": 0.5
+        },
+        {
+          "id": "63WQJW4OFEI5FKZSXRWK3ETG",
+          "name": "Lavender Mint Splash Sea Salt Bar",
+          "confidence": 0.5
+        },
+        {
+          "id": "GAZUYOU6ABE5T4HNTPQY5KDI",
+          "name": "Sage Bundle for Love+ Friendship",
+          "confidence": 0.5
+        },
+        {
+          "id": "DYAC6JXLB2Z7W2P7L5FEA7OV",
+          "name": "Black Agate Yoga Bracelet",
+          "confidence": 0.5
+        },
+        {
+          "id": "KOJRMMLOGEKLQVN226IMGBPE",
+          "name": "Tree of Life Apatite Stretch Bracelet",
+          "confidence": 0.5
+        },
+        {
+          "id": "V5BCPXBU7OZGGEVJ2X7VGY3A",
+          "name": "Tree of Life Amazonite Charm Bracelet",
+          "confidence": 0.5
+        },
+        {
+          "id": "EMRA5EGGZQLGRO7CAMDTKV25",
+          "name": "The Essence of Lavender Spa Gift Basket - spa baskets for women gift",
+          "confidence": 0.5
+        },
+        {
+          "id": "QXXRUWIBAQCTBRHRIT26FOSE",
+          "name": "Tree of Life Rhodonite Stretch Bracelet",
+          "confidence": 0.5
+        },
+        {
+          "id": "QDKY6C6DL4776HBBB2WO2Z2M",
+          "name": "Tiger Eye Tibetan Charm Bracelet",
+          "confidence": 0.5
+        },
+        {
+          "id": "GR2OABC6URLWQVE4COXFDZNR",
+          "name": "Turquoise Crystal Butterfly Bracelet",
+          "confidence": 0.5
+        },
+        {
+          "id": "SPQSDQAWTCQV3QDNBXAE6X55",
+          "name": "Amethyst Crystal Butterfly Bracelet",
+          "confidence": 0.5
+        },
+        {
+          "id": "OH4DN737YURBOMONIAV5LJTU",
+          "name": "Moonlight Tarot Deck",
+          "confidence": 0.5
+        },
+        {
+          "id": "WKZJHILLEF7FUBZPNM5R4QVY",
+          "name": "Polished Selenite Bar",
+          "confidence": 0.5
+        },
+        {
+          "id": "TL3VX36HLXFMFVTWFJNZVBCN",
+          "name": "Rider-Waite Spanish tarot deck by Pamela Colman Smith",
+          "confidence": 0.5
+        },
+        {
+          "id": "VJCASMJZNKBZZ4OKIW7Y2JDX",
+          "name": "Selenite from Morocco 8 mm 2 beads necklace.",
+          "confidence": 0.5
+        },
+        {
+          "id": "OWJDUFWWXBGITKOUSTAPAA6N",
+          "name": "7 Chakras Engraved Crescent Moon Selenite Plate",
+          "confidence": 0.5
+        },
+        {
+          "id": "S2FOCGYOTHKOFGBBO2C2YOEI",
+          "name": "Spirit of the Animals oracle by Jody Bergsma",
+          "confidence": 0.5
+        },
+        {
+          "id": "2VI55MF5LXYH5MEP2CWSSJ6C",
+          "name": "Moon Phase Engraved Selenite Plate",
+          "confidence": 0.5
+        },
+        {
+          "id": "U6QJDAJ7Z5IH44WXF56OT7YB",
+          "name": "Selenite Incense Holder",
+          "confidence": 0.5
+        },
+        {
+          "id": "TRFVEG2XZR3NKXHH5FKQSL2A",
+          "name": "Large Round Point Selenite Stilo Wand",
+          "confidence": 0.5
+        },
+        {
+          "id": "ROU3IEHJV33VCRMNG7G6LRSG",
+          "name": "Selenite Healing Bowl 3.5\"-4\" Diameter",
+          "confidence": 0.5
+        },
+        {
+          "id": "5MR7YACLXFQMAJX7QP54GWWK",
+          "name": "Chrysalis Tarot by Toney Brooks",
+          "confidence": 0.5
+        },
+        {
+          "id": "4KAFMHRAFX2PTFOWUKDOBEMO",
+          "name": "Complete Book of Tarot Spreads by Burger & Fiebig",
+          "confidence": 0.5
+        },
+        {
+          "id": "3GJPSALKJ637VWFFYZXAOVR3",
+          "name": "Affirmation Cards for Entrepreneurs",
+          "confidence": 0.5
+        },
+        {
+          "id": "N5HRR3RCHTNWEFQ5KYYCGCEJ",
+          "name": "Focus Aromatherapy Mood Scent",
+          "confidence": 0.5
+        },
+        {
+          "id": "IB2BH7MZYTNZWZ744AMNVYUV",
+          "name": "Felicity Tabletop Meditation Fountain With Led Light",
+          "confidence": 0.5
+        },
+        {
+          "id": "FELI3WH7W7LG354YR25VFCO3",
+          "name": "Reiki Golden Nag | Incense Sticks Joss 15g | Premium Scents |",
+          "confidence": 0.5
+        },
+        {
+          "id": "TKD4EVOZ7E7MHHQEJT7IVUJU",
+          "name": "Solar Plexus Chakra Incense Sticks",
+          "confidence": 0.5
+        },
+        {
+          "id": "6H6ZADEIHWXW6CPT2XHJ6MLI",
+          "name": "CELESTIAL MOON w/ CRYSTALS & ROSES 12oz travel tumbler",
+          "confidence": 0.5
+        },
+        {
+          "id": "V3C53TXUGKQBMFZ35XDVEVJR",
+          "name": "Sacral Chakra Incense Sticks",
+          "confidence": 0.5
+        },
+        {
+          "id": "M6WSHHYEFH5EZHBWHMRN7HXC",
+          "name": "4 Pcs White Sage + Red Eucalyptus Bundle Smudge",
+          "confidence": 0.5
+        },
+        {
+          "id": "ZCCPYPGEYH4TAX6V2HK34SRD",
+          "name": "New Beginnings crystal bracelet, anklet Eco friendly and Sustainable",
+          "confidence": 0.5
+        },
+        {
+          "id": "ZB5RJCHKGZXP32N73GXUT6XR",
+          "name": "Soap Sampler Gift Set",
+          "confidence": 0.5
+        },
+        {
+          "id": "67P2NGY3I6QESHSBRMUBND4L",
+          "name": "Activated Charcoal Soap - Natural Handmade Soap",
+          "confidence": 0.5
+        },
+        {
+          "id": "D2GY4M7WOEQJOQZYUSIXFQMV",
+          "name": "Crown Chakra Incense Sticks",
+          "confidence": 0.5
+        },
+        {
+          "id": "5UGN3RJYA2UZSUQPEZHDK7EV",
+          "name": "Divine Codes Oracle (Violet Version)",
+          "confidence": 0.5
+        },
+        {
+          "id": "T4RXOPWEPBARFCBAS4RMKUOY",
+          "name": "CRYSTALS & ROSES 12oz travel tumbler",
+          "confidence": 0.5
+        },
+        {
+          "id": "OQM3PVT3XGQIRNJMG6LOC2NZ",
+          "name": "USB Himalayan Pink Rock Salt Lamp - Carved Shape Crystal LED Light",
+          "confidence": 0.5
+        },
+        {
+          "id": "54LX5J7G6PRSWS6QWVFHSULG",
+          "name": "Body & Linen Spray",
+          "confidence": 0.5
+        },
+        {
+          "id": "7KRP5AZZJG57BTSXDG355ZJE",
+          "name": "14-in-1+ Outdoor Emergency Survival Gear Kit – Tactical & Adventure Ready",
+          "confidence": 0.5
+        },
+        {
+          "id": "LJOKCJAGHA6XQJB2IENYARLB",
+          "name": "Galaxy Moon Lamp- 16 Color Touch with Remote Control",
+          "confidence": 0.5
+        },
+        {
+          "id": "2I7M7GEI6CD7EZ6QKGDR4OTF",
+          "name": "CMA",
+          "confidence": 0.5
+        },
+        {
+          "id": "SIGKEDVBFLP54S4I3SEDJQCV",
+          "name": "Red and Blue clown.",
+          "confidence": 0.5
+        },
+        {
+          "id": "5VA4XMWYZ3HJ2X3NFSZ4DQ5W",
+          "name": "Sony HF 60min (5 pack) Normal Bias Audio Cassette",
+          "confidence": 0.5
+        },
+        {
+          "id": "UNQDUVTS6TNNPUADQTS3N63X",
+          "name": "Pete's Dragon VHS (2001) – Disney Gold Collection",
+          "confidence": 0.5
+        },
+        {
+          "id": "7MPGBBM7XQQVOL74I6DQNHTF",
+          "name": "Zoey Holographic Stickers (Now in 3 sizes!)",
+          "confidence": 0.5
+        },
+        {
+          "id": "5HIVVWF3GTLZUNUW46BDAGXY",
+          "name": "Yoga Leggings",
+          "confidence": 0.5
+        },
+        {
+          "id": "NRLGAKGFD4LSGNYCU7KXMSTK",
+          "name": "Pacific Drums",
+          "confidence": 0.5
+        },
+        {
+          "id": "4OWQRLF5AWDDPD745LFAF6VR",
+          "name": "🎶 Remember How Great...? – 1961 Lucky Strike Collector’s Vinyl LP",
+          "confidence": 0.5
+        },
+        {
+          "id": "6XO2NFV6XYIBNPPRXTFMCB65",
+          "name": "📼 Willy Wonka & The Chocolate Factory – 1986 Warner Bros. Sealed VHS (French Language – Version Française)",
+          "confidence": 0.5
+        },
+        {
+          "id": "CMKTFXISADO7U47DYVO7A56C",
+          "name": "Three Men and a Baby (VHS, 1995) w/ Touchstone Home Video Security Tag NEW",
+          "confidence": 0.5
+        },
+        {
+          "id": "B5YLX7UI7BHROWYJZGUTYO56",
+          "name": "Sophia-Swarovski",
+          "confidence": 0.5
+        },
+        {
+          "id": "3PKTCUT263VOTHGOCAWLM5JX",
+          "name": "Plasma Ball",
+          "confidence": 0.5
+        },
+        {
+          "id": "FYH5SNKEP3MIX76X6AIESRPJ",
+          "name": "The Lumination Holographic Purse",
+          "confidence": 0.5
+        },
+        {
+          "id": "GJ73AEZRFMP53C3NWNZ4ASCM",
+          "name": "Zoey in the Laundry Jigsaw Puzzle",
+          "confidence": 0.5
+        },
+        {
+          "id": "K2QZD6AJFUOUCSEJO2LIFKMN",
+          "name": "Space Clearing Candle/ Intention candle / organic",
+          "confidence": 0.5
+        },
+        {
+          "id": "2QWTOCBLRIKAK63IHWL7YG2R",
+          "name": "Organic Finishing Powder Setting",
+          "confidence": 0.5
+        },
+        {
+          "id": "MCY72VUFK3555PGQ6EFKXU5P",
+          "name": "Zoey in the Laundry Jigsaw Puzzle Women's T-shirt",
+          "confidence": 0.5
+        },
+        {
+          "id": "W4OAWWE2EB5J2HTUYLQM7IHG",
+          "name": "Paris Vintage Postcard Mouse Pad",
+          "confidence": 0.5
+        },
+        {
+          "id": "5FWZTFN6L2TLNZHG2S4GHR3D",
+          "name": "Amethyst Lamp",
+          "confidence": 0.5
+        },
+        {
+          "id": "TIMMOEQQ6RL4HXMSGN6JVBVT",
+          "name": "PARIS",
+          "confidence": 0.5
+        },
+        {
+          "id": "LVQWNADUNILKI4RFKSIQMG3N",
+          "name": "Be Kind T-shirt",
+          "confidence": 0.5
+        },
+        {
+          "id": "R4D2WVTEROGV46B54CIHL3SD",
+          "name": "Nordic Style All-in-1 Candle Holder, Sage, Incense & Palo Santo Burner",
+          "confidence": 0.5
+        },
+        {
+          "id": "YE6DVB3Z4OQD4LS3AMGJNF6T",
+          "name": "Sacral Chakra Crystal Singing Bowl",
+          "confidence": 0.5
+        },
+        {
+          "id": "PZ7FULN6OCDSUAHLUGOFF3UU",
+          "name": "Organic Black Drawing Salve / Bee Stings / Rashes / Skin Ailments /",
+          "confidence": 0.5
+        },
+        {
+          "id": "V5MY4S5FIECEYWSO3MRZMMZD",
+          "name": "Rose Garden Organic Soap",
+          "confidence": 0.5
+        },
+        {
+          "id": "XE2OKQZL5PE5EFMQVODVZHME",
+          "name": "16 Colors Sunset Projection Lamp Sunset Lamp",
+          "confidence": 0.5
+        },
+        {
+          "id": "YG4YW6KSLNIWKIAC7F3WJEPR",
+          "name": "Insight + Energy Crystal Set",
+          "confidence": 0.5
+        },
+        {
+          "id": "G5KTHS2BEKLPU3QFWXYNYMVX",
+          "name": "Burgundy ELEPHANT Pants Women Boho Pants Hippie Pants Yoga",
+          "confidence": 0.5
+        },
+        {
+          "id": "MV2UZE6S7D5UDSV76VHJ6OBW",
+          "name": "Treatments - TC07 - Bed & body mist - Ceylon - 150 ml",
+          "confidence": 0.5
+        },
+        {
+          "id": "EATOTJ5QHDFHKGW6QXEWHZY7",
+          "name": "Flower of Life Laser Engraved Selenite Plates",
+          "confidence": 0.5
+        },
+        {
+          "id": "BHRSPCHYHRMHKWWYUTYCMRI7",
+          "name": "7 Chakra Stones & Silver, Spiritual Jewelry, Chakra Bracelet",
+          "confidence": 0.5
+        },
+        {
+          "id": "JCCXHMZABTIBBRJE6MMMNSAP",
+          "name": "Pet Feeding Mats - Smiley",
+          "confidence": 0.5
+        },
+        {
+          "id": "INMOJS7ZHEO4WJAZF3KTY4HN",
+          "name": "Space Clearing Candle/ Intention Candle / Organic Soy Candle / Candle",
+          "confidence": 0.5
+        },
+        {
+          "id": "5GLQMDLCI6JB2NNAA5GTMXA4",
+          "name": "Blue Tiger's Eye Bracelet Elastic Fit 8mm",
+          "confidence": 0.5
+        },
+        {
+          "id": "A2DXSRJKZ24L3JS26NNRV2F3",
+          "name": "High-quality Palo Santo incense from Peru, 7 Sticks",
+          "confidence": 0.5
+        },
+        {
+          "id": "OPY2FAVOV3HEORCMPVGDF675",
+          "name": "turmeric sage facial toner",
+          "confidence": 0.5
+        },
+        {
+          "id": "J76XK27277TGKDEGVLKELPWR",
+          "name": "Handmade Natural Eucalyptus Incense Sticks, 7 Sticks",
+          "confidence": 0.5
+        },
+        {
+          "id": "QVLK2FXOMYNEK5XXMW2ELDBO",
+          "name": "Crystal Singing Bowl with Engraved Chakra Symbol: Throat Chakra",
+          "confidence": 0.5
+        },
+        {
+          "id": "HFRYSKZG6S4CJD2FENNJRLHN",
+          "name": "Crown Chakra Singing Bowl",
+          "confidence": 0.5
+        },
+        {
+          "id": "Y5ITM7RWGQ3H7OEQ4BCSYI5Y",
+          "name": "Green Aventurine Stretch Nugget",
+          "confidence": 0.5
+        },
+        {
+          "id": "IQBYCTDTVXNXSHYGZRMQKDUJ",
+          "name": "Carnelian Bracelet Stretch Fit Handmade",
+          "confidence": 0.5
+        },
+        {
+          "id": "DBZI5OFZ25GUE6SQMU7XUIDA",
+          "name": "Anti Cellulite Slimming Body Sculpting Hot Cream Firming Body Lotion",
+          "confidence": 0.5
+        },
+        {
+          "id": "GHYY4U57UGUGUMLRYSJTGLHW",
+          "name": "Selenite  Crystal Charging Plates",
+          "confidence": 0.5
+        },
+        {
+          "id": "MKGKYUGIRZB2S7NAZE6RHOS7",
+          "name": "Organic Detox Bath Bomb Bath Fizzie",
+          "confidence": 0.5
+        },
+        {
+          "id": "57O7QDT75AMBOWD3QUV4KT75",
+          "name": "RGBW Modern Curve Floor Lamp | New Version",
+          "confidence": 0.5
+        },
+        {
+          "id": "5MXDHO73RRGHMTO3MOHCDZCK",
+          "name": "Organic Oatmeal Hand Soap",
+          "confidence": 0.5
+        },
+        {
+          "id": "D3IMZ5N242IXHONH7XVOB52S",
+          "name": "Organic Brightening Toner",
+          "confidence": 0.5
+        },
+        {
+          "id": "ROAIZJGUFFENHES6PUVQL3AQ",
+          "name": "Oat and Honey Soap",
+          "confidence": 0.5
+        },
+        {
+          "id": "M6LMGFEHG5BXHAYQSI2OSRGB",
+          "name": "Youthful Balance All Natural Small Batch Soap",
+          "confidence": 0.5
+        },
+        {
+          "id": "YISZ3P2WUTBYRZF2RK5ODKGM",
+          "name": "The Lumination Holographic Backpack",
+          "confidence": 0.5
+        },
+        {
+          "id": "KYPEMICNLHGVIHBIRMNNCJHZ",
+          "name": "NEW Crystal Shape Bowls",
+          "confidence": 0.5
+        },
+        {
+          "id": "3O6MMFYS62DFDC235STSNPKJ",
+          "name": "NEW Selenite Moon Bowls",
+          "confidence": 0.5
+        },
+        {
+          "id": "E3FB5MI3FWZTQO6IWOEHGE4R",
+          "name": "Turquoise Teardrop Bead Boho Silver Anklet",
+          "confidence": 0.5
+        },
+        {
+          "id": "IW35BWPML6UF43HGP42ZXCQP",
+          "name": "Mini Magnetic Vase (plants not included)",
+          "confidence": 0.5
+        },
+        {
+          "id": "EOHDJMQNPAUCI2OHC2BXJTZS",
+          "name": "1 Pcs Lotus Flower Design Agarbatti Stand Incense Holder Ash Catcher",
+          "confidence": 0.5
+        },
+        {
+          "id": "6E4LXGKLINAZZ2D5IF5UBZAS",
+          "name": "Charles-Hubert- Paris  Dual Time Mechanical Pocket Watch",
+          "confidence": 0.5
+        },
+        {
+          "id": "3H4QYAK4QHRTP4IMAS56TFJA",
+          "name": "Charles-Hubert Paris 3904-W Polished Finish Stainless Steel Double Cov",
+          "confidence": 0.5
+        },
+        {
+          "id": "7MFJEJGDA4IIYZUWT25ZHUKV",
+          "name": "Larimar Bracelet in Natural Pearls 8/10mm - Smooth Round Semi-Precious",
+          "confidence": 0.5
+        },
+        {
+          "id": "7OB6ED7YWUZICPYNF74JB6GU",
+          "name": "Abundance Candle / Ritual Candle / Intention Candle / Hand Poured",
+          "confidence": 0.5
+        },
+        {
+          "id": "22COQUZPCJWF77PEIOF7RONY",
+          "name": "Organic Bath Bomb Calm Bomb- TWO SIZES lavender",
+          "confidence": 0.5
+        },
+        {
+          "id": "2U6XNJFMGKXPOO5HVCPKWHQT",
+          "name": "Lemon Poppyseed",
+          "confidence": 0.5
+        },
+        {
+          "id": "XBJ5BYZPEZOHETUPGHPEEJU7",
+          "name": "Super Acne Fighter / Organic Acne Treatment / Acne",
+          "confidence": 0.5
+        },
+        {
+          "id": "RFF6FHS5K5RLE37UD4FC43TP",
+          "name": "Premium Pillow - Enchanted Forest",
+          "confidence": 0.5
+        },
+        {
+          "id": "4GABN6XOP7N67YLLEWL2BKLU",
+          "name": "The Labz’ \"Easter Island 4th of July Picnic\" on Canvas (8\" x 10\")",
+          "confidence": 0.5
+        },
+        {
+          "id": "Q6NWXXUGZMY4YFRD2ODMUPMG",
+          "name": "Organic Witch Hazel / Organic Facial Toner /",
+          "confidence": 0.5
+        },
+        {
+          "id": "5N4B3VH7QQ2ICFKN7P6BQGIS",
+          "name": "Natural Bamboo Wide Tooth Comb-Zero Waste Detangeling Comb-With",
+          "confidence": 0.5
+        },
+        {
+          "id": "MADULK4PXR6G3XJOFGPXSN2M",
+          "name": "Hair & Nail Mask for long hair growth and healthy",
+          "confidence": 0.5
+        },
+        {
+          "id": "CW2V2LHYV3SIB5QI3CZ4G3NR",
+          "name": "Organic bath bomb / Valentine's Day / conversation",
+          "confidence": 0.5
+        },
+        {
+          "id": "WWV6N3NQEHBDZXETLYX77WE7",
+          "name": "Original Immortal Rose, Recycled Metal Rose, Steel Rose Sculpture,",
+          "confidence": 0.5
+        },
+        {
+          "id": "A3CDQDX4XLSI2XJIK36PMENZ",
+          "name": "Labor",
+          "confidence": 0.5
+        },
+        {
+          "id": "C7IPAB5SKMCENQ7FJM6QFZ2O",
+          "name": "Followup Site Visit and Evalution",
+          "confidence": 0.5
+        },
+        {
+          "id": "CWBOAFRRLT4566LQHDQEJDK4",
+          "name": "Simcity 4 Deluxe Edition (PC)",
+          "confidence": 0.5
+        },
+        {
+          "id": "JPWDXFX2QE6EFYKRLGJCUFEZ",
+          "name": "\"The End\" European Deer Mount Eight Point Buck Skull Sculpture Heavy",
+          "confidence": 0.5
+        },
+        {
+          "id": "DZISOW62CTLUUFFF2PO2ZCKR",
+          "name": "Green and Black Immortal Rose, Recycled Metal Rose, Steel Rose",
+          "confidence": 0.5
+        },
+        {
+          "id": "FKEPSL7B6ZTNL5PCZ6JWYBJS",
+          "name": "Blue and Black Immortal Rose, Recycled Metal Rose, Steel Rose",
+          "confidence": 0.5
+        },
+        {
+          "id": "S4LKFSXOZCTWMWUFABHBIJZR",
+          "name": "Scrap Metal Spider Figurine, Steel Spider, Metal Arachnid Tarantula",
+          "confidence": 0.5
+        },
+        {
+          "id": "GV2L7QNDEFMTFVEUMG3O4RUU",
+          "name": "7 Ports USB 3.0 Type C HUB Expander Splitter High Speed OTG Adapter",
+          "confidence": 0.5
+        },
+        {
+          "id": "OPVUKK4HHCSQJY7THGFAGDN2",
+          "name": "Selenite Skyscraper Lamp Small Prime",
+          "confidence": 0.5
+        },
+        {
+          "id": "IXRDB6DZ7RAPISOL7KW7A7OX",
+          "name": "Wooden Coconut Spoon",
+          "confidence": 0.5
+        },
+        {
+          "id": "5QB6K4OIE6M6355GWLEWNFZA",
+          "name": "Purple & Black Immortal Rose - Handmade Recycled Metal",
+          "confidence": 0.5
+        },
+        {
+          "id": "KJIK5555O7W26FHQE36QIB5O",
+          "name": "Sauna Hats, Sauna Caps Sauna Hats Sauna Accessories Wool Felt Sauna",
+          "confidence": 0.5
+        },
+        {
+          "id": "4QQZO6KSF4XLLLAP3FBM7AUI",
+          "name": "Half Dozen Metal Roses and Vase, Six Recycled Metal Roses and Vase,",
+          "confidence": 0.5
+        },
+        {
+          "id": "HZ3ZDOGG5QZUG6CTGPFBEGOE",
+          "name": "Dozen Metal Roses, Recycled Metal Roses, Steampunk Roses, 12 Immortal",
+          "confidence": 0.5
+        },
+        {
+          "id": "JQ6ENPC7UQ7VZOEKGHEIYISQ",
+          "name": "Half Dozen Metal Roses, Six Metal Roses, Welded Metal Rose Sculptures,",
+          "confidence": 0.5
+        },
+        {
+          "id": "7EJ6QXKKBDXYS43CSXN2ALUZ",
+          "name": "Three Metal Roses, Welded Steel Roses, Metal Immortal Roses, Steampunk",
+          "confidence": 0.5
+        },
+        {
+          "id": "WI644QTCXNMJNJC53YPARRHI",
+          "name": "Ninja Dragons 3 in1 Wireless Foldable Charging Station",
+          "confidence": 0.5
+        },
+        {
+          "id": "ZXKHQAHIJ2EV6URMXGEX7HV7",
+          "name": "Brightening  Lifting Floral Gel Toner",
+          "confidence": 0.5
+        },
+        {
+          "id": "ANLYIB7JZEJ6GRM3OMVBU7T2",
+          "name": "Handmade Olive Wood Salt Double Layer – Rustic & Sustainable Kitchen",
+          "confidence": 0.5
+        },
+        {
+          "id": "LL7F64727UKW3U3YCYI6XQ3K",
+          "name": "Organic & Natural Skin Pamper Shower gel - Aloe Vera, Calendula and",
+          "confidence": 0.5
+        },
+        {
+          "id": "XDTVPHNMPBUYU5RF7EPQOG6W",
+          "name": "🦸‍♂️ Vintage VHS: Superman – Silver Star Video (1989)",
+          "confidence": 0.5
+        },
+        {
+          "id": "WOEI7T4PV4X3BVRMJIA4DSZP",
+          "name": "10-Pcs Sleek Modern Pinky Flatware Silverware Flatware Set",
+          "confidence": 0.5
+        },
+        {
+          "id": "V5SSC76ANWWZTAEF6JONAG7I",
+          "name": "🐌 Leather Keychain – “Forward is Forward”",
+          "confidence": 0.5
+        },
+        {
+          "id": "2S5F6DZ46JUXIGFUNUONHJYP",
+          "name": "Test Amethyst Lamp Updated",
+          "confidence": 0.5
+        },
+        {
+          "id": "JOWOZUC24JVEUNBPSGY2X2VT",
+          "name": "Test Amethyst Lamp V2",
+          "confidence": 0.5
+        },
+        {
+          "id": "HPSIPDKLCU5IB6X42PDCUOAG",
+          "name": "Test Amethyst Lamp Final",
+          "confidence": 0.5
+        }
+      ]
+    }
+  },
+  "existingCategories": [
+    {
+      "id": "mock-category-1754197530915",
+      "name": "Services",
+      "data": {
+        "id": "mock-category-1754197530915",
+        "categoryData": {
+          "name": "Services"
+        }
+      }
+    },
+    {
+      "id": "mock-category-1754197530915",
+      "name": "Entertainment",
+      "data": {
+        "id": "mock-category-1754197530915",
+        "categoryData": {
+          "name": "Entertainment"
+        }
+      }
+    },
+    {
+      "id": "mock-category-1754197530915",
+      "name": "Apparel & Accessories",
+      "data": {
+        "id": "mock-category-1754197530915",
+        "categoryData": {
+          "name": "Apparel & Accessories"
+        }
+      }
+    },
+    {
+      "id": "mock-category-1754197530916",
+      "name": "Art & Decor",
+      "data": {
+        "id": "mock-category-1754197530916",
+        "categoryData": {
+          "name": "Art & Decor"
+        }
+      }
+    },
+    {
+      "id": "mock-category-1754197530916",
+      "name": "Beauty & Cosmetics",
+      "data": {
+        "id": "mock-category-1754197530916",
+        "categoryData": {
+          "name": "Beauty & Cosmetics"
+        }
+      }
+    },
+    {
+      "id": "mock-category-1754197530916",
+      "name": "Drinkware",
+      "data": {
+        "id": "mock-category-1754197530916",
+        "categoryData": {
+          "name": "Drinkware"
+        }
+      }
+    },
+    {
+      "id": "mock-category-1754197530916",
+      "name": "Tech Accessories",
+      "data": {
+        "id": "mock-category-1754197530916",
+        "categoryData": {
+          "name": "Tech Accessories"
+        }
+      }
+    },
+    {
+      "id": "mock-category-1754197530916",
+      "name": "Stationery",
+      "data": {
+        "id": "mock-category-1754197530916",
+        "categoryData": {
+          "name": "Stationery"
+        }
+      }
+    }
+  ],
+  "recommendations": [
+    "Review 227 items with low confidence scores",
+    "Manual categorization needed for 227 uncategorized items",
+    "Create 1 new categories in Square"
+  ]
+}

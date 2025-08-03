@@ -48,6 +48,7 @@ class PuppeteerSEOAgent {
           '--no-sandbox', 
           '--disable-setuid-sandbox',
           '--remote-debugging-port=9223', // Use different port to avoid conflicts
+          '--user-data-dir=' + process.env.HOME + '/.chrome-puppeteer',
           '--disable-web-security',
           '--disable-features=VizDisplayCompositor'
         ]

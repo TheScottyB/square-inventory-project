@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Services",
+    "description": "Products related to services",
+    "estimatedCount": 9,
+    "examples": []
+  },
+  {
+    "name": "Beauty & Cosmetics",
+    "description": "Products related to beauty & cosmetics",
+    "estimatedCount": 45,
+    "examples": []
+  },
+  {
+    "name": "Drinkware",
+    "description": "Products related to drinkware",
+    "estimatedCount": 14,
+    "examples": []
+  },
+  {
+    "name": "Apparel & Accessories",
+    "description": "Products related to apparel & accessories",
+    "estimatedCount": 6,
+    "examples": []
+  },
+  {
+    "name": "Tech Accessories",
+    "description": "Products related to tech accessories",
+    "estimatedCount": 5,
+    "examples": []
+  },
+  {
+    "name": "Art & Decor",
+    "description": "Products related to art & decor",
+    "estimatedCount": 40,
+    "examples": []
+  },
+  {
+    "name": "Stationery",
+    "description": "Products related to stationery",
+    "estimatedCount": 3,
+    "examples": []
+  },
+  {
+    "name": "Entertainment",
+    "description": "Products related to entertainment",
+    "estimatedCount": 6,
+    "examples": []
+  },
+  {
+    "name": "Uncategorized",
+    "description": "Products related to uncategorized",
+    "estimatedCount": 227,
+    "examples": []
+  }
+]
