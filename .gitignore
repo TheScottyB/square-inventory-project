@@ -66,6 +66,11 @@ data/active-items.json
 data/archived-items.json
 data/items-needing-updates.json
 
+# SEO Agent data (contains session info and snapshots)
+data/square-session.json
+data/seo-snapshot-*.json
+data/seo-snapshots/
+
 # Keep sample/template data files
 !data/*-sample.json
 !data/*-template.json

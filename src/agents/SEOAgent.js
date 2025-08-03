@@ -323,20 +323,38 @@ Guidelines:
   }
 
   generateTemplateDescription(context, template) {
-    let description = template.description
-      .replace(/\{name\}/g, context.name.toLowerCase())
-      .replace(/\{Name\}/g, context.name)
-      .replace(/\{category\}/g, context.category.toLowerCase())
-      .replace(/\{Category\}/g, context.category)
-      .replace(/\{brand\}/g, context.brand);
-
-    // Add unique selling points
-    if (context.imageContext.hasImages) {
-      description += ' ' + template.withImages;
-    }
-
-    if (context.isService) {
-      description += ' ' + template.serviceAddition;
+    let description;
+    
+    // Use existing description if available, otherwise generate from template
+    if (context.currentContent.description && context.currentContent.description.trim()) {
+      // Enhance existing description with SEO elements
+      description = context.currentContent.description;
+      
+      // Add template enhancements if not already present
+      if (context.imageContext.hasImages && !description.includes('photo')) {
+        description += ' ' + template.withImages;
+      }
+      
+      if (context.isService && !description.includes('service')) {
+        description += ' ' + template.serviceAddition;
+      }
+    } else {
+      // Generate new description from template
+      description = template.description
+        .replace(/\{name\}/g, context.name.toLowerCase())
+        .replace(/\{Name\}/g, context.name)
+        .replace(/\{category\}/g, context.category.toLowerCase())
+        .replace(/\{Category\}/g, context.category)
+        .replace(/\{brand\}/g, context.brand);
+      
+      // Add contextual enhancements
+      if (context.imageContext.hasImages) {
+        description += ' ' + template.withImages;
+      }
+      
+      if (context.isService) {
+        description += ' ' + template.serviceAddition;
+      }
     }
 
     return description.trim();

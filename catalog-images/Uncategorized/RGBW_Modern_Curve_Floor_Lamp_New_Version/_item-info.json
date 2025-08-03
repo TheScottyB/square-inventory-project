@@ -1,0 +1,13 @@
+{
+  "id": "TJ46OE4IY5GLLHFIZGJ52XTH",
+  "name": "RGBW Modern Curve Floor Lamp | New Version",
+  "description": "Features\n— Colors: Black\n\n— Materials: Metal, Aluminum\n\n— Measurements: 47.3\"L x 12.6\"W x 66.9\"H \n\n— Origin: China\n\n— Warranty: Manufacturer's 1 Year\n\n— 16 Million Colors & 358 Light Effect\n\n— 3000 - 6000k white light （new version）\n\n— Dimmable\n\n— Remote Control (Requires AAA Battery; Not Included)\n\n\n\n \n\n\n.so-tab {\nposition: relative;\nwidth: 100%;\noverflow: hidden;\nmargin: 25px 0;\n}\n.so-tab label {\nposition: relative;\ndisplay: block;\npadding: 0 25px 0 0;\nmargin-bottom: 15px;\nline-height: normal;\ncursor: pointer;\n}\n.so-tab input {\nposition: absolute;\nopacity: 0;\nz-index: -1;\n}\n.so-tab-content {\nmax-height: 0;\noverflow: hidden;\ntransition: max-height .35s;\n}\n/* :checked */\n.so-tab input:checked ~ .so-tab-content {\nmax-height: none;\n}\n/* Icon */\n.so-tab label::after {\nposition: absolute;\nright: 0;\ntop: 0;\ndisplay: block;\n-webkit-transition: all .35s;\n-o-transition: all .35s;\ntransition: all .35s;\n}\n.so-tab input[type=checkbox] + label::after {\ncontent: \"+\";\n}\n.so-tab input[type=radio] + label::after {\ncontent: \"\\25BC\";\n}\n.so-tab input[type=checkbox]:checked + label::after {\ntransform: rotate(315deg);\n}\n.so-tab input[type=radio]:checked + label::after {\ntransform: rotateX(180deg);\n}\n-->\n\nSpecifications\n\n＋ Product Details\n\n\n— Power Source: Wall Plug\n\n— Cord Length: 8.2'\n\n— Voltage: 12V / 2A\n\n— Bulb Type: LED\n\n— Bulb Included: Yes\n\n— Dimmable: Yes\n\n— Wattage: 21 W\n\n— Lumens: 1512～1680 lm\n\n— Color Temperature: 2700-6500 K\n\n— Bulb Lifetime: 20000+ Hours\n\n— Color Rendering Index: 85RA\n\n— Assembly Required: Yes\n\n— Instructions Included: Yes\n\n— Suitable For Outdoor Use: No \n\n— Certifications: FCC, CE, ROHS\n\n— Product Weight: 11.5 lb",
+  "category": "Uncategorized",
+  "productType": "REGULAR",
+  "ecomVisibility": "UNAVAILABLE",
+  "imageCount": 1,
+  "variations": 1,
+  "createdAt": "2025-05-11T00:38:23.264Z",
+  "updatedAt": "2025-06-11T01:27:15.52Z",
+  "downloadedAt": "2025-08-03T02:20:58.039Z"
+}
