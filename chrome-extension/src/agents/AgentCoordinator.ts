@@ -36,7 +36,8 @@ export class AgentCoordinator {
       
       Always choose the most specialized agent for each task type.`,
       model: 'gpt-4o-mini',
-      tools: this.buildCoordinatorTools()
+      // TODO: Fix tool types for OpenAI agents 0.0.14
+      // tools: this.buildCoordinatorTools()
     });
   }
 
@@ -146,7 +147,7 @@ export class AgentCoordinator {
     ];
   }
 
-  private async routeTaskToAgent({ agentType, task }): Promise<AgentResult> {
+  private async routeTaskToAgent({ agentType, task }: { agentType: 'seo' | 'navigation' | 'image' | 'form'; task: any }): Promise<AgentResult> {
     const agent = this.agents.get(agentType);
     
     if (!agent) {
@@ -170,7 +171,7 @@ export class AgentCoordinator {
     return await agent.executeTask(agentTask);
   }
 
-  private async executeWorkflow({ workflow }): Promise<{ success: boolean; results: AgentResult[]; message: string }> {
+  private async executeWorkflow({ workflow }: { workflow: any }): Promise<{ success: boolean; results: AgentResult[]; message: string }> {
     console.log(`🔄 Executing workflow: ${workflow.name}`);
     
     const results: AgentResult[] = [];
@@ -181,7 +182,7 @@ export class AgentCoordinator {
       for (const step of workflow.steps) {
         // Check if dependencies are satisfied
         if (step.dependsOn) {
-          const dependenciesMet = step.dependsOn.every(dep => 
+          const dependenciesMet = step.dependsOn.every((dep: string) => 
             stepResults.has(dep) && stepResults.get(dep)?.success
           );
           
@@ -257,7 +258,7 @@ export class AgentCoordinator {
     };
   }
 
-  private async reinitializeAgents({ newPageContext }): Promise<{ success: boolean; message: string }> {
+  private async reinitializeAgents({ newPageContext }: { newPageContext: any }): Promise<{ success: boolean; message: string }> {
     try {
       console.log('🔄 Reinitializing agents for new page context:', newPageContext);
 
@@ -417,7 +418,7 @@ Analyze the task and route it to the correct specialized agent.`;
 
       return {
         success: true,
-        message: result,
+        message: typeof result === 'string' ? result : 'Task completed',
         data: task.data
       };
 
@@ -452,7 +453,7 @@ Analyze the task and route it to the correct specialized agent.`;
       };
     }
 
-    return await navAgent.navigateToSquareItem(itemId);
+    return await navAgent.navigateToSquareItem({ itemId, waitForLoad: true });
   }
 
   getAvailableAgents(): string[] {
