@@ -11,7 +11,15 @@
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "test": "jest",
-    "package": "npm run build && web-ext build --source-dir=dist"
+    "package": "npm run build && web-ext build --source-dir=dist",
+    "package:private": "npm run build && ./scripts/package-extension.sh",
+    "distribute": "npm run package:private && echo 'Check releases/ directory for distribution files'",
+    "version:patch": "node scripts/bump-version.js patch",
+    "version:minor": "node scripts/bump-version.js minor",
+    "version:major": "node scripts/bump-version.js major",
+    "release:patch": "npm run version:patch && npm run distribute",
+    "release:minor": "npm run version:minor && npm run distribute",
+    "release:major": "npm run version:major && npm run distribute"
   },
   "dependencies": {
     "openai": "^4.24.1"
@@ -45,6 +53,7 @@
     "openai",
     "typescript"
   ],
+  "private": true,
   "author": "Your Name",
   "license": "MIT"
 }

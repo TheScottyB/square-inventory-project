@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.js.map
+*.d.ts
+*.d.ts.map
+
+# Test coverage
+coverage/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Extension packaging
+*.crx
+*.pem
+private.pem
+releases/
+*.zip
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Chrome extension development
+web-ext-artifacts/
+
+# Keep TypeScript source files
+!src/**/*.ts
+!src/**/*.d.ts
