@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glass Card with Metallic Edging</title>
+    <style>
+      :root {
+        --glass-bg: rgba(255, 255, 255, 0.12);
+        --glass-border: rgba(255, 255, 255, 0.35);
+        --glass-highlight: rgba(255, 255, 255, 0.65);
+        --metal-1: #c9c9c9;
+        --metal-2: #9a9a9a;
+        --metal-3: #dedede;
+        --metal-shadow: rgba(0, 0, 0, 0.25);
+        --text-strong: #ecf2ff;
+        --text-muted: #cfd7ff;
+        --bg-1: #0f1220;
+        --bg-grad-a: #7bd1ff33;
+        --bg-grad-b: #c6a7ff33;
+      }
+
+      /* Page background to showcase glass effect */
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: radial-gradient(
+            1200px 600px at 20% -10%,
+            var(--bg-grad-a),
+            transparent 60%
+          ),
+          radial-gradient(
+            1000px 500px at 80% 110%,
+            var(--bg-grad-b),
+            transparent 60%
+          ),
+          var(--bg-1);
+        display: grid;
+        place-items: center;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+      }
+
+      /* Glass card with metallic edging */
+      .glass-card {
+        position: relative;
+        width: min(92vw, 420px);
+        padding: 22px;
+        border-radius: 18px;
+
+        /* Glass base with subtle gradient */
+        background: linear-gradient(
+          180deg,
+          var(--glass-bg),
+          rgba(255, 255, 255, 0.06)
+        );
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
+        /* Inner frosted outline */
+        outline: 1px solid var(--glass-border);
+
+        /* Metallic edging via second background layer */
+        border: 2px solid transparent;
+        background-clip: padding-box, border-box;
+        background-origin: padding-box, border-box;
+        background-image: linear-gradient(
+            180deg,
+            var(--glass-bg),
+            rgba(255, 255, 255, 0.06)
+          ),
+          conic-gradient(
+            from 0deg,
+            var(--metal-3),
+            var(--metal-1),
+            var(--metal-2),
+            var(--metal-3)
+          );
+
+        /* Depth and soft shadows */
+        box-shadow: 0 8px 24px -8px var(--metal-shadow),
+          inset 0 1px 0 0 var(--glass-highlight),
+          inset 0 -1px 0 0 rgba(0, 0, 0, 0.15);
+      }
+
+      /* Subtle edge highlight band (simulating a chamfer) */
+      .glass-card::before {
+        content: "";
+        position: absolute;
+        inset: 2px;
+        border-radius: 16px;
+        pointer-events: none;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.18),
+          rgba(255, 255, 255, 0)
+        );
+        mask: linear-gradient(black, transparent 30%);
+        -webkit-mask: linear-gradient(black, transparent 30%);
+        opacity: 0.7;
+      }
+
+      /* Light streak reflection for extra realism */
+      .glass-card::after {
+        content: "";
+        position: absolute;
+        top: -40%;
+        left: -20%;
+        width: 160%;
+        height: 120%;
+        transform: rotate(12deg);
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.15) 35%,
+          rgba(255, 255, 255, 0.35) 50%,
+          rgba(255, 255, 255, 0.15) 65%,
+          transparent 100%
+        );
+        mix-blend-mode: screen;
+        opacity: 0.35;
+        pointer-events: none;
+        filter: blur(6px);
+      }
+
+      .glass-content {
+        position: relative;
+        z-index: 1;
+        color: var(--text-strong);
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+      }
+
+      .glass-content h3 {
+        margin: 0 0 8px;
+        font-size: 1.25rem;
+        letter-spacing: 0.2px;
+      }
+
+      .glass-content p {
+        margin: 0 0 16px;
+        color: var(--text-muted);
+        opacity: 0.95;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .pill {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 12px;
+        padding: 10px 12px;
+        color: var(--text-strong);
+      }
+
+      .label {
+        display: block;
+        font-size: 0.8rem;
+        opacity: 0.8;
+        margin-bottom: 4px;
+      }
+
+      .value {
+        font-weight: 600;
+        letter-spacing: 0.2px;
+      }
+
+      .links a {
+        display: inline-block;
+        color: #a7c4ff;
+        text-decoration: none;
+        border-bottom: 1px dashed rgba(167, 196, 255, 0.5);
+        padding-bottom: 1px;
+      }
+
+      .links a:hover {
+        color: #cfe0ff;
+        border-bottom-color: #cfe0ff;
+      }
+
+      @media (max-width: 520px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glass-card">
+      <div class="glass-content">
+        <h3>Glass Card</h3>
+        <p>With metallic edging and subtle depth.</p>
+
+        <div class="row">
+          <div class="pill">
+            <span class="label">Contact</span>
+            <div class="value">847-287-1148</div>
+          </div>
+          <div class="pill links">
+            <span class="label">Email</span>
+            <a href="mailto:example@email.com">example@email.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

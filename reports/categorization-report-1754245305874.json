@@ -1,0 +1,101 @@
+{
+  "timestamp": "2025-08-03T18:21:45.874Z",
+  "summary": {
+    "totalRows": 787,
+    "uniqueProducts": 338,
+    "itemsProcessed": 787,
+    "categoriesFixed": 0,
+    "categoriesAdded": 7,
+    "categoriesPreserved": 780,
+    "errors": 0
+  },
+  "categoryAnalysis": {
+    "totalCategories": 16,
+    "categoryBreakdown": {
+      "The Real Rarities": 62,
+      "The New Finds": 129,
+      "Mind & Clarity": 15,
+      "The New Things": 94,
+      "TBDLabz Exclusive": 111,
+      "Space & Atmosphere": 17,
+      "The Apothecary Cabinet": 147,
+      "Energy & Elements": 106,
+      "Updates": 2,
+      "🇫🇷 Classic Beauty": 16,
+      "TBDL Picks": 48,
+      "🇫🇷 Whimsical Gifts": 160,
+      "🇫🇷 Timeless Treasures": 16,
+      "🇫🇷 Expressly TVM": 143,
+      "miscellaneous": 2,
+      "jewelry": 1
+    },
+    "realCategories": [
+      "Energy & Elements",
+      "Mind & Clarity",
+      "Space & Atmosphere",
+      "TBDL Picks",
+      "TBDLabz Exclusive",
+      "The Apothecary Cabinet",
+      "The New Finds",
+      "The New Things",
+      "The Real Rarities",
+      "Updates",
+      "jewelry",
+      "miscellaneous",
+      "🇫🇷 Classic Beauty",
+      "🇫🇷 Expressly TVM",
+      "🇫🇷 Timeless Treasures",
+      "🇫🇷 Whimsical Gifts"
+    ],
+    "missingCategories": [],
+    "categoryHierarchy": {
+      "brand": [
+        "🇫🇷 Expressly TVM",
+        "🇫🇷 Classic Beauty",
+        "🇫🇷 Timeless Treasures",
+        "🇫🇷 Whimsical Gifts"
+      ],
+      "product": [
+        "jewelry",
+        "miscellaneous"
+      ],
+      "collection": [
+        "The Apothecary Cabinet",
+        "The Real Rarities",
+        "TBDLabz Exclusive",
+        "The New Finds",
+        "The New Things"
+      ],
+      "concept": [
+        "Energy & Elements",
+        "Mind & Clarity",
+        "Space & Atmosphere"
+      ],
+      "status": [
+        "TBDL Picks",
+        "Updates"
+      ]
+    }
+  },
+  "categoryDistribution": {
+    "The Real Rarities": 62,
+    "The New Finds": 129,
+    "Mind & Clarity": 15,
+    "The New Things": 94,
+    "TBDLabz Exclusive": 111,
+    "Space & Atmosphere": 17,
+    "The Apothecary Cabinet": 147,
+    "Energy & Elements": 106,
+    "Updates": 2,
+    "🇫🇷 Classic Beauty": 16,
+    "TBDL Picks": 48,
+    "🇫🇷 Whimsical Gifts": 160,
+    "🇫🇷 Timeless Treasures": 16,
+    "🇫🇷 Expressly TVM": 143,
+    "miscellaneous": 2,
+    "jewelry": 1
+  },
+  "recommendations": [
+    "99.1% of categories were preserved - good existing category structure"
+  ]
+}

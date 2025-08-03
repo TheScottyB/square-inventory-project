@@ -102,6 +102,17 @@ Optional performance settings:
 **Data**: JSON files in `data/` for catalog state, analysis results, and snapshots
 **Logs**: Structured logs in `logs/` with separate subdirectories per service
 
+### Square Variants & SKU Structure
+
+**IMPORTANT**: Read `docs/SQUARE-VARIANTS-GUIDE.md` for complete understanding of:
+- Square's Item Name → Variation → SKU hierarchy
+- How options (Size, Color, etc.) create variations
+- SKU generation patterns: `RRV-{Category}-{Sequence}-{Options}`
+- Content management strategies (shared vs individual by variation)
+- Column mapping: Item Name (Col 2), SKU (Col 4), Options (Col 28-31)
+
+**Key Insight**: Item Name groups variations together. Most content is shared at the Item Name level, with individual SKUs inheriting that content.
+
 ### Development Patterns
 
 **Error Handling**: All agents implement retry logic with exponential backoff

@@ -1,0 +1,44 @@
+{
+  "processingId": "catalog-processing-1754245305749",
+  "timestamp": "2025-08-03T18:21:45.881Z",
+  "options": {
+    "enableDryRun": true,
+    "preserveExistingSKUs": true,
+    "preserveExistingCategories": true,
+    "generateMissingSKUs": true,
+    "fixInvalidCategories": true,
+    "outputDirectory": "./exports/processed-catalog"
+  },
+  "statistics": {
+    "startTime": 1754245305750,
+    "totalRows": 787,
+    "processedRows": 0,
+    "skusGenerated": 541,
+    "categoriesFixed": 0,
+    "errors": [],
+    "steps": {
+      "load": 112,
+      "skus": 10,
+      "categories": 3,
+      "save": 6
+    },
+    "totalProcessingTime": 131,
+    "averageTimePerRow": 0.16645489199491742
+  },
+  "outputs": {
+    "excelPath": "exports/processed-catalog/processed-catalog-2025-08-03T18-21-45-875Z.xlsx",
+    "jsonPath": "exports/processed-catalog/processed-catalog-2025-08-03T18-21-45-875Z.json",
+    "isDryRun": true
+  },
+  "summary": {
+    "totalRows": 787,
+    "skusGenerated": 541,
+    "categoriesFixed": 0,
+    "successRate": 100
+  },
+  "recommendations": [
+    "Generated 541 SKUs - consider implementing automated SKU generation for new products",
+    "Consider implementing SEO field enhancement as next step",
+    "Set up automated validation for future catalog imports"
+  ]
+}

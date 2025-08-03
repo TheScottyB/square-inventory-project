@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Art Deco Slot · 5x3 · Chrome · Ruby/Emerald</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      /* Chrome frame */
+      --chrome-a:#fbfcff; --chrome-b:#e7edf6; --chrome-c:#c6cfdb; --chrome-d:#8a99ad; --chrome-e:#3c4657;
+      --rim: rgba(255,255,255,.55);
+      --rim-dark: rgba(0,0,0,.6);
+
+      /* Glass + background */
+      --bg:#0a0e13;
+      --smoke-1:#0d1118; --smoke-2:#070a0f;
+
+      /* Gem palette */
+      --ruby:#e11239; --ruby-soft:#ff5a78;
+      --emerald:#0f8b6e; --emerald-soft:#45d1ab;
+      --gold:#f2c14e; --ivory:#efe8d8;
+
+      --lead: rgba(0,0,0,.6);
+      --grid: rgba(255,255,255,.06);
+
+      --tile:#0f1420; --tile-edge:#1b2230;
+      --txt:#eaf1f9; --muted:#9fb0c4;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1400px 900px at 15% -10%, #111827 0%, transparent 60%),
+        radial-gradient(1400px 900px at 100% 120%, #0b111a 0%, transparent 70%),
+        var(--bg);
+      color: var(--txt);
+      font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      display:flex; align-items:center; justify-content:center;
+      padding: 24px;
+    }
+
+    /* Cabinet */
+    .cabinet{
+      width:min(980px, 96vw);
+      border-radius: 18px;
+      padding: 20px;
+      background:
+        linear-gradient(135deg, var(--chrome-a), var(--chrome-b) 28%, var(--chrome-c) 52%, var(--chrome-d) 74%, var(--chrome-e) 92%, var(--chrome-a) 100%);
+      border:1px solid var(--rim);
+      box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.85),
+        inset 0 -2px 0 rgba(0,0,0,.35),
+        inset 0 0 0 2px rgba(255,255,255,.14),
+        0 22px 60px rgba(0,0,0,.55),
+        0 6px 16px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
+    }
+    .cabinet::after{
+      content:""; position:absolute; inset:8px; border-radius:12px;
+      box-shadow:
+        inset 0 0 0 1px var(--rim-dark),
+        inset 0 0 0 4px rgba(255,255,255,.05),
+        inset 0 10px 26px -10px rgba(255,255,255,.35),
+        inset 0 -10px 26px -10px rgba(255,255,255,.35),
+        inset 10px 0 26px -10px rgba(255,255,255,.25),
+        inset -10px 0 26px -10px rgba(255,255,255,.25);
+      pointer-events:none;
+    }
+
+    /* Header marquee */
+    .marquee{
+      border-radius: 12px;
+      border:1px solid var(--lead);
+      padding: 14px 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.55)),
+        conic-gradient(from 0deg at 50% 100%, var(--ruby) 0 16%, var(--emerald) 16% 32%, var(--ruby) 32% 48%, var(--emerald) 48% 64%, var(--ruby) 64% 80%, var(--emerald) 80% 100%);
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,.06),
+        0 10px 26px rgba(0,0,0,.5);
+      position:relative;
+      overflow:hidden;
+      text-align:center;
+    }
+    .marquee h1{
+      margin:0;
+      font: 800 clamp(18px, 4vw, 28px)/1.1 "Cinzel", "Times New Roman", serif;
+      letter-spacing:.08em;
+      text-shadow: 0 2px 0 rgba(0,0,0,.6), 0 0 24px rgba(225,18,57,.35);
+    }
+    .marquee p{
+      margin:6px 0 0; color:#eef3fb; opacity:.9; font-size:14px;
+    }
+    .shine{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:
+        linear-gradient( to right, rgba(255,255,255,.28), rgba(255,255,255,0) 25%, rgba(255,255,255,.22) 75%, rgba(255,255,255,0)),
+        linear-gradient( to bottom, rgba(255,255,255,.18), rgba(255,255,255,0) 40%),
+        radial-gradient(300px 160px at 25% 0%, rgba(255,255,255,.38), transparent 60%),
+        radial-gradient(420px 200px at 80% 0%, rgba(225,18,57,.28), transparent 70%);
+      mix-blend-mode: screen;
+    }
+
+    /* Game window (smoky glass) */
+    .window{
+      margin-top: 14px;
+      border-radius: 12px;
+      border:1px solid var(--lead);
+      background:
+        radial-gradient(120% 140% at 50% -20%, rgba(255,255,255,.05), transparent 40%),
+        linear-gradient(180deg, var(--smoke-1), var(--smoke-2));
+      padding: 16px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        inset 0 -1px 0 rgba(0,0,0,.6),
+        0 12px 28px rgba(0,0,0,.55);
+      position:relative;
+      overflow:hidden;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      height: 240px; /* reel height (3 rows) */
+    }
+
+    /* Reel column */
+    .reel{
+      position:relative; border-radius:10px; border:1px solid #141b28; overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.4));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06), inset 0 -1px 0 rgba(0,0,0,.5);
+    }
+    .track{
+      position:absolute; left:0; right:0; top:0;
+      display:grid; gap:10px;
+      padding: 10px;
+      /* Height > reel to allow smooth loop; 8 symbols repeated */
+      animation: spin 2.6s linear infinite;
+    }
+    /* Offset speeds for each reel for variety */
+    .reel:nth-child(1) .track{animation-duration: 2.7s}
+    .reel:nth-child(2) .track{animation-duration: 2.5s}
+    .reel:nth-child(3) .track{animation-duration: 2.8s}
+    .reel:nth-child(4) .track{animation-duration: 2.45s}
+    .reel:nth-child(5) .track{animation-duration: 2.65s}
+
+    @keyframes spin{
+      0%{ transform: translateY(0) }
+      100%{ transform: translateY(-50%) } /* loop mid-list to simulate continuous feed */
+    }
+
+    .symbol{
+      height: calc((240px - 20px - 20px)/3); /* reel height minus paddings divided by 3 rows */
+      min-height: 60px;
+      border-radius: 8px;
+      background: var(--tile);
+      border:1px solid var(--tile-edge);
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 700;
+      letter-spacing:.05em;
+      text-shadow: 0 1px 0 rgba(0,0,0,.6);
+      position:relative;
+      overflow:hidden;
+    }
+    /* Symbol designs: ruby, emerald, gold bell, bar, seven, star */
+    .ruby{
+      color:#fff;
+      background:
+        radial-gradient(140% 100% at 50% 0%, rgba(255,255,255,.12), transparent 60%),
+        linear-gradient(180deg, #24050b, #3b0913 35%, #5c0e1d 60%, #24050b 100%);
+    }
+    .ruby::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(140px 80px at 50% 10%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(220px 120px at 60% 0%, rgba(225,18,57,.45), transparent 65%),
+        radial-gradient(220px 120px at 40% 0%, rgba(255,90,120,.35), transparent 70%);
+      mix-blend-mode: screen;
+    }
+    .emerald{
+      color:#eafff9;
+      background:
+        radial-gradient(140% 100% at 50% 0%, rgba(255,255,255,.10), transparent 60%),
+        linear-gradient(180deg, #062118, #0a2e24 35%, #104a3b 60%, #062118 100%);
+    }
+    .emerald::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(160px 90px at 50% 8%, rgba(255,255,255,.3), transparent 60%),
+        radial-gradient(240px 140px at 60% 0%, rgba(69,209,171,.30), transparent 65%);
+      mix-blend-mode: screen;
+    }
+    .gold{
+      color:#2b1b00;
+      background:
+        linear-gradient(180deg, #43310b, #6b4d14 40%, #946f1f 60%, #43310b 100%);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+    .bar{
+      color:#e8eef7;
+      background:
+        linear-gradient(180deg, #0e1724, #122033 50%, #0e1724 100%);
+      border:1px solid #1b2a3f;
+    }
+    .seven{
+      color:#fff;
+      background:
+        linear-gradient(180deg, #280a0a, #4b1212 45%, #280a0a 100%);
+      border:1px solid #3a0e0e;
+    }
+    .star{
+      color:#fff5bf;
+      background:
+        linear-gradient(180deg, #171717, #212121 50%, #171717 100%);
+      border:1px solid #2a2a2a;
+    }
+
+    /* Payline indicator (center line) */
+    .payline{
+      position:absolute; left:12px; right:12px; top:50%; transform:translateY(-50%);
+      height:2px; background:
+        linear-gradient(90deg, var(--ruby) 0, var(--emerald) 50%, var(--ruby) 100%);
+      box-shadow: 0 0 8px rgba(225,18,57,.35);
+      opacity:.8;
+    }
+
+    /* Control panel (non-functional) */
+    .panel{
+      margin-top: 14px;
+      display:grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items:center;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.6));
+      border:1px solid var(--lead);
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 10px 22px rgba(0,0,0,.45);
+    }
+    .label{color:var(--muted); font-size:14px}
+    .btn{
+      padding: 10px 14px; border-radius: 999px; font-weight:700; letter-spacing:.05em;
+      color:#0a0e12; background: linear-gradient(180deg, #fff, #e9eef6);
+      border:1px solid rgba(0,0,0,.2);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 4px 14px rgba(0,0,0,.25);
+      pointer-events:none; /* decorative only */
+    }
+    .btn.spin{
+      background:
+        radial-gradient(120% 120% at 50% 0%, rgba(255,255,255,.6), transparent 40%),
+        linear-gradient(180deg, var(--emerald-soft), var(--emerald));
+      color:#001914; border-color:#024235; box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 8px 20px rgba(15,139,110,.35);
+    }
+    .btn.bet{
+      background:
+        radial-gradient(120% 120% at 50% 0%, rgba(255,255,255,.65), transparent 40%),
+        linear-gradient(180deg, var(--ruby-soft), var(--ruby));
+      color:#2b0007; border-color:#4a0a14; box-shadow: inset 0 1px 0 rgba(255,255,255,.85), 0 8px 20px rgba(225,18,57,.35);
+    }
+
+    /* Responsive */
+    @media (max-width: 720px){
+      .grid{ height: 200px }
+      .symbol{ min-height: 48px }
+      .panel{ grid-template-columns: 1fr auto; grid-auto-rows: auto }
+    }
+  </style>
+</head>
+<body>
+  <div class="cabinet">
+    <div class="marquee">
+      <div class="shine" aria-hidden="true"></div>
+      <h1>Temple of Chrome · 5×3</h1>
+      <p>Art‑Deco stained glass • Ruby/Emerald • Pure CSS reels</p>
+    </div>
+
+    <div class="window">
+      <div class="payline" aria-hidden="true"></div>
+      <div class="grid">
+        <!-- Reel 1 -->
+        <div class="reel">
+          <div class="track">
+            <div class="symbol ruby">RUBY</div>
+            <div class="symbol emerald">EMRLD</div>
+            <div class="symbol gold">BELL</div>
+            <div class="symbol bar">BAR</div>
+            <div class="symbol seven">7</div>
+            <div class="symbol star">★</div>
+            <!-- repeat for loop -->
+            <div class="symbol ruby">RUBY</div>
+            <div class="symbol emerald">EMRLD</div>
+          </div>
+        </div>
+        <!-- Reel 2 -->
+        <div class="reel">
+          <div class="track">
+            <div class="symbol bar">BAR</div>
+            <div class="symbol seven">7</div>
+            <div class="symbol ruby">RUBY</div>
+            <div class="symbol emerald">EMRLD</div>
+            <div class="symbol gold">BELL</div>
+            <div class="symbol star">★</div>
+            <div class="symbol bar">BAR</div>
+            <div class="symbol seven">7</div>
+          </div>
+        </div>
+        <!-- Reel 3 -->
+        <div class="reel">
+          <div class="track">
+            <div class="symbol gold">BELL</div>
+            <div class="symbol ruby">RUBY</div>
+            <div class="symbol emerald">EMRLD</div>
+            <div class="symbol star">★</div>
+            <div class="symbol seven">7</div>
+            <div class="symbol bar">BAR</div>
+            <div class="symbol gold">BELL</div>
+            <div class="symbol ruby">RUBY</div>
+          </div>
+        </div>
+        <!-- Reel 4 -->
+        <div class="reel">
+          <div class="track">
+            <div class="symbol emerald">EMRLD</div>
+            <div class="symbol bar">BAR</div>
+            <div class="symbol gold">BELL</div>
+            <div class="symbol seven">7</div>
+            <div class="symbol ruby">RUBY</div>
+            <div class="symbol star">★</div>
+            <div class="symbol emerald">EMRLD</div>
+            <div class="symbol bar">BAR</div>
+          </div>
+        </div>
+        <!-- Reel 5 -->
+        <div class="reel">
+          <div class="track">
+            <div class="symbol star">★</div>
+            <div class="symbol emerald">EMRLD</div>
+            <div class="symbol seven">7</div>
+            <div class="symbol gold">BELL</div>
+            <div class="symbol bar">BAR</div>
+            <div class="symbol ruby">RUBY</div>
+            <div class="symbol star">★</div>
+            <div class="symbol emerald">EMRLD</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="label">Demo only — CSS animation simulates spinning reels.</div>
+      <button class="btn bet" aria-disabled="true">BET</button>
+      <button class="btn spin" aria-disabled="true">SPIN</button>
+    </div>
+  </div>
+</body>
+</html>
