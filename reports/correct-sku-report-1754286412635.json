@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-08-04T05:46:52.635Z",
+  "summary": {
+    "totalRows": 0,
+    "uniqueProducts": 0,
+    "skusGenerated": 0,
+    "skusPreserved": 0,
+    "variationsProcessed": 0,
+    "errors": 0
+  },
+  "categoryBreakdown": {},
+  "recommendations": []
+}

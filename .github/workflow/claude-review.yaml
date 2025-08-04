@@ -1,0 +1,36 @@
+# .github/workflows/claude-review.yml
+
+name: Claude Code Review
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - release/**
+
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: claude-review-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Claude Code Review
+        uses: anthropic/claude-action@v1
+        with:
+          prompt_file: .github/claude/prompt.md # Optional custom prompt file
+          max_turns: 3
+          timeout_minutes: 10
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Post Claude Summary (Optional)
+        if: always()
+        run: |
+          echo "Claude completed review. Please verify all comments and commit if valid."

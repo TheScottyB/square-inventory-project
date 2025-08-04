@@ -1,0 +1,171 @@
+{
+  "timestamp": "2025-08-04T06:27:28.588Z",
+  "configuration": {
+    "dryRun": false,
+    "category": null,
+    "limit": 10,
+    "exampleCount": 3,
+    "catalogPath": "/Users/scottybe/Workspace/square-inventory-project/exports/catalog-filtered-2025-08-04T06-26-46.xlsx"
+  },
+  "examples": [
+    {
+      "name": "\"The End\" European Deer Mount Eight Point Buck Skull Sculpture Heavy",
+      "category": "The Real Rarities, The New Finds"
+    },
+    {
+      "name": "\"The Original\" Metal Electric Guitar Sculpture Heavy Metal Wall Art",
+      "category": "The Real Rarities, The New Finds"
+    },
+    {
+      "name": "10-Pcs Sleek Modern Pinky Flatware Silverware Flatware Set",
+      "category": "The New Things"
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "completed": 10,
+    "failed": 0,
+    "averageQualityImprovement": 0
+  },
+  "results": [
+    {
+      "itemName": "Paris Vintage Postcard Mouse Pad",
+      "sku": "RRV-WG-001",
+      "category": "🇫🇷 Whimsical Gifts",
+      "status": "completed",
+      "changes": [
+        "Generated SKU",
+        "Generated enhanced content"
+      ],
+      "qualityScore": {
+        "before": 0.3333333333333333,
+        "after": 0.3333333333333333,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "7 Chakra Stones & Silver, Spiritual Jewelry, Chakra Bracelet",
+      "sku": "RRV-EE-001",
+      "category": "The New Things, Energy & Elements",
+      "status": "completed",
+      "changes": [
+        "Generated SKU"
+      ],
+      "qualityScore": {
+        "before": 0.6666666666666666,
+        "after": 0.6666666666666666,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Arteza Metallic Markers",
+      "sku": "RRV-AC-001",
+      "category": "The Apothecary Cabinet",
+      "status": "completed",
+      "changes": [
+        "Generated SKU"
+      ],
+      "qualityScore": {
+        "before": 0.6666666666666666,
+        "after": 0.6666666666666666,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Carnelian Bracelet Stretch Fit Handmade",
+      "sku": "RRV-EE-002",
+      "category": "The New Things, Energy & Elements",
+      "status": "completed",
+      "changes": [
+        "Generated SKU"
+      ],
+      "qualityScore": {
+        "before": 0.6666666666666666,
+        "after": 0.6666666666666666,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Lip Gloss - Red",
+      "sku": "FLLG4",
+      "category": "TBDLabz Exclusive",
+      "status": "completed",
+      "changes": [],
+      "qualityScore": {
+        "before": 0.6666666666666666,
+        "after": 0.6666666666666666,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Mookite Stone Bracelets Metaphysical Reiki Boho",
+      "sku": "RRV-AC-002",
+      "category": "The Apothecary Cabinet",
+      "status": "completed",
+      "changes": [
+        "Generated SKU"
+      ],
+      "qualityScore": {
+        "before": 0.6666666666666666,
+        "after": 0.6666666666666666,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Murano Hand Blown Glass Giraffe",
+      "sku": "RRV-RR-001",
+      "category": "The Real Rarities, 🇫🇷 Whimsical Gifts, Space & Atmosphere",
+      "status": "completed",
+      "changes": [
+        "Generated SKU"
+      ],
+      "qualityScore": {
+        "before": 0.6666666666666666,
+        "after": 0.6666666666666666,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "NEW Selenite Moon Bowls",
+      "sku": "RRV-EE-003",
+      "category": "Energy & Elements",
+      "status": "completed",
+      "changes": [
+        "Generated SKU"
+      ],
+      "qualityScore": {
+        "before": 0.6666666666666666,
+        "after": 0.6666666666666666,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Tangerine Quartz Points",
+      "sku": "RRV-EE-004",
+      "category": "Energy & Elements",
+      "status": "completed",
+      "changes": [
+        "Generated SKU"
+      ],
+      "qualityScore": {
+        "before": 0.6666666666666666,
+        "after": 0.6666666666666666,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "USB Port Hub 7 Ports USB Hub for PC, USB Splitter Extender with",
+      "sku": "RRV-EX-001-BLK",
+      "category": "TBDLabz Exclusive",
+      "status": "completed",
+      "changes": [
+        "Generated SKU"
+      ],
+      "qualityScore": {
+        "before": 0.6666666666666666,
+        "after": 0.6666666666666666,
+        "improvement": 0
+      }
+    }
+  ]
+}

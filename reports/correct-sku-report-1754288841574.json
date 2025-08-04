@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-08-04T06:27:21.574Z",
+  "summary": {
+    "totalRows": 1,
+    "uniqueProducts": 1,
+    "skusGenerated": 3,
+    "skusPreserved": 0,
+    "variationsProcessed": 2,
+    "errors": 0
+  },
+  "categoryBreakdown": {
+    "WG": {
+      "categoryName": "🇫🇷 Whimsical Gifts",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    },
+    "EE": {
+      "categoryName": "Energy & Elements",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    },
+    "AC": {
+      "categoryName": "The Apothecary Cabinet",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    }
+  },
+  "recommendations": [
+    "300.0% of items needed new SKUs - consider automated SKU generation for new products"
+  ]
+}

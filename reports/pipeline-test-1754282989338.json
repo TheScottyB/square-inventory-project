@@ -1,0 +1,152 @@
+{
+  "timestamp": "2025-08-04T04:49:49.337Z",
+  "configuration": {
+    "dryRun": true,
+    "category": null,
+    "limit": 10,
+    "exampleCount": 3,
+    "catalogPath": "/Users/scottybe/Workspace/square-inventory-project/exports/7MM9AFJAD0XHW_catalog-2025-08-03-1627.xlsx"
+  },
+  "examples": [
+    {
+      "name": "\"The End\" European Deer Mount Eight Point Buck Skull Sculpture Heavy",
+      "category": "The Real Rarities, The New Finds"
+    },
+    {
+      "name": "\"The Original\" Metal Electric Guitar Sculpture Heavy Metal Wall Art",
+      "category": "The Real Rarities, The New Finds"
+    },
+    {
+      "name": "10-Pcs Sleek Modern Pinky Flatware Silverware Flatware Set",
+      "category": "The New Things"
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "completed": 10,
+    "failed": 0,
+    "averageQualityImprovement": 0
+  },
+  "results": [
+    {
+      "itemName": "Field Service Work - Weekend",
+      "sku": "5507803",
+      "category": "",
+      "status": "completed",
+      "changes": [],
+      "qualityScore": {
+        "before": 0,
+        "after": 0,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Followup Site Visit and Evalution",
+      "sku": "956713M",
+      "category": "",
+      "status": "completed",
+      "changes": [],
+      "qualityScore": {
+        "before": 0,
+        "after": 0,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Labor",
+      "sku": "501701Z",
+      "category": "",
+      "status": "completed",
+      "changes": [],
+      "qualityScore": {
+        "before": 0,
+        "after": 0,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Service Charge - Sunday",
+      "sku": "630667K",
+      "category": "",
+      "status": "completed",
+      "changes": [],
+      "qualityScore": {
+        "before": 0,
+        "after": 0,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Site Visit - Sat Service Call",
+      "sku": "Y768837",
+      "category": "",
+      "status": "completed",
+      "changes": [],
+      "qualityScore": {
+        "before": 0,
+        "after": 0,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Test Amethyst Lamp Updated",
+      "sku": "JEW-TESTAM-4537",
+      "category": "",
+      "status": "completed",
+      "changes": [],
+      "qualityScore": {
+        "before": 0,
+        "after": 0,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Test Amethyst Lamp V2",
+      "sku": "JEW-TESTAM-8412",
+      "category": "",
+      "status": "completed",
+      "changes": [],
+      "qualityScore": {
+        "before": 0,
+        "after": 0,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Paris Vintage Postcard Mouse Pad",
+      "sku": "",
+      "category": "🇫🇷 Whimsical Gifts",
+      "status": "completed",
+      "changes": [],
+      "qualityScore": {
+        "before": 0.3333333333333333,
+        "after": 0.3333333333333333,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Sample Product",
+      "sku": "MIS-SAMPLE-0168",
+      "category": "miscellaneous",
+      "status": "completed",
+      "changes": [],
+      "qualityScore": {
+        "before": 0.3333333333333333,
+        "after": 0.3333333333333333,
+        "improvement": 0
+      }
+    },
+    {
+      "itemName": "Sample Product",
+      "sku": "MIS-SAMPLE-0347",
+      "category": "miscellaneous",
+      "status": "completed",
+      "changes": [],
+      "qualityScore": {
+        "before": 0.3333333333333333,
+        "after": 0.3333333333333333,
+        "improvement": 0
+      }
+    }
+  ]
+}

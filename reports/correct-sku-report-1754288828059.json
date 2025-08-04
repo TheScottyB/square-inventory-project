@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-08-04T06:27:08.059Z",
+  "summary": {
+    "totalRows": 1,
+    "uniqueProducts": 1,
+    "skusGenerated": 1,
+    "skusPreserved": 0,
+    "variationsProcessed": 0,
+    "errors": 0
+  },
+  "categoryBreakdown": {
+    "WG": {
+      "categoryName": "🇫🇷 Whimsical Gifts",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    }
+  },
+  "recommendations": [
+    "100.0% of items needed new SKUs - consider automated SKU generation for new products"
+  ]
+}

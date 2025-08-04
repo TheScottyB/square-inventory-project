@@ -1,0 +1,97 @@
+{
+  "timestamp": "2025-08-04T06:15:13.250Z",
+  "summary": {
+    "totalRows": 787,
+    "uniqueProducts": 338,
+    "skusGenerated": 541,
+    "skusPreserved": 246,
+    "variationsProcessed": 581,
+    "errors": 0
+  },
+  "categoryBreakdown": {
+    "RR": {
+      "categoryName": "The Real Rarities",
+      "sequenceCount": 23,
+      "nextSequence": 24
+    },
+    "NF": {
+      "categoryName": "The New Finds",
+      "sequenceCount": 6,
+      "nextSequence": 7
+    },
+    "MC": {
+      "categoryName": "Mind & Clarity",
+      "sequenceCount": 12,
+      "nextSequence": 13
+    },
+    "NT": {
+      "categoryName": "The New Things",
+      "sequenceCount": 24,
+      "nextSequence": 25
+    },
+    "EX": {
+      "categoryName": "TBDLabz Exclusive",
+      "sequenceCount": 56,
+      "nextSequence": 57
+    },
+    "SA": {
+      "categoryName": "Space & Atmosphere",
+      "sequenceCount": 11,
+      "nextSequence": 12
+    },
+    "AC": {
+      "categoryName": "The Apothecary Cabinet",
+      "sequenceCount": 97,
+      "nextSequence": 98
+    },
+    "EE": {
+      "categoryName": "Energy & Elements",
+      "sequenceCount": 38,
+      "nextSequence": 39
+    },
+    "CB": {
+      "categoryName": "🇫🇷 Classic Beauty",
+      "sequenceCount": 13,
+      "nextSequence": 14
+    },
+    "WG": {
+      "categoryName": "🇫🇷 Whimsical Gifts",
+      "sequenceCount": 17,
+      "nextSequence": 18
+    },
+    "TV": {
+      "categoryName": "🇫🇷 Expressly TVM",
+      "sequenceCount": 23,
+      "nextSequence": 24
+    },
+    "GN": {
+      "categoryName": "default",
+      "sequenceCount": 7,
+      "nextSequence": 8
+    },
+    "TT": {
+      "categoryName": "🇫🇷 Timeless Treasures",
+      "sequenceCount": 6,
+      "nextSequence": 7
+    },
+    "TB": {
+      "categoryName": "TBDL Picks",
+      "sequenceCount": 3,
+      "nextSequence": 4
+    },
+    "MS": {
+      "categoryName": "miscellaneous",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    },
+    "JW": {
+      "categoryName": "jewelry",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    }
+  },
+  "recommendations": [
+    "68.7% of items needed new SKUs - consider automated SKU generation for new products",
+    "Large number of variations processed - verify SKU patterns are logical"
+  ]
+}

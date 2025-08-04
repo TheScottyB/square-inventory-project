@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-08-04T06:27:28.588Z",
+  "summary": {
+    "totalRows": 1,
+    "uniqueProducts": 1,
+    "skusGenerated": 9,
+    "skusPreserved": 0,
+    "variationsProcessed": 4,
+    "errors": 0
+  },
+  "categoryBreakdown": {
+    "WG": {
+      "categoryName": "🇫🇷 Whimsical Gifts",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    },
+    "EE": {
+      "categoryName": "Energy & Elements",
+      "sequenceCount": 4,
+      "nextSequence": 5
+    },
+    "AC": {
+      "categoryName": "The Apothecary Cabinet",
+      "sequenceCount": 2,
+      "nextSequence": 3
+    },
+    "RR": {
+      "categoryName": "The Real Rarities",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    },
+    "EX": {
+      "categoryName": "TBDLabz Exclusive",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    }
+  },
+  "recommendations": [
+    "900.0% of items needed new SKUs - consider automated SKU generation for new products"
+  ]
+}

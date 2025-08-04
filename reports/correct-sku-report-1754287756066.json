@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-08-04T06:09:16.065Z",
+  "summary": {
+    "totalRows": 5,
+    "uniqueProducts": 5,
+    "skusGenerated": 5,
+    "skusPreserved": 0,
+    "variationsProcessed": 2,
+    "errors": 0
+  },
+  "categoryBreakdown": {
+    "RR": {
+      "categoryName": "The Real Rarities",
+      "sequenceCount": 2,
+      "nextSequence": 3
+    },
+    "NF": {
+      "categoryName": "The New Finds",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    },
+    "MC": {
+      "categoryName": "Mind & Clarity",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    },
+    "NT": {
+      "categoryName": "The New Things",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    }
+  },
+  "recommendations": [
+    "100.0% of items needed new SKUs - consider automated SKU generation for new products"
+  ]
+}

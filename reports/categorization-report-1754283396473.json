@@ -1,0 +1,84 @@
+{
+  "timestamp": "2025-08-04T04:56:36.473Z",
+  "summary": {
+    "totalRows": 0,
+    "uniqueProducts": 0,
+    "itemsProcessed": 0,
+    "categoriesFixed": 0,
+    "categoriesAdded": 0,
+    "categoriesPreserved": 0,
+    "errors": 0
+  },
+  "categoryAnalysis": {
+    "totalCategories": 0,
+    "categoryBreakdown": {},
+    "realCategories": [
+      "Energy & Elements",
+      "Mind & Clarity",
+      "Space & Atmosphere",
+      "TBDL Picks",
+      "TBDLabz Exclusive",
+      "The Apothecary Cabinet",
+      "The New Finds",
+      "The New Things",
+      "The Real Rarities",
+      "Updates",
+      "jewelry",
+      "miscellaneous",
+      "🇫🇷 Classic Beauty",
+      "🇫🇷 Expressly TVM",
+      "🇫🇷 Timeless Treasures",
+      "🇫🇷 Whimsical Gifts"
+    ],
+    "missingCategories": [
+      "Energy & Elements",
+      "Mind & Clarity",
+      "Space & Atmosphere",
+      "TBDL Picks",
+      "TBDLabz Exclusive",
+      "The Apothecary Cabinet",
+      "The New Finds",
+      "The New Things",
+      "The Real Rarities",
+      "Updates",
+      "jewelry",
+      "miscellaneous",
+      "🇫🇷 Classic Beauty",
+      "🇫🇷 Expressly TVM",
+      "🇫🇷 Timeless Treasures",
+      "🇫🇷 Whimsical Gifts"
+    ],
+    "categoryHierarchy": {
+      "brand": [
+        "🇫🇷 Expressly TVM",
+        "🇫🇷 Classic Beauty",
+        "🇫🇷 Timeless Treasures",
+        "🇫🇷 Whimsical Gifts"
+      ],
+      "product": [
+        "jewelry",
+        "miscellaneous"
+      ],
+      "collection": [
+        "The Apothecary Cabinet",
+        "The Real Rarities",
+        "TBDLabz Exclusive",
+        "The New Finds",
+        "The New Things"
+      ],
+      "concept": [
+        "Energy & Elements",
+        "Mind & Clarity",
+        "Space & Atmosphere"
+      ],
+      "status": [
+        "TBDL Picks",
+        "Updates"
+      ]
+    }
+  },
+  "categoryDistribution": {},
+  "recommendations": [
+    "Limited category diversity - consider expanding category structure"
+  ]
+}

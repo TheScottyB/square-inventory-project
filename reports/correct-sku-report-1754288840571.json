@@ -1,0 +1,26 @@
+{
+  "timestamp": "2025-08-04T06:27:20.571Z",
+  "summary": {
+    "totalRows": 1,
+    "uniqueProducts": 1,
+    "skusGenerated": 2,
+    "skusPreserved": 0,
+    "variationsProcessed": 1,
+    "errors": 0
+  },
+  "categoryBreakdown": {
+    "WG": {
+      "categoryName": "🇫🇷 Whimsical Gifts",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    },
+    "EE": {
+      "categoryName": "Energy & Elements",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    }
+  },
+  "recommendations": [
+    "200.0% of items needed new SKUs - consider automated SKU generation for new products"
+  ]
+}

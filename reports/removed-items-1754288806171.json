@@ -1,0 +1,58 @@
+{
+  "timestamp": "2025-08-04T06:26:46.171Z",
+  "originalCount": 787,
+  "removedCount": 10,
+  "finalCount": 777,
+  "removedItems": [
+    {
+      "itemName": "Field Service Work - Weekend",
+      "sku": "5507803",
+      "category": "N/A"
+    },
+    {
+      "itemName": "Followup Site Visit and Evalution",
+      "sku": "956713M",
+      "category": "N/A"
+    },
+    {
+      "itemName": "Labor",
+      "sku": "501701Z",
+      "category": "N/A"
+    },
+    {
+      "itemName": "Sample Product",
+      "sku": "MIS-SAMPLE-0168",
+      "category": "miscellaneous"
+    },
+    {
+      "itemName": "Sample Product",
+      "sku": "MIS-SAMPLE-0347",
+      "category": "miscellaneous"
+    },
+    {
+      "itemName": "Service Charge - Sunday",
+      "sku": "630667K",
+      "category": "N/A"
+    },
+    {
+      "itemName": "Site Visit - Sat Service Call",
+      "sku": "Y768837",
+      "category": "N/A"
+    },
+    {
+      "itemName": "Test Amethyst Lamp Final",
+      "sku": "JEW-TESTAM-1247",
+      "category": "jewelry"
+    },
+    {
+      "itemName": "Test Amethyst Lamp Updated",
+      "sku": "JEW-TESTAM-4537",
+      "category": "N/A"
+    },
+    {
+      "itemName": "Test Amethyst Lamp V2",
+      "sku": "JEW-TESTAM-8412",
+      "category": "N/A"
+    }
+  ]
+}

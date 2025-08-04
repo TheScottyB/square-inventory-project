@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-08-04T06:27:25.581Z",
+  "summary": {
+    "totalRows": 1,
+    "uniqueProducts": 1,
+    "skusGenerated": 6,
+    "skusPreserved": 0,
+    "variationsProcessed": 3,
+    "errors": 0
+  },
+  "categoryBreakdown": {
+    "WG": {
+      "categoryName": "🇫🇷 Whimsical Gifts",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    },
+    "EE": {
+      "categoryName": "Energy & Elements",
+      "sequenceCount": 2,
+      "nextSequence": 3
+    },
+    "AC": {
+      "categoryName": "The Apothecary Cabinet",
+      "sequenceCount": 2,
+      "nextSequence": 3
+    },
+    "RR": {
+      "categoryName": "The Real Rarities",
+      "sequenceCount": 1,
+      "nextSequence": 2
+    }
+  },
+  "recommendations": [
+    "600.0% of items needed new SKUs - consider automated SKU generation for new products"
+  ]
+}

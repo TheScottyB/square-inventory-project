@@ -1,0 +1,85 @@
+{
+  "timestamp": "2025-08-04T06:17:50.923Z",
+  "summary": {
+    "totalRows": 1,
+    "uniqueProducts": 1,
+    "itemsProcessed": 3,
+    "categoriesFixed": 0,
+    "categoriesAdded": 3,
+    "categoriesPreserved": 0,
+    "errors": 0
+  },
+  "categoryAnalysis": {
+    "totalCategories": 0,
+    "categoryBreakdown": {},
+    "realCategories": [
+      "Energy & Elements",
+      "Mind & Clarity",
+      "Space & Atmosphere",
+      "TBDL Picks",
+      "TBDLabz Exclusive",
+      "The Apothecary Cabinet",
+      "The New Finds",
+      "The New Things",
+      "The Real Rarities",
+      "Updates",
+      "jewelry",
+      "miscellaneous",
+      "🇫🇷 Classic Beauty",
+      "🇫🇷 Expressly TVM",
+      "🇫🇷 Timeless Treasures",
+      "🇫🇷 Whimsical Gifts"
+    ],
+    "missingCategories": [
+      "Energy & Elements",
+      "Mind & Clarity",
+      "Space & Atmosphere",
+      "TBDL Picks",
+      "TBDLabz Exclusive",
+      "The Apothecary Cabinet",
+      "The New Finds",
+      "The New Things",
+      "The Real Rarities",
+      "Updates",
+      "jewelry",
+      "miscellaneous",
+      "🇫🇷 Classic Beauty",
+      "🇫🇷 Expressly TVM",
+      "🇫🇷 Timeless Treasures",
+      "🇫🇷 Whimsical Gifts"
+    ],
+    "categoryHierarchy": {
+      "brand": [
+        "🇫🇷 Expressly TVM",
+        "🇫🇷 Classic Beauty",
+        "🇫🇷 Timeless Treasures",
+        "🇫🇷 Whimsical Gifts"
+      ],
+      "product": [
+        "jewelry",
+        "miscellaneous"
+      ],
+      "collection": [
+        "The Apothecary Cabinet",
+        "The Real Rarities",
+        "TBDLabz Exclusive",
+        "The New Finds",
+        "The New Things"
+      ],
+      "concept": [
+        "Energy & Elements",
+        "Mind & Clarity",
+        "Space & Atmosphere"
+      ],
+      "status": [
+        "TBDL Picks",
+        "Updates"
+      ]
+    }
+  },
+  "categoryDistribution": {},
+  "recommendations": [
+    "300.0% of items needed new categories - consider automated categorization for new products",
+    "Limited category diversity - consider expanding category structure"
+  ]
+}

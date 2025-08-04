@@ -1,0 +1,157 @@
+{
+  "pageType": "product-detail",
+  "totalImages": 100,
+  "filteredImages": 7,
+  "productImages": [
+    {
+      "index": 1,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/ed9/bef/4b-/normal/data.jpg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/ed9/bef/4b-/normal/data.jpg",
+      "filename": "miscellaneous-products-product-description-1754162361310.jpg",
+      "alt": "featured image",
+      "dimensions": {
+        "width": 500,
+        "height": 500
+      },
+      "productName": "Product Description",
+      "description": "In Store",
+      "price": "",
+      "category": "miscellaneous-products",
+      "supplier": ""
+    },
+    {
+      "index": 2,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/148/0d1/6c-/normal/data.jpg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/148/0d1/6c-/normal/data.jpg",
+      "filename": "miscellaneous-products-product-description-1754162361313.jpg",
+      "alt": "thumbnail image",
+      "dimensions": {
+        "width": 500,
+        "height": 500
+      },
+      "productName": "Product Description",
+      "description": "In Store",
+      "price": "",
+      "category": "miscellaneous-products",
+      "supplier": ""
+    },
+    {
+      "index": 3,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/4fc/fea/ec-/normal/data.jpg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/4fc/fea/ec-/normal/data.jpg",
+      "filename": "miscellaneous-products-product-description-1754162361315.jpg",
+      "alt": "thumbnail image",
+      "dimensions": {
+        "width": 500,
+        "height": 500
+      },
+      "productName": "Product Description",
+      "description": "In Store",
+      "price": "",
+      "category": "miscellaneous-products",
+      "supplier": ""
+    },
+    {
+      "index": 4,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/099/279/fe-/normal/data.jpg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/099/279/fe-/normal/data.jpg",
+      "filename": "miscellaneous-products-product-description-1754162361317.jpg",
+      "alt": "thumbnail image",
+      "dimensions": {
+        "width": 500,
+        "height": 500
+      },
+      "productName": "Product Description",
+      "description": "In Store",
+      "price": "",
+      "category": "miscellaneous-products",
+      "supplier": ""
+    },
+    {
+      "index": 5,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/7f1/26a/9d-/normal/data.jpg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/7f1/26a/9d-/normal/data.jpg",
+      "filename": "miscellaneous-products-image-1754162361319.jpg",
+      "alt": "Image",
+      "dimensions": {
+        "width": 500,
+        "height": 500
+      },
+      "productName": "Image",
+      "description": "",
+      "price": "",
+      "category": "miscellaneous-products",
+      "supplier": ""
+    },
+    {
+      "index": 6,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/ed9/bef/4b-/normal/data.jpg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/ed9/bef/4b-/normal/data.jpg",
+      "filename": "miscellaneous-products-image-1754162361320.jpg",
+      "alt": "Image",
+      "dimensions": {
+        "width": 500,
+        "height": 500
+      },
+      "productName": "Image",
+      "description": "",
+      "price": "",
+      "category": "miscellaneous-products",
+      "supplier": ""
+    },
+    {
+      "index": 7,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/f1d/107/cc-/normal/data.jpg",
+      "originalUrl": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/f1d/107/cc-/normal/data.jpg",
+      "filename": "miscellaneous-products-image-1754162361321.jpg",
+      "alt": "Image",
+      "dimensions": {
+        "width": 500,
+        "height": 500
+      },
+      "productName": "Image",
+      "description": "",
+      "price": "",
+      "category": "miscellaneous-products",
+      "supplier": ""
+    }
+  ],
+  "excludedImages": [],
+  "errors": [
+    {
+      "index": 1,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/ed9/bef/4b-/normal/data.jpg",
+      "error": "Failed to fetch"
+    },
+    {
+      "index": 2,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/148/0d1/6c-/normal/data.jpg",
+      "error": "Failed to fetch"
+    },
+    {
+      "index": 3,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/4fc/fea/ec-/normal/data.jpg",
+      "error": "Failed to fetch"
+    },
+    {
+      "index": 4,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/099/279/fe-/normal/data.jpg",
+      "error": "Failed to fetch"
+    },
+    {
+      "index": 5,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/7f1/26a/9d-/normal/data.jpg",
+      "error": "Failed to fetch"
+    },
+    {
+      "index": 6,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/ed9/bef/4b-/normal/data.jpg",
+      "error": "Failed to fetch"
+    },
+    {
+      "index": 7,
+      "url": "https://d2nxps5jx3f309.cloudfront.net/listing_images/attachments/f1d/107/cc-/normal/data.jpg",
+      "error": "Failed to fetch"
+    }
+  ]
+}

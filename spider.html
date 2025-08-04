@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Handcrafted Upcycled Steel Spider Sculpture</title>
+    <style>
+      /* ---------- Theme (metal + fire) ---------- */
+      :root {
+        --bg-1: #0b0e12;
+        --bg-2: #121821;
+        --ink: #e9eef7;
+        --muted: #b6c0d6;
+        --accent: #ffb84d;
+
+        /* Metal */
+        --steel-1: #dcdde1;
+        --steel-2: #8f9398;
+        --steel-3: #f3f4f5;
+        --steel-dark: #262a30;
+
+        /* Fire */
+        --fire-1: #ffdd55;
+        --fire-2: #ff9d3c;
+        --fire-3: #ff5e3a;
+        --fire-4: #ff2d55;
+        --ember: #ff7a1a;
+        --glow: #ffd18a;
+      }
+
+      /* ---------- Base ---------- */
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        background: radial-gradient(
+            1200px 800px at 70% 120%,
+            rgba(255, 80, 20, 0.09),
+            transparent 60%
+          ),
+          radial-gradient(
+            1000px 600px at -10% -10%,
+            rgba(120, 180, 255, 0.06),
+            transparent 55%
+          ),
+          linear-gradient(180deg, var(--bg-1), var(--bg-2) 60%, #0a0e13);
+        overflow-x: hidden;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 20px 80px;
+      }
+
+      /* ---------- Header: forged nameplate ---------- */
+      .nameplate {
+        position: relative;
+        padding: 24px 22px;
+        border-radius: 14px;
+        color: var(--ink);
+        background:
+          /* brushed steel plate */ linear-gradient(
+            100deg,
+            rgba(255, 255, 255, 0.08),
+            transparent 30%
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.06) 0 2px,
+            rgba(0, 0, 0, 0) 2px 6px
+          ),
+          linear-gradient(180deg, var(--steel-3), var(--steel-1));
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55),
+          inset 0 1px 0 rgba(255, 255, 255, 0.35),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .nameplate h1 {
+        margin: 0 0 6px;
+        font-size: clamp(24px, 5vw, 38px);
+        letter-spacing: 0.4px;
+        background: linear-gradient(180deg, #fff, #d0d4da 60%, #a2a8b0);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .nameplate p {
+        margin: 0;
+        color: var(--steel-dark);
+        mix-blend-mode: multiply;
+        font-weight: 600;
+      }
+
+      /* Bolts on the plate */
+      .bolt {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: radial-gradient(
+            circle at 35% 35%,
+            #ffffff,
+            rgba(255, 255, 255, 0.2) 40%,
+            rgba(0, 0, 0, 0.45) 70%
+          ),
+          linear-gradient(180deg, #dfe2e6, #adb2b8);
+        box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.4);
+      }
+      .bolt.tl {
+        top: 10px;
+        left: 10px;
+      }
+      .bolt.tr {
+        top: 10px;
+        right: 10px;
+      }
+      .bolt.bl {
+        bottom: 10px;
+        left: 10px;
+      }
+      .bolt.br {
+        bottom: 10px;
+        right: 10px;
+      }
+
+      /* ---------- Hero: molten fire under steel mesh ---------- */
+      .hero {
+        position: relative;
+        margin-top: 26px;
+        border-radius: 16px;
+        overflow: hidden;
+        height: 260px;
+        background: radial-gradient(
+            80% 120% at 50% 120%,
+            rgba(255, 210, 120, 0.18),
+            transparent 60%
+          ),
+          linear-gradient(180deg, #1a1f27, #0e1218);
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+      }
+      /* glowing fire core */
+      .fire {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            140% 100% at 50% 110%,
+            var(--fire-1) 0%,
+            var(--fire-2) 26%,
+            var(--fire-3) 46%,
+            transparent 60%
+          ),
+          radial-gradient(
+            140% 120% at 60% 120%,
+            rgba(255, 180, 64, 0.7) 0%,
+            transparent 55%
+          ),
+          radial-gradient(
+            120% 120% at 40% 120%,
+            rgba(255, 100, 40, 0.6) 0%,
+            transparent 55%
+          );
+        filter: blur(10px) saturate(1.2);
+        opacity: 0.8;
+        animation: flame 5s infinite ease-in-out;
+      }
+      @keyframes flame {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translateY(-6px) scale(1.02);
+          opacity: 1;
+        }
+      }
+      /* metal grate overlay */
+      .grate {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle at 8px 8px,
+          rgba(255, 255, 255, 0.06) 2px,
+          rgba(0, 0, 0, 0) 2px
+        );
+        background-size: 22px 22px;
+        mix-blend-mode: overlay;
+        opacity: 0.6;
+      }
+      /* steel rim */
+      .rim {
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        border: 2px solid transparent;
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.12),
+            rgba(255, 255, 255, 0.04)
+          ),
+          conic-gradient(
+            from 0deg,
+            var(--steel-3),
+            var(--steel-1),
+            var(--steel-2),
+            var(--steel-3)
+          );
+        background-clip: padding-box, border-box;
+        background-origin: padding-box, border-box;
+        pointer-events: none;
+      }
+
+      /* ---------- Product card ---------- */
+      .card {
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 22px;
+      }
+      @media (max-width: 860px) {
+        .card {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .photo {
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        min-height: 260px;
+        display: grid;
+        place-items: center;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Stylized spider silhouette (SVG) */
+      .photo svg {
+        width: 84%;
+        max-width: 520px;
+        filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.6));
+      }
+      .steel-fill {
+        fill: url(#steelGrad);
+        stroke: #515861;
+        stroke-width: 1.5;
+      }
+      .wire {
+        stroke: url(#steelGrad);
+        stroke-width: 6;
+        stroke-linecap: round;
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6));
+      }
+
+      .details {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.03)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 14px;
+        padding: 18px 18px 16px;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+      }
+
+      .title {
+        margin: 0 0 10px;
+        font-size: 24px;
+        letter-spacing: 0.4px;
+      }
+      .subtitle {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .specs {
+        margin: 0;
+        padding: 0 0 12px;
+        list-style: none;
+      }
+      .specs li {
+        margin: 6px 0;
+        display: flex;
+        gap: 10px;
+        align-items: start;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, var(--steel-3), var(--steel-1));
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+        margin-top: 6px;
+        flex: 0 0 auto;
+      }
+
+      .callouts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 14px 0 12px;
+      }
+      .chip {
+        border-radius: 999px;
+        padding: 8px 10px;
+        font-size: 12px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.08),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.14);
+      }
+
+      .cta {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        margin-top: 6px;
+      }
+      .btn {
+        appearance: none;
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 14px;
+        color: #141820;
+        background: linear-gradient(180deg, var(--glow), var(--ember));
+        box-shadow: 0 10px 26px rgba(255, 120, 40, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        font-weight: 800;
+        cursor: pointer;
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 32px rgba(255, 120, 40, 0.55),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+      .btn.secondary {
+        background: linear-gradient(180deg, #e7ecf5, #c7d0e2);
+        color: #1a1f27;
+        box-shadow: 0 10px 26px rgba(160, 180, 210, 0.25),
+          inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      }
+
+      /* ---------- Footer tags ---------- */
+      .tags {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .tag {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        color: #11151b;
+        background: linear-gradient(
+          180deg,
+          var(--fire-1),
+          var(--fire-2) 60%,
+          var(--fire-3)
+        );
+        box-shadow: 0 8px 16px rgba(255, 120, 40, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        border: 0;
+      }
+
+      /* ---------- Small print ---------- */
+      .note {
+        margin-top: 16px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Nameplate header -->
+      <header class="nameplate">
+        <span class="bolt tl" aria-hidden="true"></span>
+        <span class="bolt tr" aria-hidden="true"></span>
+        <span class="bolt bl" aria-hidden="true"></span>
+        <span class="bolt br" aria-hidden="true"></span>
+        <h1>Handcrafted Upcycled Steel Spider Sculpture</h1>
+        <p>Forged from scrap. Finished to last.</p>
+      </header>
+
+      <!-- Fire + metal hero -->
+      <section class="hero" aria-label="Molten glow and steel mesh background">
+        <div class="fire"></div>
+        <div class="grate"></div>
+        <div class="rim"></div>
+      </section>
+
+      <!-- Product card -->
+      <section class="card" aria-label="Product details">
+        <div class="photo" aria-label="Stylized metal spider silhouette">
+          <svg
+            viewBox="0 0 900 600"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Scrap-metal spider art"
+          >
+            <defs>
+              <linearGradient id="steelGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#f3f4f5" />
+                <stop offset="0.5" stop-color="#b7bcc2" />
+                <stop offset="1" stop-color="#8f9398" />
+              </linearGradient>
+            </defs>
+
+            <!-- Body: bearing race + socket -->
+            <ellipse
+              class="steel-fill"
+              cx="450"
+              cy="300"
+              rx="90"
+              ry="70"
+            ></ellipse>
+            <circle
+              class="steel-fill"
+              cx="450"
+              cy="245"
+              r="46"
+              style="filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.45))"
+            ></circle>
+
+            <!-- Washer base shadow -->
+            <ellipse
+              cx="450"
+              cy="360"
+              rx="115"
+              ry="26"
+              fill="rgba(0,0,0,.35)"
+              filter="blur(2px)"
+            ></ellipse>
+
+            <!-- Eyes: chain link + nut vibe -->
+            <circle cx="430" cy="238" r="8" fill="#1b1e24"></circle>
+            <circle cx="470" cy="238" r="8" fill="#1b1e24"></circle>
+
+            <!-- Legs (wire) -->
+            <path class="wire" d="M330,300 C250,260 240,250 210,240"></path>
+            <path class="wire" d="M340,330 C255,310 250,305 215,305"></path>
+            <path class="wire" d="M350,360 C275,380 265,390 240,410"></path>
+            <path class="wire" d="M380,385 C320,430 310,440 295,465"></path>
+
+            <path class="wire" d="M570,300 C650,260 660,250 690,240"></path>
+            <path class="wire" d="M560,330 C645,310 650,305 685,305"></path>
+            <path class="wire" d="M550,360 C625,380 635,390 660,410"></path>
+            <path class="wire" d="M520,385 C580,430 590,440 605,465"></path>
+          </svg>
+        </div>
+
+        <article class="details">
+          <h2 class="title">Overview</h2>
+          <p class="subtitle">
+            One‑of‑a‑kind spider sculpture handcrafted from reclaimed steel and
+            sealed for a lifetime of character.
+          </p>
+
+          <ul class="specs">
+            <li>
+              <span class="dot"></span>
+              Body forged from a bearing race and socket with a bent washer
+              base—welded into a rugged arachnid form.
+            </li>
+            <li>
+              <span class="dot"></span>
+              Eyes made from a chain link and nut; eight legs hand‑formed from
+              steel wire.
+            </li>
+            <li>
+              <span class="dot"></span>
+              Edges deburred and smoothed; finished with clear polyurethane to
+              help resist rust while preserving the raw metal look.
+            </li>
+            <li>
+              <span class="dot"></span>
+              Substantial weight—this desk guardian is solid steel.
+            </li>
+            <li>
+              <span class="dot"></span>
+              Handmade in the USA.
+            </li>
+          </ul>
+
+          <div class="callouts">
+            <div class="chip">Industrial décor statement piece</div>
+            <div class="chip">Perfect gift for spider fans + welders</div>
+          </div>
+
+          <div class="cta">
+            <button class="btn" type="button">Add to Cart</button>
+            <button class="btn secondary" type="button">View More Works</button>
+          </div>
+
+          <p class="note">
+            Care: Indoor display recommended. Dust with a dry cloth. Avoid harsh
+            cleaners. Re‑coat with clear sealant as desired over time.
+          </p>
+        </article>
+      </section>
+
+      <!-- Tags -->
+      <div class="tags" aria-label="Related tags">
+        <span class="tag">#Handmade</span>
+        <span class="tag">#Upcycled</span>
+        <span class="tag">#ScrapArt</span>
+        <span class="tag">#Welded</span>
+        <span class="tag">#IndustrialDecor</span>
+        <span class="tag">#Spider</span>
+        <span class="tag">#Halloween</span>
+        <span class="tag">#MadeInUSA</span>
+      </div>
+    </div>
+  </body>
+</html>
